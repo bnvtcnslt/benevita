@@ -1,0 +1,154 @@
+@extends('layouts.frontend')
+
+@section('content')
+
+    <!-- Services Hero Section -->
+    <section class="hero-section" id="home" style="padding-bottom: 5%;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <div class="row align-items-center flex-column-reverse flex-md-row">
+                        <div class="col-md-7 mt-md-0 align-self-center">
+                            <h1 class="display-3 fw-normal mb-4" style="color: #0A5640;">Mengubah Wawasan Menjadi Tindakan</h1>
+                            <p class="text-muted mb-4" style="text-align: justify;">
+                                Di BeneVita Consulting, kami membantu bisnis memanfaatkan kekuatan umpan balik pelanggan melalui analisis sentimen yang canggih. Keahlian kami dalam NLP dan AI memungkinkan Anda mendapatkan wawasan yang dapat ditindaklanjuti dari ulasan, media sosial, dan survei, mendorong keputusan strategis yang meningkatkan kepuasan serta loyalitas pelanggan.
+                            </p>
+                            <p>💡 <span class="fst-italic">Temukan solusi terbaik untuk bisnis Anda dengan layanan analisis sentimen kami. Mari bersama-sama mengoptimalkan strategi dan meningkatkan pengalaman pelanggan!</span></p>
+                        </div>
+                        <div class="col-md-5 mb-4 align-self-center">
+                            <div class="hero-image">
+                                <img src="assets/images/heros.png" alt="Hero Image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300" class="img-fluid rounded-4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Services</h2>
+                    <div class="services-wrapper">
+                        <div class="services-container">
+                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+                                <img src="assets/images/services.webp" alt="Service Image">
+                                <h3>Analisis Sentimen</h3>
+                                <p>Layanan analisis sentimen kami membantu Anda memahami emosi dan opini pelanggan melalui data tekstual...</p>
+                                <a href="#" class="read-services" style="margin-left: -5px;" data-bs-toggle="modal" data-bs-target="#servicesmodal">
+                                    Read More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+                                <img src="assets/images/services.webp" alt="Service Image">
+                                <h3>Analisis Aspek Sentimen</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="read-services" style="margin-left: -5px;"  data-bs-toggle="modal" data-bs-target="#servicesmodal">
+                                    Read More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+                                <img src="assets/images/services.webp" alt="Service Image">
+                                <h3>Pemantauan Opini Publik dan Analisis Kompetitif</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <a href="#" class="read-services" style="margin-left: -5px;"  data-bs-toggle="modal" data-bs-target="#servicesmodal">
+                                    Read More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Learn More Section -->
+                    <!-- <div class="text-center mt-4">
+                        <a href="#learn-more" class="btn btn-success">Learn More</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo section -->
+    <section class="logo-section" id="logo" style="margin-top: 2%;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <div class="logo-section">
+                        <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Client</h2>
+                        <div class="logo-container">
+                            <!-- Logo asli -->
+                            <img src="assets/images/logo.png" alt="Logo 1">
+                            <img src="assets/images/logo.png" alt="Logo 2">
+                            <img src="assets/images/logo.png" alt="Logo 3">
+                            <img src="assets/images/logo.png" alt="Logo 4">
+                            <img src="assets/images/logo.png" alt="Logo 5">
+                            <img src="assets/images/logo.png" alt="Logo 6">
+                            <img src="assets/images/logo.png" alt="Logo 7">
+                            <img src="assets/images/logo.png" alt="Logo 8">
+                            <img src="assets/images/logo.png" alt="Logo 9">
+                            <img src="assets/images/logo.png" alt="Logo 10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact-section p-3" id="contact" style="margin-top: 10%;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <div class="row">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="contact-info" data-aos="fade-right" data-aos-duration="1500" style="margin-top: 120px; margin-bottom: 50px;">
+                                <h3 class="h4 mb-4">Informasi Kontak</h3>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-map-marker-alt me-3" style="color: #0A5640; font-size: 1.5rem;"></i>
+                                    <p class="mb-0">Jl. Ukrim</p>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-phone me-3" style="color: #0A5640; font-size: 1.5rem;"></i>
+                                    <p class="mb-0">+62 822 7562 5828</p>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-envelope me-3" style="color: #0A5640; font-size: 1.5rem;"></i>
+                                    <p class="mb-0">info@benevitaconsulting.com</p>
+                                </div>
+                                <div class="social-links mt-4">
+                                    <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="contact-form" data-aos="fade-left" data-aos-duration="1500">
+                                <h2 class="text-center mb-5 display-10 fw-bold" style="color: #0A5640;">Hubungi Kami</h2>
+                                <form>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="Nama Lengkap">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="Subjek">
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" rows="5" placeholder="Pesan"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Kirim Pesan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+@endsection

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex; /* Menggunakan flexbox */
+            justify-content: center; /* Memusatkan secara horizontal */
+            align-items: center; /* Memusatkan secara vertikal */
+            height: 100vh; /* Mengatur tinggi body agar 100% dari viewport */
+            margin: 0; /* Menghapus margin default */
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 90%; /* Memastikan lebar 90% pada mobile */
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-group-append .btn {
+            border: none;
+            background: transparent;
+        }
+        .input-group-append .btn:hover {
+            background: transparent;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%; /* Mengatur posisi vertikal ke tengah */
+            transform: translateY(-50%); /* Menggeser ikon ke tengah secara vertikal */
+            cursor: pointer;
+        }
+        .password-container {
+            position: relative;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+        }
+        .form-control:focus {
+            border-color: #6c757d;
+            box-shadow: none;
+        }
+        .form-control:hover {
+            border-color: #6c757d;
+            background-color: #e9ecef;
+        }
+
+        /* Media Query untuk Responsivitas */
+        @media (max-width: 576px) {
+            .eye-icon {
+                top: 50%; /* Menjaga posisi ikon mata di tengah */
+                transform: translateY(-50%); /* Menggeser ikon ke tengah secara vertikal */
+            }
+        }
+    </style>
+</head>
+<body>
+
+@yield('content')
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Script untuk toggle password visibility
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordInput = document.querySelector('#password');
+    const eyeIcon = document.querySelector('#togglePassword');
+
+    togglePassword.addEventListener('click', function () {
+        // Toggle the type attribute
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        // Toggle the eye / eye slash icon
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePassword = document.getElementById('togglePassword');
+        const newPasswordInput = document.getElementById('new_password');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function () {
+                const type = newPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                newPasswordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        if (toggleConfirmPassword) {
+            toggleConfirmPassword.addEventListener('click', function () {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+    });
+</script>
+
+<!-- JavaScript untuk mengelola tampilan dan percobaan login -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let loginAttempts = localStorage.getItem("loginAttempts") ? parseInt(localStorage.getItem("loginAttempts")) : 0;
+        let isAdminConfirmed = localStorage.getItem("isAdminConfirmed");
+        let hasLoggedOut = localStorage.getItem("hasLoggedOut");
+
+        // Jika Admin sudah terkonfirmasi, dan login attempts kurang dari 5
+        if (isAdminConfirmed === "true" && loginAttempts < 5 && !hasLoggedOut) {
+            showLoginForm();
+        }
+        // Tampilkan konfirmasi admin jika admin belum terkonfirmasi atau sudah logout
+        else if (isAdminConfirmed !== "true" || hasLoggedOut) {
+            showAdminConfirmation();
+        }
+
+        // Handle konfirmasi admin
+        document.getElementById("btnYesAdmin").addEventListener("click", function() {
+            localStorage.setItem("isAdminConfirmed", "true");
+            localStorage.setItem("loginAttempts", "0"); // Reset login attempts
+            showLoginForm();
+        });
+
+        document.getElementById("btnNotAdmin").addEventListener("click", function() {
+            window.location.href = "{{ url('/') }}"; // Redirect to homepage or other page
+        });
+
+        // Handle login form
+        document.getElementById("loginButton").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent form from submitting immediately
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            // Validasi login
+            if (email === "admin@example.com" && password === "admin123") {
+                // Reset login attempts setelah login berhasil
+                localStorage.setItem("loginAttempts", "0");
+                localStorage.setItem("isAdminConfirmed", "true"); // Admin terkonfirmasi
+                localStorage.removeItem("hasLoggedOut"); // Reset logout flag
+                window.location.href = "{{ route('dashboard.index') }}"; // Redirect ke dashboard
+            } else {
+                loginAttempts++;
+                localStorage.setItem("loginAttempts", loginAttempts);
+
+                // Tampilkan modal jika gagal login 5 kali
+                if (loginAttempts >= 5) {
+                    // Jangan langsung tampilkan modal, hanya set flag untuk menampilkan modal nanti
+                    localStorage.setItem("showFailedLoginModal", "true");
+                    $("#failedLoginModal").modal("show");
+                } else {
+                    alert("Email atau password salah. Coba lagi.");
+                }
+            }
+        });
+
+        // Konfirmasi ulang jika gagal login 5 kali
+        document.getElementById("retryAdminConfirm").addEventListener("click", function() {
+            localStorage.removeItem("isAdminConfirmed");
+            localStorage.setItem("loginAttempts", "0"); // Reset login attempts setelah konfirmasi ulang
+            location.reload(); // Reload halaman untuk menampilkan konfirmasi admin lagi
+        });
+
+        // Periksa apakah modal gagal login perlu ditampilkan
+        if (localStorage.getItem("showFailedLoginModal") === "true") {
+            // Modal ditampilkan hanya jika login attempts >= 5
+            localStorage.removeItem("showFailedLoginModal");
+        }
+    });
+
+    function showLoginForm() {
+        document.getElementById('adminConfirmation').style.display = 'none';
+        document.getElementById('loginTitle').style.display = 'block';
+        document.getElementById('loginForm').style.display = 'block';
+
+        var messageBox = document.getElementById('loginMessage');
+        if (messageBox) {
+            messageBox.style.display = 'block';
+        }
+    }
+
+    function showAdminConfirmation() {
+        document.getElementById('adminConfirmation').style.display = 'block';
+        document.getElementById('loginTitle').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'none';
+    }
+
+    // Fungsi untuk logout
+    function handleLogout() {
+        localStorage.setItem("hasLoggedOut", "true"); // Set flag logout
+        localStorage.setItem("loginAttempts", "0"); // Reset login attempts setelah logout
+        window.location.href = "{{ url('login') }}"; // Redirect ke halaman login
+    }
+
+</script>
+</body>
+</html>

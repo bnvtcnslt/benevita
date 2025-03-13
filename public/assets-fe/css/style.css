@@ -1,0 +1,802 @@
+ /* Container untuk section logo */
+ .logo-section {
+    width: 100%;
+    overflow: hidden; /* Agar animasi tidak keluar dari container */
+    position: relative;
+    }
+
+    /* Container untuk logo */
+    .logo-container {
+    display: flex;
+    width: max-content; /* Lebar sesuai dengan total logo */
+    animation: scroll 20s linear infinite; /* Animasi scroll otomatis */
+    }
+
+    /* Animasi scroll */
+    @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Geser setengah dari total lebar */
+    }
+
+    /* Style untuk logo */
+    .logo-container img {
+    width: 100px; /* Sesuaikan ukuran logo */
+    height: auto;
+    margin: 0 20px; /* Jarak antar logo */
+    }
+
+    /* Efek hover */
+    .logo-section:hover .logo-container {
+    animation-play-state: paused; /* Menghentikan animasi saat di-hover */
+    }
+    body {
+        font-family: 'Merriweather', serif;
+        padding-top: 56px; /* Sesuaikan dengan tinggi navbar yang baru */
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Merriweather', serif;
+    }
+
+    .hero-section {
+        position: relative;
+        padding: 80px 0;
+    }
+
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        top: -56px; /* Atur sesuai tinggi navbar */
+        right: 0;
+        width: 40%; /* Atur lebar sesuai kebutuhan */
+        height: calc(80vh + 56px); /* 100vh ditambah tinggi navbar */
+        background-color: rgb(255, 241, 220); /* Warna oranye dengan transparansi */
+        z-index: 0; /* Pastikan berada di belakang konten */
+    }
+
+    .hero-section > div {
+        position: relative; /* Agar konten tetap di atas pseudo-element */
+        z-index: 1; /* Pastikan konten berada di atas latar belakang */
+    }
+
+    @media(max-width: 991px){
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: -56px; /* Atur sesuai tinggi navbar */
+            right: 0;
+            width: 65%; /* Atur lebar sesuai kebutuhan */
+            height: 45%;
+            background-color: rgb(255, 241, 220); /* Warna oranye dengan transparansi */
+            z-index: 0; /* Pastikan berada di belakang konten */
+        }
+    }
+
+    .hero-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .team-section {
+        padding: 80px 0;
+    }
+    .team-member img {
+        max-width: 100%;
+        height: auto;
+    }
+    .services{
+        background: #7d918e;
+    }
+    .footer {
+        background-color: #005033;
+        color: #fff;
+        padding: 60px 0 30px 0;
+    }
+    .footer a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .footer a:hover {
+        text-decoration: underline;
+    }
+    
+    .navbar-section .container {
+        padding: 0 125px;
+    }
+
+    @media (max-width: 991px) {
+        .navbar-section .container {
+            padding: 0 20px;
+        }
+    }
+
+    @keyframes shadowMove {
+        0% {
+            box-shadow: 107px -61px 39px 0px rgba(0, 0, 0, 0.2);
+        }
+        50% {
+            box-shadow: 87px -41px 39px 0px rgba(0, 0, 0, 0.15);
+        }
+        100% {
+            box-shadow: 107px -61px 39px 0px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .hero-image img {
+        max-width: 110%;
+        height: auto;
+        border-radius: 10px;
+        margin-right: -10%;
+        animation: shadowMove 3s ease-in-out infinite;
+    }
+    
+    .team-member {
+        margin-bottom: 2rem;
+    }
+    
+    .team-member img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 991px) {
+        .hero-image img {
+            max-width: 100%;
+            margin-left: 0;
+        }
+        
+        .team-member img {
+            max-width: 100%;
+        }
+    }
+
+    .logo-section{
+        padding: 20px 0;
+        background-color: rgb(255, 241, 220);
+    }
+
+    .services-section {
+        background-color: rgb(255, 255, 255);
+        padding: 80px 0;
+        overflow: hidden;
+    }
+
+    .services-section h2 {
+        margin-top: 0;
+        margin-bottom: 40px;
+    }
+
+    .services-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        overflow: hidden;
+    }
+
+    
+    .services {
+        background: rgba(214, 245, 255, 0.5);
+        position: relative;
+        padding: 20px; /* Adjust padding for team members */
+        border-radius: 10px; /* Rounded corners */
+        transition: transform 0.3s ease; /* Add hover effect */
+    }
+
+    .services img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px; /* Rounded corners for images */
+        margin-bottom: 1rem; /* Space below images */
+    }
+
+    .services h3 {
+        font-size: 1.25rem; /* Adjust heading size */
+        margin-bottom: 0.5rem; /* Space below heading */
+    }
+
+    .services p {
+        color: #0A5640; /* Text color for descriptions */
+    }
+
+    .services:hover {
+        transform: translateY(-5px); /* Hover effect */
+    }
+
+    .read-services {
+        color: #0a5640;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        padding: 6px 12px;
+        border-radius: 4px;
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .read-services:hover {
+        background: rgba(10, 86, 64, 0.1);
+        color: #0a5640;
+    }
+
+    .read-services:hover i {
+        transform: translateX(5px);
+    }
+
+    .read-services i {
+        font-size: 0.9em;
+        transition: transform 0.3s ease;
+        margin-left: 5px;
+    }
+
+    @media (max-width: 991px) {
+        .services-container {
+            grid-template-columns: 1fr; /* Stack items on smaller screens */
+            gap: 30px; /* Space between items */
+            padding: 0 15px; /* Padding for smaller screens */
+        }
+    }
+
+    /* Styling untuk navbar mobile */
+    @media (max-width: 991px) {
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            position: relative;
+        }
+
+        .navbar-section {
+            width: 100%;
+            max-width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            /* background: rgba(255, 255, 255, 0.98); */
+            z-index: 1030;
+        }
+
+        .navbar-section .container {
+            padding: 0 15px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-collapse {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            z-index: 1000;
+            padding: 10px 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .navbar-collapse.show {
+            display: block;
+        }
+
+        .navbar-nav {
+            padding: 0;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item {
+            width: 100%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-nav .nav-item:last-child {
+            border-bottom: none;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 12px 15px;
+            width: 100%;
+            display: block;
+            color: #0A5640;
+            font-weight: 500;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(10, 86, 64, 0.05);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            overflow-x: hidden;
+        }
+
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    /* Tambahkan styling untuk navbar fixed */
+    .navbar-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        -webkit-backdrop-filter: blur(13.8px);
+        border: 1px solid rgba(255, 255, 255, 0.31);
+        z-index: 1030;
+        background-color: transparent; /* Latar belakang transparan secara default */
+        transition: background-color 0.3s ease; /* Transisi halus untuk perubahan warna */
+    }
+
+    .navbar-section.scrolled {
+        backdrop-filter: blur(13.8px);
+        background-color: rgba(255, 255, 255, 0.28); /* Warna latar belakang saat di-scroll */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan jika diinginkan */
+    }
+
+    /* Tambahkan scroll margin untuk semua section dengan ID */
+    section[id] {
+        scroll-margin-top: 60px;
+    }
+
+    .navbar {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .modal-image-container {
+        position: relative;
+        line-height: 0;
+    }
+
+    .modal-image-container .btn-close {
+        z-index: 1;
+        opacity: 0.8;
+        padding: 0.5rem;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .modal-image-container .btn-close:hover {
+        opacity: 1;
+        background-color: #fff;
+    }
+
+    .modal-content {
+        overflow: hidden;
+    }
+
+    .about-section {
+        position: relative; /* Agar pseudo-element dapat diposisikan relatif terhadap section ini */
+        padding: 40px 0; /* Padding untuk konten */
+    }
+
+    .about-section::after {
+        content: '';
+        position: absolute;
+        top: 20%; /* Jarak dari atas */
+        left: 0; /* Mulai dari kiri */
+        width: 40%; /* Lebar background */
+        height: 60%; /* Tinggi background, mengisi 60% dari tinggi section */
+        bottom: 20%; /* Jarak dari bawah */
+        background-color: rgb(255, 241, 220); /* Warna latar belakang */
+        z-index: 0; /* Pastikan berada di belakang konten */
+    }
+
+    @media (max-width: 991px) {
+        .about-section::after {
+            content: '';
+            position: absolute;
+            top: 0; /* Jarak dari atas */
+            left: 0; /* Mulai dari kiri */
+            width: 50%; /* Lebar background */
+            height: 20%; /* Tinggi background, mengisi 60% dari tinggi section */
+            bottom: 20%; /* Mengisi tinggi penuh */
+            background-color: rgb(255, 241, 220); /* Warna latar belakang */
+            z-index: 0; /* Pastikan berada di belakang konten */
+        }
+    }
+
+    .about-section > div {
+        position: relative; /* Agar konten tetap di atas pseudo-element */
+        z-index: 1; /* Pastikan konten berada di atas latar belakang */
+    }
+
+    .about-image {
+        position: relative;
+        transition: all 0.5s ease;
+        padding: 15px;
+    }
+
+    .about-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid rgba(10, 86, 64, 0.2);
+        border-radius: 10px;
+        transition: all 0.5s ease;
+    }
+
+    .about-image:hover::before {
+        transform: translate(-15px, -15px);
+    }
+
+    .about-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+    }
+
+    .about-image:hover img {
+        transform: translate(15px, 15px);
+    }
+
+    .about-image:hover{
+        
+    }
+
+    .about-feature {
+        padding: 20px;
+        background: rgba(214, 245, 255, 0.3);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .about-feature:hover {
+        transform: translateY(-5px);
+        background: rgba(214, 245, 255, 0.5);
+    }
+
+    .about-content p {
+        line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+        .about-feature {
+            margin-bottom: 15px;
+            padding: 15px;
+            min-height: auto;
+        }
+        
+        .about-content {
+            text-align: center;
+        }
+        
+        .about-feature {
+            text-align: center;
+        }
+
+        .about-feature i {
+            font-size: 1.75rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .about-feature h5 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .about-feature p.small {
+            font-size: 0.8rem;
+            line-height: 1.3;
+            margin-bottom: 0;
+        }
+    }
+
+    /* Untuk layar yang lebih kecil */
+    @media screen and (max-width: 400px) {
+        .about-feature {
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .about-feature i {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.4rem !important;
+        }
+        
+        .about-feature h5 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .about-feature p.small {
+            font-size: 0.75rem;
+            line-height: 1.2;
+        }
+    }
+
+    /* Khusus untuk device sangat kecil */
+    @media screen and (max-width: 320px) {
+        .about-feature {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .about-feature i {
+            font-size: 1.25rem !important;
+            margin-bottom: 0.3rem !important;
+        }
+        
+        .about-feature h5 {
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .about-feature p.small {
+            font-size: 0.7rem;
+            line-height: 1.2;
+        }
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .footer-logo span {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .footer h5 {
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer h5::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .footer ul li {
+        margin-bottom: 12px;
+    }
+
+    .footer ul li a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .footer ul li a:hover {
+        color: #fff;
+        transform: translateX(5px);
+    }
+
+    .footer ul li a i {
+        margin-right: 8px;
+        font-size: 0.8rem;
+    }
+
+    .footer hr {
+        border-color: rgb(245, 245, 245);
+    }
+
+    .footer .copyright {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .mapouter {
+        position: relative;
+        text-align: right;
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+    }
+
+    .gmap_canvas {
+        overflow: hidden;
+        background: none!important;
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+    }
+
+    .gmap_iframe {
+        width: 100%!important;
+        height: 200px!important;
+    }
+
+    .footer .social-links {
+        margin-top: 15px;
+    }
+
+    .footer hr {
+        border: 1px solidrgb(255, 255, 255); /* Ganti dengan warna yang diinginkan */
+        margin: 20px 0; /* Menambahkan margin atas dan bawah */
+    }
+
+    .footer .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .footer .social-links a:hover {
+        background: #fff;
+        color: rgb(0, 183, 255);
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+        .footer {
+            padding: 40px 0 20px 0;
+        }
+        
+        .footer h5 {
+            margin-top: 20px;
+        }
+        
+        .mapouter {
+            margin: 10px auto;
+        }
+    }
+    
+    .contact-section form{
+        padding-bottom: 100px;
+    }
+
+    .contact-section input, textarea{
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    }
+    
+    .contact-section .contact-info {
+        background-color: white; /* Set background to white */
+        border-radius: 8px; /* Optional: add rounded corners */
+        padding: 20px; /* Add some padding for better spacing */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+        overflow: hidden; /* Prevent overflow */
+        text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+        white-space: normal; /* Allow text to wrap */
+    }
+
+    .contact-section {
+        position: relative; /* Agar pseudo-element dapat diposisikan relatif terhadap section ini */
+        padding: 40px 0; /* Padding untuk konten */
+    }
+
+    .contact-section::after {
+        content: '';
+        position: absolute;
+        top: 0; /* Jarak dari atas */
+        right: 0; /* Mulai dari kanan */
+        width: 80%; /* Lebar background */
+        height: 90%; /* Tinggi background, mengisi 60% dari tinggi section */
+        bottom: 20%; /* Jarak dari bawah */
+        background-color: rgb(255, 241, 220); /* Warna latar belakang */
+        z-index: 0; /* Pastikan berada di belakang konten */
+    }
+
+    @media (max-width: 991px) {
+        .contact-section::after {
+            content: '';
+            position: absolute;
+            top: 250px; /* Adjust this value to align with the bottom of the "Hubungi Kami" heading */
+            left: 0; /* Start from the left */
+            width: 100%; /* Lebar background */
+            height: calc(90% - 250px); /* Adjust height to fill the remaining space */
+            right: 0; /* Extend to the right */
+            bottom: 0; /* Extend to the bottom */
+            background-color: rgb(255, 241, 220); /* Background color */
+            z-index: 0; /* Ensure it is behind the content */
+        }
+
+        .contact-section {
+            margin-top: -200px;
+        }
+    }
+
+    .contact-section > div {
+        position: relative; /* Agar konten tetap di atas pseudo-element */
+        z-index: 1; /* Pastikan konten berada di atas latar belakang */
+    }
+
+    /* Additional styles for mobile */
+    @media (max-width: 991px) {
+        .contact-section .contact-info {
+            padding: 10px; /* Adjust padding for mobile */
+        }
+
+        .contact-section .contact-info h3 {
+            font-size: 1.5rem; /* Adjust heading size for mobile */
+        }
+
+        .contact-section .contact-info p {
+            font-size: 0.9rem; /* Adjust paragraph size for mobile */
+        }
+    }
+
+    .our-team-section {
+        padding: 80px 0;
+    }
+
+    .our-team-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .team-member {
+        background: rgba(214, 245, 255, 0.5);
+        border-radius: 10px;
+        padding: 20px; /* Adjust padding for team members */
+        text-align: center;
+        transition: transform 0.3s ease; /* Add hover effect */
+    }
+
+    .team-member img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px; /* Rounded corners for images */
+        margin-bottom: 1rem; /* Space below images */
+    }
+
+    .team-member h3 {
+        font-size: 1.25rem; /* Adjust heading size */
+        margin-bottom: 0.5rem; /* Space below heading */
+    }
+
+    .team-member p {
+        color: #0A5640; /* Text color for descriptions */
+    }
+
+    .team-member:hover {
+        transform: translateY(-5px); /* Hover effect */
+    }
+
+    @media (max-width: 991px) {
+        .our-team-wrapper {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding: 0 15px;
+        }
+    }
