@@ -18,36 +18,25 @@ class AuthController extends Controller
     }
 
 
-    public function verify(Request $request)
-    {
+    public function verify(Request $request){
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        $remember_token = $request->has('remember'); // Cek apakah remember me dicentang
+        // Menambahkan 'remember' untuk "Remember Me"
+        $remember = $request->has('remember');
 
-        // Login dengan or without "Remember Me"
-        if (Auth::guard('user')->attempt(
-            ['email' => $request->email, 'password' => $request->password], $remember_token
-        )) {
-            // Jika berhasil login, pastikan sesi tetap aktif meskipun remember me tidak dicentang
-            if ($remember_token) {
-                // Sesuai dengan login "remember me"
-                Auth::guard('user')->setRememberToken(Str::random(60)); // Update token remember me jika dicentang
-            }
-
-            return redirect()->route('dashboard.index');
+        if (auth()->guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+            return redirect(route('dashboard.index'));
+        } else {
+            return redirect(route('auth.index'))->with('pesan', ['type' => 'danger', 'message' => 'Email atau Password Tidak Valid']);
         }
-
-        return redirect()->route('auth.index')->with('pesan', [
-            'type' => 'danger', 'message' => 'Email atau Password Tidak Valid'
-        ]);
     }
 
     public function logout(){
         auth()->guard('user')->logout();
-        return redirect(route('auth.index'));
+        return view('frontend.home');
     }
 
     public function forgotPassword(){

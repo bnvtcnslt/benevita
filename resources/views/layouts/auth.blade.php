@@ -113,16 +113,17 @@
 <!-- JavaScript untuk mengelola tampilan dan percobaan login -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let loginAttempts = localStorage.getItem("loginAttempts") ? parseInt(localStorage.getItem("loginAttempts")) : 0;
-        let isAdminConfirmed = localStorage.getItem("isAdminConfirmed");
+        let loginAttempts = sessionStorage.getItem("loginAttempts") ? parseInt(sessionStorage.getItem("loginAttempts")) : 0;
+        let isAdminConfirmed = sessionStorage.getItem("isAdminConfirmed");
 
-        if (isAdminConfirmed === "true" && loginAttempts < 5) {
+        // Cek apakah sudah dikonfirmasi admin dan jumlah percobaan login
+        if (isAdminConfirmed === "true" && loginAttempts < 6) {
             showLoginForm();
         }
 
         document.getElementById("btnYesAdmin").addEventListener("click", function() {
-            localStorage.setItem("isAdminConfirmed", "true");
-            localStorage.setItem("loginAttempts", "0");
+            sessionStorage.setItem("isAdminConfirmed", "true");
+            sessionStorage.setItem("loginAttempts", "0");
             showLoginForm();
         });
 
@@ -132,7 +133,7 @@
 
         document.getElementById("loginForm").addEventListener("submit", function (event) {
             loginAttempts++;
-            localStorage.setItem("loginAttempts", loginAttempts);
+            sessionStorage.setItem("loginAttempts", loginAttempts);
 
             if (loginAttempts >= 5) {
                 event.preventDefault();
@@ -141,8 +142,8 @@
         });
 
         document.getElementById("retryAdminConfirm").addEventListener("click", function() {
-            localStorage.removeItem("isAdminConfirmed");
-            localStorage.setItem("loginAttempts", "0");
+            sessionStorage.removeItem("isAdminConfirmed");
+            sessionStorage.setItem("loginAttempts", "0");
             location.reload();
         });
     });

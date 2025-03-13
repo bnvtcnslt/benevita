@@ -113,71 +113,39 @@
 <!-- JavaScript untuk mengelola tampilan dan percobaan login -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let loginAttempts = localStorage.getItem("loginAttempts") ? parseInt(localStorage.getItem("loginAttempts")) : 0;
-        let isAdminConfirmed = localStorage.getItem("isAdminConfirmed");
-        let hasLoggedOut = localStorage.getItem("hasLoggedOut");
+        let loginAttempts = sessionStorage.getItem("loginAttempts") ? parseInt(sessionStorage.getItem("loginAttempts")) : 0;
+        let isAdminConfirmed = sessionStorage.getItem("isAdminConfirmed");
 
-        // Jika Admin sudah terkonfirmasi, dan login attempts kurang dari 5
-        if (isAdminConfirmed === "true" && loginAttempts < 5 && !hasLoggedOut) {
+        // Cek apakah sudah dikonfirmasi admin dan jumlah percobaan login
+        if (isAdminConfirmed === "true" && loginAttempts < 5) {
             showLoginForm();
         }
-        // Tampilkan konfirmasi admin jika admin belum terkonfirmasi atau sudah logout
-        else if (isAdminConfirmed !== "true" || hasLoggedOut) {
-            showAdminConfirmation();
-        }
 
-        // Handle konfirmasi admin
         document.getElementById("btnYesAdmin").addEventListener("click", function() {
-            localStorage.setItem("isAdminConfirmed", "true");
-            localStorage.setItem("loginAttempts", "0"); // Reset login attempts
+            sessionStorage.setItem("isAdminConfirmed", "true");
+            sessionStorage.setItem("loginAttempts", "0");
             showLoginForm();
         });
 
         document.getElementById("btnNotAdmin").addEventListener("click", function() {
-            window.location.href = "{{ url('/') }}"; // Redirect to homepage or other page
+            window.location.href = "{{ url('/') }}";
         });
 
-        // Handle login form
-        document.getElementById("loginButton").addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent form from submitting immediately
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            loginAttempts++;
+            sessionStorage.setItem("loginAttempts", loginAttempts);
 
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
-
-            // Validasi login
-            if (email === "admin@example.com" && password === "admin123") {
-                // Reset login attempts setelah login berhasil
-                localStorage.setItem("loginAttempts", "0");
-                localStorage.setItem("isAdminConfirmed", "true"); // Admin terkonfirmasi
-                localStorage.removeItem("hasLoggedOut"); // Reset logout flag
-                window.location.href = "{{ route('dashboard.index') }}"; // Redirect ke dashboard
-            } else {
-                loginAttempts++;
-                localStorage.setItem("loginAttempts", loginAttempts);
-
-                // Tampilkan modal jika gagal login 5 kali
-                if (loginAttempts >= 5) {
-                    // Jangan langsung tampilkan modal, hanya set flag untuk menampilkan modal nanti
-                    localStorage.setItem("showFailedLoginModal", "true");
-                    $("#failedLoginModal").modal("show");
-                } else {
-                    alert("Email atau password salah. Coba lagi.");
-                }
+            if (loginAttempts >= 5) {
+                event.preventDefault();
+                $("#failedLoginModal").modal("show");
             }
         });
 
-        // Konfirmasi ulang jika gagal login 5 kali
         document.getElementById("retryAdminConfirm").addEventListener("click", function() {
-            localStorage.removeItem("isAdminConfirmed");
-            localStorage.setItem("loginAttempts", "0"); // Reset login attempts setelah konfirmasi ulang
-            location.reload(); // Reload halaman untuk menampilkan konfirmasi admin lagi
+            sessionStorage.removeItem("isAdminConfirmed");
+            sessionStorage.setItem("loginAttempts", "0");
+            location.reload();
         });
-
-        // Periksa apakah modal gagal login perlu ditampilkan
-        if (localStorage.getItem("showFailedLoginModal") === "true") {
-            // Modal ditampilkan hanya jika login attempts >= 5
-            localStorage.removeItem("showFailedLoginModal");
-        }
     });
 
     function showLoginForm() {
@@ -190,20 +158,6 @@
             messageBox.style.display = 'block';
         }
     }
-
-    function showAdminConfirmation() {
-        document.getElementById('adminConfirmation').style.display = 'block';
-        document.getElementById('loginTitle').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'none';
-    }
-
-    // Fungsi untuk logout
-    function handleLogout() {
-        localStorage.setItem("hasLoggedOut", "true"); // Set flag logout
-        localStorage.setItem("loginAttempts", "0"); // Reset login attempts setelah logout
-        window.location.href = "{{ url('login') }}"; // Redirect ke halaman login
-    }
-
 </script>
 </body>
 </html>
