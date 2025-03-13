@@ -117,7 +117,7 @@
         let isAdminConfirmed = sessionStorage.getItem("isAdminConfirmed");
 
         // Cek apakah sudah dikonfirmasi admin dan jumlah percobaan login
-        if (isAdminConfirmed === "true" && loginAttempts < 5) {
+        if (isAdminConfirmed === "true" && loginAttempts <= 6) {
             showLoginForm();
         }
 
@@ -135,7 +135,7 @@
             loginAttempts++;
             sessionStorage.setItem("loginAttempts", loginAttempts);
 
-            if (loginAttempts >= 5) {
+            if (loginAttempts >= 6) {
                 event.preventDefault();
                 $("#failedLoginModal").modal("show");
             }

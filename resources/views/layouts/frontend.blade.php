@@ -30,16 +30,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/" onclick="document.getElementById('navbarNav').classList.remove('show')">Home</a>
+                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{route('home')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about" onclick="document.getElementById('navbarNav').classList.remove('show')">About</a>
+                        <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{route('about')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('services') ? 'active' : '' }}" href="/services" onclick="document.getElementById('navbarNav').classList.remove('show')">Services</a>
+                        <a class="nav-link {{ Request::is('services') ? 'active' : '' }}" href="{{route('services')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="/contact" onclick="document.getElementById('navbarNav').classList.remove('show')">Contact</a>
+                        <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{route('contact')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -71,10 +71,10 @@
                     <div class="col-md-3">
                         <h5>Quick Links</h5>
                         <ul class="list-unstyled">
-                            <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
-                            <li><a href="/about"><i class="fas fa-chevron-right"></i> About</a></li>
-                            <li><a href="/services"><i class="fas fa-chevron-right"></i> Services</a></li>
-                            <li><a href="/contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                            <li><a href="{{route('home')}}"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="{{route('about')}}"><i class="fas fa-chevron-right"></i> About</a></li>
+                            <li><a href="{{route('services')}}"><i class="fas fa-chevron-right"></i> Services</a></li>
+                            <li><a href="{{route('contact')}}"><i class="fas fa-chevron-right"></i> Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">

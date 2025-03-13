@@ -117,7 +117,7 @@
         let isAdminConfirmed = sessionStorage.getItem("isAdminConfirmed");
 
         // Cek apakah sudah dikonfirmasi admin dan jumlah percobaan login
-        if (isAdminConfirmed === "true" && loginAttempts < 6) {
+        if (isAdminConfirmed === "true" && loginAttempts <= 6) {
             showLoginForm();
         }
 
@@ -128,14 +128,14 @@
         });
 
         document.getElementById("btnNotAdmin").addEventListener("click", function() {
-            window.location.href = "{{ url('/') }}";
+            window.location.href = "{{ route('home') }}";
         });
 
         document.getElementById("loginForm").addEventListener("submit", function (event) {
             loginAttempts++;
             sessionStorage.setItem("loginAttempts", loginAttempts);
 
-            if (loginAttempts >= 5) {
+            if (loginAttempts >= 6) {
                 event.preventDefault();
                 $("#failedLoginModal").modal("show");
             }

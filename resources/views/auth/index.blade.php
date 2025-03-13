@@ -50,8 +50,9 @@
             </div>
 
             <button type="submit" class="btn btn-primary btn-block" id="loginButton">Login</button>
-            <div class="text-center mt-3">
+            <div class="text-center mt-3 d-flex justify-content-between">
                 <a href="{{ route('password.request') }}" id="forgotPassword">Lupa Password?</a>
+                <a href="{{ route('home') }}" id="backToHome">Back to home</a>
             </div>
         </form>
 
