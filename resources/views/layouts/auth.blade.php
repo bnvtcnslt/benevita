@@ -109,55 +109,5 @@
         }
     });
 </script>
-
-<!-- JavaScript untuk mengelola tampilan dan percobaan login -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let loginAttempts = sessionStorage.getItem("loginAttempts") ? parseInt(sessionStorage.getItem("loginAttempts")) : 0;
-        let isAdminConfirmed = sessionStorage.getItem("isAdminConfirmed");
-
-        // Cek apakah sudah dikonfirmasi admin dan jumlah percobaan login
-        if (isAdminConfirmed === "true" && loginAttempts <= 6) {
-            showLoginForm();
-        }
-
-        document.getElementById("btnYesAdmin").addEventListener("click", function() {
-            sessionStorage.setItem("isAdminConfirmed", "true");
-            sessionStorage.setItem("loginAttempts", "0");
-            showLoginForm();
-        });
-
-        document.getElementById("btnNotAdmin").addEventListener("click", function() {
-            window.location.href = "{{ route('home') }}";
-        });
-
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
-            loginAttempts++;
-            sessionStorage.setItem("loginAttempts", loginAttempts);
-
-            if (loginAttempts >= 6) {
-                event.preventDefault();
-                $("#failedLoginModal").modal("show");
-            }
-        });
-
-        document.getElementById("retryAdminConfirm").addEventListener("click", function() {
-            sessionStorage.removeItem("isAdminConfirmed");
-            sessionStorage.setItem("loginAttempts", "0");
-            location.reload();
-        });
-    });
-
-    function showLoginForm() {
-        document.getElementById('adminConfirmation').style.display = 'none';
-        document.getElementById('loginTitle').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'block';
-
-        var messageBox = document.getElementById('loginMessage');
-        if (messageBox) {
-            messageBox.style.display = 'block';
-        }
-    }
-</script>
 </body>
 </html>

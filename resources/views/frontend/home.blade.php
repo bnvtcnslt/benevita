@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-md-5 mb-4 align-self-center">
                             <div class="hero-image">
-                                <img src="{{asset('assets-fe//images/heros.png')}}" alt="Hero Image" data-aos="zoom-in"
+                                <img src="{{asset('assets-fe/images/heros.png')}}" alt="Hero Image" data-aos="zoom-in"
                                      data-aos-duration="1500" data-aos-delay="300" class="img-fluid rounded-4">
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                         <div class="col-md-6 mb-4 mb-md-0">
                             <div class="about-image" data-aos="fade-right" data-aos-duration="1500"
                                  data-aos-delay="300">
-                                <img src="{{asset('assets-fe//images/about.png')}}" alt="About Image"
+                                <img src="{{asset('assets-fe/images/about.png')}}" alt="About Image"
                                      class="img-fluid rounded-4" style="width: 90%;">
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                     <div class="services-wrapper">
                         <div class="services-container">
                             <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-                                <img src="{{asset('assets-fe//images/services.webp" alt="Service Image')}}">
+                                <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image')}}">
                                 <h3>Analisis Sentimen</h3>
                                 <p>Layanan analisis sentimen kami membantu Anda memahami emosi dan opini pelanggan
                                     melalui data tekstual...</p>
@@ -114,7 +114,7 @@
                                 </a>
                             </div>
                             <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-                                <img src="{{asset('assets-fe//images/services.webp')}}" alt="Service Image">
+                                <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
                                 <h3>Analisis Aspek Sentimen</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                                     Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
@@ -124,7 +124,7 @@
                                 </a>
                             </div>
                             <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-                                <img src="{{asset('assets-fe//images/services.webp" alt="Service Image')}}">
+                                <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image')}}">
                                 <h3>Pemantauan Opini Publik dan Analisis Kompetitif</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                                     Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
@@ -137,7 +137,7 @@
                     </div>
                     <!-- Learn More Section -->
                     <div class="text-center mt-4">
-                        <a href="services.html" class="btn btn-success">Learn More</a>
+                        <a href="{{route('services')}}" class="btn btn-success">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -153,16 +153,16 @@
                         <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Client</h2>
                         <div class="logo-container">
                             <!-- Logo asli -->
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 1">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 2">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 3">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 4">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 5">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 6">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 7">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 8">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 9">
-                            <img src="{{asset('assets-fe//images/logo.png')}}" alt="Logo 10">
+                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Logo 1">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 2">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 3">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 4">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 5">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 6">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 7">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 8">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 9">
+                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 10">
                         </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="social-links mt-4">
                                     <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
                                     <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
                                     <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
@@ -213,7 +213,7 @@
                                         <input type="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Subjek">
+                                        <input type="text" class="form-control" placeholder="Subjek (Opsional)">
                                     </div>
                                     <div class="mb-3">
                                         <textarea class="form-control" rows="5" placeholder="Pesan"></textarea>
@@ -236,7 +236,7 @@
                 <div class="modal-image-container position-relative">
                     <button type="button" class="btn-close position-absolute top-0 end-0 m-2 bg-white"
                             data-bs-dismiss="modal" aria-label="Close"></button>
-                    <img src="{{asset('assets-fe//images/services.webp')}}" alt="Service Image" class="w-100">
+                    <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image" class="w-100">
                 </div>
                 <div class="modal-body">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis asperiores unde quia

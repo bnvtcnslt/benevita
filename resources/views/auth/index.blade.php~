@@ -12,16 +12,6 @@
             </div>
         @endif
 
-        <!-- Section Konfirmasi Admin -->
-        <div id="adminConfirmation" class="text-center mb-4">
-            <strong>Apakah Anda seorang Admin?</strong>
-            <p class="mt-2 text-danger">Hanya Admin yang dapat mengakses halaman ini!</p>
-            <div class="mt-3 d-flex justify-content-center gap-3">
-                <button id="btnYesAdmin" class="btn btn-primary mr-2">Ya, saya adalah Admin</button>
-                <button id="btnNotAdmin" class="btn btn-secondary">Bukan</button>
-            </div>
-        </div>
-
         <!-- Form Login (Disembunyikan di Awal) -->
         <form id="loginForm" action="{{ route('auth.verify') }}" method="POST" class="mt-4" style="display: none;">
             @csrf
@@ -54,36 +44,8 @@
                 <a href="{{ route('password.request') }}" id="forgotPassword">Lupa Password?</a>
                 <a href="{{ route('home') }}" id="backToHome">Back to home</a>
             </div>
-            <div class="text-center mt-3">
-
-            </div>
         </form>
 
-    </div>
-
-    <!-- MODAL GAGAL LOGIN -->
-    <div class="modal fade" id="failedLoginModal" tabindex="-1" aria-labelledby="failedLoginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-danger">
-                <!-- Header -->
-                <div class="modal-header bg-danger text-white text-center d-flex flex-column">
-                    <h5 class="modal-title font-weight-bold" id="failedLoginModalLabel"><i class="fas fa-exclamation-triangle fa-3x mb-2"></i> Gagal Login</h5>
-                </div>
-
-                <!-- Body -->
-                <div class="modal-body text-center">
-                    <p class="mb-0">Batas percobaan login telah tercapai.</p>
-                    <p>Silakan lakukan konfirmasi ulang untuk melanjutkan.</p>
-                </div>
-
-                <!-- Footer -->
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary px-4" id="retryAdminConfirm">
-                        <i class="fas fa-undo-alt"></i> Konfirmasi Ulang
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 
 @endsection

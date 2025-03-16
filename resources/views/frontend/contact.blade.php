@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="social-links mt-4">
                                     <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
                                     <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
                                     <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
@@ -66,7 +66,7 @@
                                         <input type="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Subjek">
+                                        <input type="text" class="form-control" placeholder="Subjek (Opsional)">
                                     </div>
                                     <div class="mb-3">
                                         <textarea class="form-control" rows="5" placeholder="Pesan"></textarea>

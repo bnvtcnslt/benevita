@@ -81,13 +81,13 @@
                         <h5>Follow Us</h5>
                         <ul class="list-unstyled">
                             <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#"><i class="fab fa-tiktok"></i> Tiktok</a></li>
                             <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
                             <li><a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
                         </ul>
                         <div class="social-links">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-tiktok"></i></a>
                             <a href="#"><i class="fab fa-instagram"></i></a>
                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
