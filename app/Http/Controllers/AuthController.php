@@ -24,7 +24,6 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        // Menambahkan 'remember' untuk "Remember Me"
         $remember = $request->has('remember');
 
         if (auth()->guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
@@ -70,22 +69,18 @@ class AuthController extends Controller
     {
         $messages = [];
 
-        // Cek jika password kurang dari 8 karakter
         if (strlen($request->password) < 8) {
             $messages[] = 'Password minimal 8 karakter.';
         }
 
-        // Jika password sudah cukup panjang, cek apakah konfirmasi password tidak cocok
         if (strlen($request->password) >= 8 && $request->password !== $request->password_confirmation) {
             $messages[] = 'Konfirmasi password tidak sesuai.';
         }
 
-        // Jika ada pesan kesalahan, kembalikan ke halaman sebelumnya dengan pesan kesalahan
         if (count($messages) > 0) {
             return back()->withErrors($messages);
         }
 
-        // Jika validasi berhasil, lanjutkan untuk mereset password
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {

@@ -1,28 +1,41 @@
 ﻿@extends('layouts.main')
-@section('title', 'Clients')
-@section('subtitle', 'Welcome to your list of clients')
+
 @section('content')
     <div class="row mt-4">
-        <div class="col-lg-12 col-12 col-md-8 mb-4">
+        <div class="col-lg-12 col-12 mb-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h4 class="fw-bold">Client List</h4>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                            <i class="bi bi-plus-lg"></i> Add Client
-                        </button>
+                    <h4 class="fw-bold">Client List</h4>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="col-lg-4">
+                            <form action="{{ route('client.search') }}" method="GET">
+                                <div class="input-group input-group-sm align-items-center">
+                                    <input type="text" name="query" class="form-control" placeholder="Search for clients..." value="{{ request()->input('query') }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary btn-sm" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-auto text-end d-flex justify-content-end">
+                            <button class="btn btn-primary d-flex align-items-center px-2" style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <i class="bi bi-plus-lg me-2 d-none d-sm-block"></i>
+                                <span class="d-block d-sm-none">+ Add</span>
+                                <span class="d-none d-sm-block">Add Client</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover text-center align-middle">
                             <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Name</th>
                                 <th>Logo</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Address</th>
-                                <th>Date</th>
+                                <th>Date Added</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -30,10 +43,17 @@
                             <tbody>
                             @foreach($clients as $client)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{ ($clients->currentPage() - 1) * $clients->perPage() + $loop->iteration }}</td>
                                     <td>{{$client->name}}</td>
-                                    <td>
-                                        <img src="{{Storage::url('/images/' . $client->logo_img)}}" alt="Logo Client" class="rounded-circle" width="50px" height="50px">
+                                    <td class="align-middle">
+                                        <div class="d-flex justify-content-center">
+                                            <img src="{{Storage::url('/clients/' . $client->logo_img)}}"
+                                                 alt="Client Member"
+                                                 class="rounded-circle"
+                                                 width="50"
+                                                 height="50"
+                                                 style="object-fit: cover">
+                                        </div>
                                     </td>
                                     <td>{{$client->email}}</td>
                                     <td>{{$client->phone}}</td>
@@ -48,18 +68,59 @@
                                         <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{$client->id}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-
                                         <form id="delete-client-{{$client->id}}" action="{{route('client.destroy', $client->id)}}" method="post" style="display:none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
-                                        <a onclick="confirmDelete({{$client->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                        <a href="#" onclick="confirmDelete({{$client->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <!-- Previous Page Link -->
+                            <li class="page-item {{ $clients->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $clients->previousPageUrl() }}" aria-label="Previous">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+
+                            @php
+                                $currentPage = $clients->currentPage();
+                                $lastPage = $clients->lastPage();
+                                $start = max($currentPage - 2, 1);
+                                $end = min($currentPage + 2, $lastPage);
+
+                                if ($start > 1) {
+                                    echo '<li class="page-item"><a class="page-link" href="' . $clients->url(1) . '">1</a></li>';
+                                    if ($start > 2) {
+                                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                    }
+                                }
+
+                                for ($i = $start; $i <= $end; $i++) {
+                                    $active = $currentPage == $i ? 'active' : '';
+                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . $clients->url($i) . '">' . $i . '</a></li>';
+                                }
+
+                                if ($end < $lastPage) {
+                                    if ($end < $lastPage - 1) {
+                                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                    }
+                                    echo '<li class="page-item"><a class="page-link" href="' . $clients->url($lastPage) . '">' . $lastPage . '</a></li>';
+                                }
+                            @endphp
+
+                            <li class="page-item {{ $clients->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $clients->nextPageUrl() }}" aria-label="Next">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -70,7 +131,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{route('client.store')}}" method="post" enctype="multipart/form-data">
@@ -112,6 +174,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="updateModalLabel">Edit Client</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('client.update', $client->id) }}" method="post" enctype="multipart/form-data">
@@ -120,40 +183,40 @@
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" name="name" value="{{$client->name}}">
+                                <input type="text" class="form-control" name="name" value="{{$client->name}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email" value="{{$client->email}}">
+                                <input type="email" class="form-control" name="email" value="{{$client->email}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input type="number" class="form-control" name="phone" value="{{$client->phone}}">
+                                <input type="number" class="form-control" name="phone" value="{{$client->phone}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea class="form-control" name="address">{{$client->address}}</textarea>
+                                <textarea class="form-control" name="address" required>{{$client->address}}</textarea>
                             </div>
-                            <div class="mb-3 position-relative">
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
                                 <select name="status" class="form-control">
-                                    <option value="1" {{($client->status == 1) ? 'selected' : ''}}>Aktif</option>
-                                    <option value="0" {{($client->status == 0) ? 'selected' : ''}}>Tidak Aktif</option>
+                                    <option value="1" {{($client->status == 1) ? 'selected' : ''}}>Active</option>
+                                    <option value="0" {{($client->status == 0) ? 'selected' : ''}}>Inactive</option>
                                 </select>
-                                <i class="bi bi-caret-down-fill position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
                             </div>
 
                             <div class="mb-3">
                                 <label for="logo_img" class="form-label">Logo Client</label>
                                 <div class="row">
                                     <div class="col-lg-2 col-md-12 col-12">
-                                        <img src="{{ Storage::url('/images/' . $client->logo_img) }}" alt="Logo Client" width="50px" height="50px">
+                                        <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Logo Client" width="50px" height="50px" class="rounded-circle">
                                     </div>
                                     <div class="col-lg-10 col-md-12 col-12">
-                                        <input type="file" class="form-control mt-2" name="logo_img" value="{{$client->logo_img}}">
+                                        <input type="file" class="form-control mt-2" name="logo_img">
+                                        <small class="text-muted">Leave empty if you don't want to change the logo</small>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="id" value="{{$client->id}}">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Update</button>
@@ -187,7 +250,6 @@
                 }
             });
         }
+
     </script>
 @endsection
-
-

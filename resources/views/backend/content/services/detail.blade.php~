@@ -1,0 +1,166 @@
+@extends('layouts.main')
+@section('content')
+    <div class="row mt-4">
+        <div class="col-lg-12 col-12 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="fw-bold mb-0">Service Details</h4>
+                        <a href="{{ route('service.index') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Image Column -->
+                        <div class="col-lg-4 col-md-5 mb-4 mb-md-0">
+                            <div class="position-relative">
+                                <img src="{{ Storage::url('/services/' . $service->image) }}"
+                                     alt="Service Image"
+                                     class="img-fluid rounded-3 shadow-sm"
+                                     style="max-height: 300px; width: 100%; object-fit: cover;">
+                                <div class="position-absolute bottom-0 start-0 p-2 bg-white bg-opacity-75 rounded-end">
+                                    <small class="text-muted">Uploaded: {{ $service->created_at->format('d M Y') }}</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Details Column -->
+                        <div class="col-lg-8 col-md-7">
+                            <h3 class="fw-bold">{{ $service->title }}</h3>
+
+                            <!-- Team Member Info -->
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="me-3">
+                                    @if($service->team && $service->team->image)
+                                        <img src="{{ Storage::url('/teams/' . $service->team->image) }}"
+                                             class="rounded-circle"
+                                             width="50"
+                                             height="50"
+                                             alt="{{ $service->team->name }}"
+                                             style="object-fit: cover">
+                                    @else
+                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                             style="width: 50px; height: 50px">
+                                            <i class="bi bi-person fs-4 text-muted"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">{{ $service->team ? $service->team->name : 'Not Assigned' }}</h6>
+                                    <small class="text-muted">{{ $service->team ? $service->team->position : '' }}</small>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-4">
+                                <h5 class="border-bottom pb-2">Description</h5>
+                                <p class="text-justify">{{ $service->description }}</p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex flex-wrap gap-2 mt-4">
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{ $service->id }}">
+                                    <i class="bi bi-pencil-square me-1"></i> Edit Service
+                                </button>
+
+                                <form id="delete-service-{{ $service->id }}" action="{{ route('service.destroy', $service->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="confirmDelete({{ $service->id }})" class="btn btn-danger">
+                                        <i class="bi bi-trash me-1"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal{{ $service->id }}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Edit Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('service.update', $service->id) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="title" class="form-label">Service Title*</label>
+                                <input type="text" class="form-control" name="title" value="{{ old('title', $service->title) }}" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="team_id" class="form-label">Assigned Team Member*</label>
+                                <select class="form-select" name="team_id" required>
+                                    <option value="">Select Team Member</option>
+                                    @foreach($teams as $team)
+                                        <option value="{{ $team->id }}" {{ $service->team_id == $team->id ? 'selected' : '' }}>
+                                            {{ $team->name }} ({{ $team->position }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description*</label>
+                            <textarea class="form-control" name="description" rows="5" required>{{ old('description', $service->description) }}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Service Image</label>
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <img src="{{ Storage::url('/services/' . $service->image) }}"
+                                         class="rounded"
+                                         width="100"
+                                         height="100"
+                                         style="object-fit: cover"
+                                         alt="Current Image">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <input type="file" class="form-control" name="image" accept="image/*">
+                                    <small class="text-muted">Leave blank to keep current image</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer border-top-0">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Delete Service?',
+                text: "This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`delete-service-${id}`).submit();
+                }
+            });
+        }
+    </script>
+@endsection

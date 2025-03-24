@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -12,17 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-
-        return view('backend.content.clients', compact('clients'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $clients = Client::all();
+        $clients = Client::paginate(5);
         return view('backend.content.clients', compact('clients'));
     }
 
@@ -31,46 +22,45 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'address' => 'required',
-            'logo_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'address' => 'required',
+                'logo_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
 
-        if ($request->hasFile('logo_img')) {
-            $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
-            $request->file('logo_img')->storeAs('public/images', $imageFileName);
-            $request->logo_img = $imageFileName;
+            $imageFileName = null;
+            if ($request->hasFile('logo_img')) {
+                $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
+                $request->file('logo_img')->storeAs('public/clients', $imageFileName);
+            }
+
+            Client::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'logo_img' => $imageFileName,
+                'status' => 1 // Default to active
+            ]);
+
+            return redirect()->route('client.index')->with('success', 'Client added successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('client.index')->with('error', 'Failed to add client: ' . $e->getMessage());
+        }
+    }
+
+    public function show($id)
+    {
+        $client = Client::find($id);
+
+        if (!$client) {
+            return redirect()->route('client.index')->with('error', 'Client not found.');
         }
 
-        Client::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'logo_img' => $request->logo_img
-        ]);
-
-        return redirect()->route('client.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Client $client)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Client $client)
-    {
-        $clients = Client::findOrFail($client->id);
-        return view('backend.content.clients', compact('clients'));
+        return view('backend.content.client', compact('client'));
     }
 
     /**
@@ -78,31 +68,36 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'address' => 'required',
-            'status' => 'required',
-            'logo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'address' => 'required',
+                'status' => 'required',
+                'logo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
 
-        if ($request->hasFile('logo_img')) {
-            $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
-            $request->file('logo_img')->storeAs('public/images', $imageFileName);
-            $request->logo_img = $imageFileName;
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'status' => $request->status,
+            ];
+
+            if ($request->hasFile('logo_img')) {
+                $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
+                $request->file('logo_img')->storeAs('public/clients', $imageFileName);
+                $data['logo_img'] = $imageFileName;
+            }
+
+            $client->update($data);
+
+            return redirect()->route('client.index')->with('success', 'Client updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('client.index')->with('error', 'Failed to update client: ' . $e->getMessage());
         }
-
-        Client::where('id', $client->id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'status' => $request->status,
-            'logo_img' => $request->logo_img ?? $client->logo_img
-        ]);
-
-        return redirect()->route('client.index');
     }
 
     /**
@@ -110,7 +105,53 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        Client::destroy($client->id);
-        return redirect()->route('client.index');
+        try {
+            $client->delete();
+            return redirect()->route('client.index')->with('success', 'Client deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('client.index')->with('error', 'Failed to delete client: ' . $e->getMessage());
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $query = trim($request->input('query'));
+
+            if (empty($query)) {
+                return redirect()->route('client.index');
+            }
+
+            $clientsQuery = Client::query();
+
+            if (is_numeric($query)) {
+                $clientsQuery->where(function($q) use ($query) {
+                    $q->where('id', '=', $query)
+                        ->orWhere('name', 'like', "%{$query}%")
+                        ->orWhere('email', 'like', "%{$query}%")
+                        ->orWhere('phone', 'like', "%{$query}%")
+                        ->orWhere('address', 'like', "%{$query}%");
+                });
+            } else {
+                $clientsQuery->where(function($q) use ($query) {
+                    $q->where('name', 'like', "%{$query}%")
+                        ->orWhere('email', 'like', "%{$query}%")
+                        ->orWhere('phone', 'like', "%{$query}%")
+                        ->orWhere('address', 'like', "%{$query}%");
+                });
+            }
+
+            $clients = $clientsQuery->paginate(5)->appends(['query' => $query]);
+
+            // Check if no results were found
+            if ($clients->isEmpty()) {
+                // Flash a message to the session that will be used by SweetAlert
+                session()->flash('sweet_error', 'No clients found matching your search criteria.');
+            }
+
+            return view('backend.content.clients', compact('clients'));
+        } catch (\Exception $e) {
+            return redirect()->route('client.index')->with('error', 'Failed to search client: ' . $e->getMessage());
+        }
     }
 }

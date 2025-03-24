@@ -19,7 +19,25 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'images/logo.png',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client212@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -28,10 +46,1216 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'images/logo.png',
+                'logo_img' => '1742733479_download (3).jpg',
                 'created_at' => now(),
                 'status' => true
-            ]
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client',
+                'email' => 'client@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => 'user.jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
+            [
+                'name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'phone' => '123456789',
+                'address' => 'Address',
+                'logo_img' => '1742733479_download (3).jpg',
+                'created_at' => now(),
+                'status' => true
+            ],
         ]);
     }
 }

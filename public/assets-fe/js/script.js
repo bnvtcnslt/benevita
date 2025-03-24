@@ -7,13 +7,13 @@ const logoContainer = document.querySelector('.logo-container');
 //         document.querySelectorAll('.nav-scroll').forEach(link => {
 //             link.addEventListener('click', function(e) {
 //                 e.preventDefault();
-                
+
 //                 // Menutup navbar mobile jika terbuka
 //                 const navbarCollapse = document.querySelector('.navbar-collapse');
 //                 if (navbarCollapse.classList.contains('show')) {
 //                     navbarCollapse.classList.remove('show');
 //                 }
-                
+
 //                 // Scroll ke section yang dituju
 //                 const targetId = this.getAttribute('href');
 //                 const targetSection = document.querySelector(targetId);
@@ -26,3 +26,5 @@ const logoContainer = document.querySelector('.logo-container');
 //                 }
 //             });
 //         });
+
+

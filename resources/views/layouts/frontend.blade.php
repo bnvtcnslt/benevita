@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6f00">
     <title>Benevita Consulting</title>
     <!-- Google Fonts - Merriweather -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -116,6 +117,35 @@
             navbar.classList.remove('scrolled');
         }
     });
+
+    /*Menangani scroll dan collapse navbar*/
+    document.addEventListener("DOMContentLoaded", function () {
+        let inner = document.querySelector(".inner");
+        let logos = Array.from(inner.children);
+        let totalLogos = logos.length;
+
+        // Clone terus menerus hingga mencapai panjang yang cukup
+        const cloneLogos = () => {
+            logos.forEach(logo => {
+                let clone = logo.cloneNode(true);
+                inner.appendChild(clone);
+            });
+        };
+
+        // Clone sampai scrollWidth lebih dari dua kali lebar jendela
+        while (inner.scrollWidth < window.innerWidth * 2) {
+            cloneLogos();
+        }
+
+        // Sesuaikan durasi animasi berdasarkan total lebar konten
+        let totalWidth = inner.scrollWidth;
+        let speed = totalWidth / 50;
+        inner.style.animationDuration = `${speed}s`;
+
+        // Tambahkan class untuk memulai animasi
+        inner.classList.add("animated");
+    });
+
 </script>
 </body>
 </html>

@@ -10,23 +10,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         :root {
-            --dark-green: #2c5640;
-            --light-green: #3d7a5a;
-            --orange: #f5844c;
-            --light-orange: #ffa773;
-        }
-
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Mencegah scroll horizontal */
+            --dark-green: #1e4d36;
+            --light-green: #2a6a4a;
+            --orange: #f27241;
+            --light-orange: #ff9466;
+            --sidebar-width: 280px;
+            --body-bg: #f4f7fa;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-bg);
+            color: #333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         .wrapper {
@@ -35,112 +35,222 @@
             width: 100%;
         }
 
-        #content {
-            flex-grow: 1;
-            background-color: white;
-            padding: 0;
-        }
-
-        .main-content {
-            flex: 1;
-        }
-
+        /* Enhanced Sidebar */
         #sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            background: var(--light-green);
+            min-width: var(--sidebar-width);
+            max-width: var(--sidebar-width);
+            background: linear-gradient(135deg, var(--dark-green), var(--light-green));
             color: #fff;
             transition: all 0.3s;
             min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 16px 16px 16px 16px;
+            padding: 10px;
         }
 
-        #sidebar.active {
-            margin-left: -250px;
+        #sidebar .sidebar-header {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            margin-top: 5px;
         }
 
-        .profile-image {
-            width: 40px;
-            height: 40px;
+        #sidebar ul li {
+            margin: 8px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #sidebar ul li a {
+            padding: 12px 20px;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        #sidebar ul li a:hover, #sidebar ul li.active a {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        #sidebar ul li a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .profile-container {
+            border-radius: 12px;
+            padding: 16px;
+            margin: 15px 10px;
+        }
+
+        .profile-container img {
             border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
 
-        .profile-dropdown {
-            background-color: var(--light-green);
-            border: none;
+        /* Main Content Area */
+        #content {
+            background-color: var(--body-bg);
+            padding: 0;
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            transition: margin-left 0.3s;
         }
 
-        .profile-dropdown .dropdown-item:hover {
+        #content.sidebar-active {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff;
+            box-shadow: var(--card-shadow);
+            padding: 12px 25px;
+            border-radius: 12px;
+            margin: 15px;
+        }
+
+        #sidebarCollapse {
             background-color: var(--orange);
-            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .profile-dropdown .dropdown-item {
-            color: white;
+        #sidebarCollapse:hover {
+            background-color: var(--light-orange);
+            transform: scale(1.05);
         }
 
+        #sidebarCollapse i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 15px 0;
+            border-radius: 16px;
+            margin: 15px;
+        }
+
+        /* Active state */
+        #sidebar.active {
+            margin-left: calc(var(--sidebar-width) * -1);
+        }
+
+        #sidebar.active + #content {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        /* Media queries for responsiveness */
         @media (max-width: 768px) {
             #sidebar {
-                margin-left: -250px;
-                position: fixed;
-                z-index: 1000;
-                height: 100%;
+                margin-left: calc(var(--sidebar-width) * -1);
+                border-radius: 0 12px 12px 0;
             }
 
             #sidebar.active {
                 margin-left: 0;
             }
 
-            #sidebarCollapse span {
-                display: none;
+            #content {
+                margin-left: 0;
+                width: 100%;
             }
         }
 
-        .custom-btn {
-            background-color: var(--orange);
+        /* Card Styling */
+        .card {
+            border-radius: 16px;
             border: none;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
         }
 
-        .custom-btn:hover {
-            background-color: var(--light-orange);
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card .rounded-circle{
+            border-radius: 50% !important;
+            background-color: rgba(0,0,0,0.05);
+            padding: 5px;
         }
     </style>
 </head>
 <body>
 <div class="wrapper d-flex">
-    <!-- Sidebar -->
-    <div class="col-12 col-md-3 col-lg-2 bg-light-green text-white" id="sidebar">
-        <div class="sidebar-header d-flex justify-content-between align-items-center p-3 bg-dark-green">
+    <!-- Enhanced Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-header d-flex justify-content-between align-items-center p-3">
             <a href="{{route('home')}}" class="m-0 h3 text-decoration-none">Benevita</a>
             <button type="button" id="sidebar-close" class="btn d-md-none">
                 <i class="bi bi-x text-white fs-4"></i>
             </button>
         </div>
 
-        <ul class="list-unstyled components p-0">
-            <li class="active">
-                <a href="{{route('dashboard.index')}}" class="text-white text-decoration-none p-3 d-block"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+        <ul class="list-unstyled components p-2">
+            <li class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                <a href="{{route('dashboard.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-speedometer2"></i>Dashboard
+                </a>
             </li>
-            <li>
-                <a href="{{route('client.index')}}" class="text-white text-decoration-none p-3 d-block"><i class="bi bi-person-circle me-2"></i>Client</a>
+            <li class="{{ request()->routeIs('client.index') ? 'active' : '' }}">
+                <a href="{{route('client.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-person-circle"></i>Client
+                </a>
             </li>
-            <li>
-                <a href="#" class="text-white text-decoration-none p-3 d-block"><i class="bi bi-people me-2"></i>User</a>
+            <li class="{{ request()->routeIs('team.index') ? 'active' : '' }}">
+                <a href="{{route('team.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-people-fill"></i>Team
+                </a>
             </li>
-            <li>
-                <a href="#" class="text-white text-decoration-none p-3 d-block"><i class="bi bi-gear me-2"></i>Settings</a>
+            <li class="{{ request()->routeIs('service.index') ? 'active' : '' }}">
+                <a href="{{route('service.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-card-list"></i>Service
+                </a>
+            </li>
+            <li class="{{--{{ request()->routeIs('settings.*') ? 'active' : '' }}--}}">
+                <a href="{{--{{ route('settings.index') ?? '#' }}--}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-gear"></i>Settings
+                </a>
             </li>
         </ul>
 
-        <!-- Profile container at the bottom of sidebar -->
-        <div class="profile-container mt-auto p-3 bg-dark-green">
+        <!-- Enhanced Profile container -->
+        <div class="profile-container mt-auto">
             <div class="dropdown">
                 <div class="d-flex align-items-center" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/api/placeholder/40/40" alt="Profile" class="profile-image me-3">
+                    <img src="https://picsum.photos/30" alt="Profile" class="me-3">
                     <div>
                         <p class="m-0 fw-bold">John Doe</p>
-                        <small>Administrator</small>
+                        <small class="text-white-50">Administrator</small>
                     </div>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </div>
@@ -155,49 +265,38 @@
     </div>
 
     <!-- Page Content -->
-    <div class="col-12 col-md-9 col-lg-10" id="content">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div id="content">
+        <!-- Enhanced Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-6 col-md-8">
-                        <button type="button" id="sidebarCollapse" class="btn custom-btn">
-                            <i class="bi bi-list text-white"></i>
-                        </button>
-
-                        {{--<div class="ms-auto d-flex align-items-center">
-                            <div class="me-4 position-relative">
-                                <i class="bi bi-bell fs-5"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
-                            </div>
-                            <div class="position-relative">
-                                <i class="bi bi-envelope fs-5"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
-                            </div>
-                        </div>--}}
+                <button type="button" id="sidebarCollapse" class="btn">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="ms-auto d-flex align-items-center">
+                    <div class="position-relative me-3">
+                        <i class="bi bi-bell fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </div>
+                    <div class="position-relative me-3">
+                        <i class="bi bi-envelope fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                            5
+                        </span>
                     </div>
                 </div>
             </div>
         </nav>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-12 col-md-8">
-                    <h2>@yield('title')</h2>
-                    <p class="text-muted">@yield('subtitle')</p>
-                </div>
-            </div>
+        <!-- Main Content Area -->
+        <div class="main-content">
+            @yield('content')
         </div>
 
-        @yield('content')
-
-        <!-- Footer -->
-        <footer class="mt-auto bg-light-green text-dark py-3">
-            <div class="col-lg-12 col-12 col-md-8">
-                <div class="container-fluid text-center">
-                    <p>&copy; 2024 Benevita Consulting. All rights reserved.</p>
-                </div>
-            </div>
+        <!-- Enhanced Footer -->
+        <footer class="text-center">
+            <p class="mb-0">&copy; 2024 Benevita Consulting. All rights reserved.</p>
         </footer>
     </div>
 </div>
@@ -209,10 +308,73 @@
 <script>
     document.getElementById('sidebarCollapse').addEventListener('click', function () {
         document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('content').classList.toggle('sidebar-active');
     });
 
     document.getElementById('sidebar-close').addEventListener('click', function () {
         document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('content').classList.toggle('sidebar-active');
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 1500,
+            width: '250px',
+            toast: true,
+            padding: '0.5rem',
+            customClass: {
+                popup: 'small-toast',
+                title: 'small-toast-title'
+            }
+        });
+        @endif
+
+        @if(session('error'))
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 1500,
+            width: '350px',
+            toast: true,
+            padding: '0.5rem',
+            customClass: {
+                popup: 'small-toast',
+                title: 'small-toast-title'
+            }
+        });
+        @endif
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle empty search results with SweetAlert
+        @if(session()->has('sweet_error'))
+        Swal.fire({
+            title: "No Results",
+            text: "{{ session('sweet_error') }}",
+            icon: "error",
+            confirmButtonColor: "#3085d6"
+        });
+        @endif
+
+        // Your existing empty search field handler
+        const searchInput = document.querySelector('input[name="query"]');
+        if (searchInput) {
+            const searchForm = searchInput.closest('form');
+            searchInput.addEventListener('input', function() {
+                if (this.value.trim() === '') {
+                    searchForm.submit();
+                }
+            });
+        }
     });
 </script>
 </body>

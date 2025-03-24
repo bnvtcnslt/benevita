@@ -9,10 +9,32 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $table = 'clients';
+    protected $table = 'clients'; // Ensure this matches your actual table name
 
-    protected $fillable = ['name', 'email', 'phone', 'address', 'status', 'logo_img'];
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'address',
+        'logo_img',
+        'status'
+    ];
 
-    protected $primaryKey = 'id';
-
+    // Add this method for debugging
+    public static function checkConnection() {
+        try {
+            $count = self::count();
+            return [
+                'success' => true,
+                'count' => $count,
+                'connection' => config('database.default'),
+                'database' => config('database.connections.' . config('database.default') . '.database')
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage()
+            ];
+        }
+    }
 }

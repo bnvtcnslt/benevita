@@ -1,34 +1,101 @@
- /* Container untuk section logo */
- .logo-section {
-    width: 100%;
-    overflow: hidden; /* Agar animasi tidak keluar dari container */
-    position: relative;
-    }
 
-    /* Container untuk logo */
-    .logo-container {
+/* Custom Pagination Styles */
+.pagination {
     display: flex;
-    width: max-content; /* Lebar sesuai dengan total logo */
-    animation: scroll 20s linear infinite; /* Animasi scroll otomatis */
-    }
+    justify-content: center;
+    margin-top: 20px;
+}
 
-    /* Animasi scroll */
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    color: var(--light-green);
+    border: 1px solid var(--light-green);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--light-green);
+    color: white;
+    border-color: var(--light-green);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--light-green);
+    border-color: var(--light-green);
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    border-color: #dee2e6;
+}
+
+/* Container untuk logo */
+.tag-list {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Wrapper animasi */
+.inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    width: max-content;
+}
+
+/* Ukuran logo */
+.tag-list img {
+    height: 60px;
+    object-fit: contain;
+    max-width: 150px;
+    flex-shrink: 0;
+}
+
+/* Animasi scroll */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Menjalankan animasi */
+.inner.animated {
+    animation: scroll linear infinite;
+}
+
+/*.logo-container {
+display: flex;
+width: max-content; !* Lebar sesuai dengan total logo *!
+animation: scroll 20s linear infinite; !* Animasi scroll otomatis *!
+}*/
+
+    /*!* Animasi scroll *!
     @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Geser setengah dari total lebar */
-    }
+    100% { transform: translateX(-50%); } !* Geser setengah dari total lebar *!
+    }*/
 
     /* Style untuk logo */
-    .logo-container img {
-    width: 100px; /* Sesuaikan ukuran logo */
+    /*.logo-container img {
+    width: 100px; !* Sesuaikan ukuran logo *!
     height: 50px;
-    margin: 0 20px; /* Jarak antar logo */
-    }
+    margin: 0 20px; !* Jarak antar logo *!
+    }*/
 
-    /* Efek hover */
-    .logo-section:hover .logo-container {
-    animation-play-state: paused; /* Menghentikan animasi saat di-hover */
-    }
     body {
         font-family: 'Merriweather', serif;
         padding-top: 56px; /* Sesuaikan dengan tinggi navbar yang baru */
@@ -168,54 +235,82 @@
         margin-bottom: 40px;
     }
 
-    .services-container {
+    .image-container {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         overflow: hidden;
     }
 
+.services-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: stretch; /* Memastikan semua card memiliki tinggi yang sama */
+}
 
-    .services {
-        background: rgba(214, 245, 255, 0.5);
-        position: relative;
-        padding: 20px; /* Adjust padding for team members */
-        border-radius: 10px; /* Rounded corners */
-        transition: transform 0.3s ease; /* Add hover effect */
+.services {
+    background: rgba(214, 245, 255, 0.5);
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Konten di dalam card terdistribusi dengan baik */
+    flex: 1 1 250px; /* Fleksibel, tetapi minimal 250px */
+}
+
+.services img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.services h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.services p {
+    color: #0A5640;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Memastikan paragraf mengambil ruang yang tersedia */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;  /* Membatasi hingga 3 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;  /* Menyelaraskan teks ke kiri dan kanan */
+}
+
+.read-services {
+    color: #0a5640;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-top: auto; /* Memastikan tombol selalu berada di bagian bawah card */
+}
+
+.services:hover {
+    transform: translateY(-5px); /* Hover effect */
+}
+
+    .text-truncate-multiline {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;  /* Membatasi hingga 5 baris */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: justify;  /* Menyelaraskan teks ke kiri dan kanan */
     }
 
-    .services img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px; /* Rounded corners for images */
-        margin-bottom: 1rem; /* Space below images */
-    }
-
-    .services h3 {
-        font-size: 1.25rem; /* Adjust heading size */
-        margin-bottom: 0.5rem; /* Space below heading */
-    }
-
-    .services p {
-        color: #0A5640; /* Text color for descriptions */
-    }
-
-    .services:hover {
-        transform: translateY(-5px); /* Hover effect */
-    }
-
-    .read-services {
-        color: #0a5640;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        transition: all 0.3s ease;
-        padding: 6px 12px;
-        border-radius: 4px;
-        position: absolute;
-        bottom: 15px;
-        right: 15px;
-    }
 
     .read-services:hover {
         background: rgba(10, 86, 64, 0.1);
@@ -233,7 +328,7 @@
     }
 
     @media (max-width: 991px) {
-        .services-container {
+        .image-container {
             grid-template-columns: 1fr; /* Stack items on smaller screens */
             gap: 30px; /* Space between items */
             padding: 0 15px; /* Padding for smaller screens */

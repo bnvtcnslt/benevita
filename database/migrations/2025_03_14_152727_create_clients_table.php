@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('logo_img');
             $table->boolean('status')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

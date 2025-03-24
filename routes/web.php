@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -43,8 +45,15 @@ Route::group(['middleware' => ['auth:user']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
+        // Route untuk pencarian
+        Route::get('/client/search', [ClientController::class, 'search'])->name('client.search');
+        Route::get('/team/search', [TeamController::class, 'search'])->name('team.search');
+        Route::get('/service/search', [ServiceController::class, 'search'])->name('service.search');
 
         Route::resource('client', ClientController::class);
+        Route::resource('team', TeamController::class);
+        Route::resource('service', ServiceController::class);
+
     });
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -52,10 +61,9 @@ Route::group(['middleware' => ['auth:user']], function () {
 
 /*End*/
 
-
 /*Route Storage*/
-Route::get('storage/images/{filename}', function ($filename) {
-    $path = storage_path('app/public/images/' . $filename);
+Route::get('storage/{filename}', function ($filename) {
+    $path = storage_path('app/public/{filename}/' . $filename);
     if (!File::exists($path)) {
         abort(404);
     }
@@ -64,5 +72,4 @@ Route::get('storage/images/{filename}', function ($filename) {
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
     return $response;
-})->name('storage/images');
-
+})->name('storage/{filename}');

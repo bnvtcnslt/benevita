@@ -102,42 +102,30 @@
                 <div class="col-lg-10 col-md-12 col-12">
                     <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Services</h2>
                     <div class="services-wrapper">
-                        <div class="services-container">
-                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-                                <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image')}}">
-                                <h3>Analisis Sentimen</h3>
-                                <p>Layanan analisis sentimen kami membantu Anda memahami emosi dan opini pelanggan
-                                    melalui data tekstual...</p>
-                                <a href="#" class="read-services" style="margin-left: -5px;" data-bs-toggle="modal"
-                                   data-bs-target="#servicesmodal">
-                                    Read More <i class="fas fa-arrow-right ms-1"></i>
-                                </a>
-                            </div>
-                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-                                <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
-                                <h3>Analisis Aspek Sentimen</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                                <a href="#" class="read-services" style="margin-left: -5px;" data-bs-toggle="modal"
-                                   data-bs-target="#servicesmodal">
-                                    Read More <i class="fas fa-arrow-right ms-1"></i>
-                                </a>
-                            </div>
-                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-                                <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image')}}">
-                                <h3>Pemantauan Opini Publik dan Analisis Kompetitif</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                                <a href="#" class="read-services" style="margin-left: -5px;" data-bs-toggle="modal"
-                                   data-bs-target="#servicesmodal">
-                                    Read More <i class="fas fa-arrow-right ms-1"></i>
-                                </a>
-                            </div>
+                        <div class="services">
+                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
+                            <h3>Analisis Sentimen</h3>
+                            <p>Layanan analisis sentimen kami membantu Anda memahami emosi dan opini pelanggan melalui data tekstual...</p>
+                            <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
                         </div>
-                    </div>
-                    <!-- Learn More Section -->
-                    <div class="text-center mt-4">
-                        <a href="{{route('services')}}" class="btn btn-success">Learn More</a>
+                        <div class="services">
+                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
+                            <h3>Analisis Aspek Sentimen</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                            <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                        <div class="services">
+                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
+                            <h3>Pemantauan Opini Publik dan Analisis Kompetitif</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                            <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,18 +139,12 @@
                 <div class="col-lg-10 col-md-12 col-12">
                     <div class="logo-section">
                         <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Client</h2>
-                        <div class="logo-container">
-                            <!-- Logo asli -->
-                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Logo 1">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 2">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 3">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 4">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 5">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 6">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 7">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 8">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 9">
-                            <img src="{{asset('assets-fe/images/logo.png')}}" alt="Logo 10">
+                        <div class="tag-list">
+                            <div class="inner">
+                                @foreach($clients as $client)
+                                    <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Client Logo">
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
