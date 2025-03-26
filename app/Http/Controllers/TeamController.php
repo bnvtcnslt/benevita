@@ -30,7 +30,7 @@ class TeamController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('public/teams', $imageFileName);
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
                 $request->image = $imageFileName;
             }
 
@@ -71,7 +71,7 @@ class TeamController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('public/teams', $imageFileName);
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
                 $request->image = $imageFileName;
             }
 

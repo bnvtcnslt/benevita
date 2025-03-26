@@ -45,7 +45,7 @@
                                     <td>{{ $member->id }}</td>
                                     <td>{{ $member->name }}</td>
                                     <td>{{ $member->role }}</td>
-                                    <td>{{ $member->team->name }}</td>
+                                    <td>{{ $member->team ? $member->team->name : '-' }}</td>
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
                                             <img src="{{ $member->image ? Storage::url('team_members/' . $member->image) : '/path/to/default/image.jpg' }}"
@@ -142,10 +142,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="team_id" class="form-label">Team</label>
-                            <select name="team_id" class="form-control" required>
+                            <select class="form-select" id="team_id" name="team_id">
                                 <option value="" selected disabled>Select Team</option>
                                 @foreach($teams as $team)
-                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                    <option value="{{$team->id}}">{{$team->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -185,7 +185,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="team_id" class="form-label">Team</label>
-                                <select name="team_id" class="form-control" required>
+                                <select class="form-select" id="team_id" name="team_id">
+                                    <option value="" selected disabled>Select Team</option>
                                     @foreach($teams as $team)
                                         <option value="{{ $team->id }}" {{ $member->team_id == $team->id ? 'selected' : '' }}>
                                             {{ $team->name }}

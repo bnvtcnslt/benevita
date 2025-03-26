@@ -32,9 +32,10 @@ class ClientController extends Controller
             ]);
 
             $imageFileName = null;
-            if ($request->hasFile('logo_img')) {
-                $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
-                $request->file('logo_img')->storeAs('public/clients', $imageFileName);
+            if ($request->hasFile('image')) {
+                $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
+                $request->image = $imageFileName;
             }
 
             Client::create([
@@ -86,10 +87,10 @@ class ClientController extends Controller
                 'status' => $request->status,
             ];
 
-            if ($request->hasFile('logo_img')) {
-                $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
-                $request->file('logo_img')->storeAs('public/clients', $imageFileName);
-                $data['logo_img'] = $imageFileName;
+            if ($request->hasFile('image')) {
+                $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
+                $request->image = $imageFileName;
             }
 
             $client->update($data);

@@ -46,7 +46,7 @@
                                     <td>{{ \Illuminate\Support\Str::limit($team->description, 50) }}</td>
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
-                                            <img src="{{Storage::url('/teams/' . $team->image)}}"
+                                            <img src="{{Storage::url('teams/' . $team->image)}}"
                                                  alt="Team"
                                                  class="rounded-circle"
                                                  width="50"
@@ -180,7 +180,7 @@
                                 <label for="image" class="form-label">Photo</label>
                                 <div class="row">
                                     <div class="col-lg-2 col-md-12 col-12">
-                                        <img src="{{ Storage::url('/teams/' . $team->image) }}" alt="Team" width="50px" height="50px">
+                                        <img src="{{ Storage::url('teams/' . $team->image) }}" alt="Team" width="50px" height="50px">
                                     </div>
                                     <div class="col-lg-10 col-md-12 col-12">
                                         <input type="file" class="form-control mt-2" name="image">

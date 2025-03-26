@@ -33,7 +33,8 @@ class TeamMemberController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('public/team_members', $imageFileName);
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
+                $request->image = $imageFileName;
             }
 
             TeamMember::create([
@@ -72,8 +73,8 @@ class TeamMemberController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('public/team_members', $imageFileName);
-                $data['image'] = $imageFileName;
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
+                $request->image = $imageFileName;
             }
 
             $team_member->update($data);

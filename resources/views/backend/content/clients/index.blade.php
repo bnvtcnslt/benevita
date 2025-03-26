@@ -49,7 +49,7 @@
                                     <td>{{$client->name}}</td>
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
-                                            <img src="{{Storage::url('/clients/' . $client->logo_img)}}"
+                                            <img src="{{Storage::url('clients/' . $client->logo_img)}}"
                                                  alt="Client Member"
                                                  class="rounded-circle"
                                                  width="50"
@@ -209,7 +209,7 @@
                                 <label for="logo_img" class="form-label">Logo Client</label>
                                 <div class="row">
                                     <div class="col-lg-2 col-md-12 col-12">
-                                        <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Logo Client" width="50px" height="50px" class="rounded-circle">
+                                        <img src="{{ Storage::url('clients/' . $client->logo_img) }}" alt="Logo Client" width="50px" height="50px" class="rounded-circle">
                                     </div>
                                     <div class="col-lg-10 col-md-12 col-12">
                                         <input type="file" class="form-control mt-2" name="logo_img">

@@ -9,7 +9,7 @@
                             <div class="row">
                                 <h3 class="fw-bold">Team Details</h3>
                                 <div class="col-lg-4 col-md-4 col-12 mb-4">
-                                    <img src="{{ Storage::url('/teams/' . $team->image) }}"
+                                    <img src="{{ Storage::url('teams/' . $team->image) }}"
                                          alt="Team Image"
                                          class="img-fluid rounded"
                                          style="max-height: 300px; object-fit: cover;">
@@ -186,7 +186,7 @@
                             <label for="image" class="form-label">Photo</label>
                             <div class="row">
                                 <div class="col-lg-2 col-md-12 col-12">
-                                    <img src="{{ Storage::url('/teams/' . $team->image) }}" alt="Team Member" width="50px" height="50px">
+                                    <img src="{{ Storage::url('teams/' . $team->image) }}" alt="Team Member" width="50px" height="50px">
                                 </div>
                                 <div class="col-lg-10 col-md-12 col-12">
                                     <input type="file" class="form-control mt-2" name="image">

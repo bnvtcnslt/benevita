@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
-            $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
+            $table->foreignId('team_id')->nullable()->constrained()->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
         });

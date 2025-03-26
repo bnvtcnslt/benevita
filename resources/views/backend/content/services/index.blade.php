@@ -45,10 +45,10 @@
                                     <td>{{$service->id}}</td>
                                     <td>{{$service->title}}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($service->description, 50) }}</td>
-                                    <td>{{$service->team->name}}</td>
+                                    <td>{{ $service->team ? $service->team->name : '-' }}</td>
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
-                                            <img src="{{Storage::url('/services/' . $service->image)}}"
+                                            <img src="{{Storage::url('services/' . $service->image)}}"
                                                  alt="Service Image"
                                                  class="rounded-circle"
                                                  width="50"
@@ -146,7 +146,7 @@
                             <select class="form-select" id="team_id" name="team_id">
                                 <option value="" selected disabled>Select Team</option>
                                 @foreach($teams as $team)
-                                    <option value="{{$team->id}}">{{$team->name}} - {{$team->position}}</option>
+                                    <option value="{{$team->id}}">{{$team->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -188,9 +188,10 @@
                             <div class="mb-3">
                                 <label for="team_id" class="form-label">Team</label>
                                 <select class="form-select" name="team_id">
+                                    <option value="" selected disabled>Select Team</option>
                                     @foreach($teams as $team)
                                         <option value="{{$team->id}}" {{$service->team_id == $team->id ? 'selected' : ''}}>
-                                            {{$team->name}} - {{$team->position}}
+                                            {{$team->name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -199,7 +200,7 @@
                                 <label for="image" class="form-label">Image</label>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-12 col-12">
-                                        <img src="{{ Storage::url('/services/' . $service->image) }}" alt="Service Image" width="80px" height="50px" style="object-fit: cover">
+                                        <img src="{{ Storage::url('services/' . $service->image) }}" alt="Service Image" width="80px" height="50px" style="object-fit: cover">
                                     </div>
                                     <div class="col-lg-9 col-md-12 col-12">
                                         <input type="file" class="form-control mt-2" name="image">
