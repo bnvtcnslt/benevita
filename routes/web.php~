@@ -27,7 +27,8 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
-Route::post('/layout', [FrontendController::class, 'frontend'])->name('layout.frontend');
+Route::post('/frontend', [FrontendController::class, 'frontend'])->name('layout.frontend');
+Route::post('/backend', [FrontendController::class, 'main'])->name('layout.backend');
 /*End*/
 
 Route::get('/login',[AuthController::class, 'index'])->name('auth.index');

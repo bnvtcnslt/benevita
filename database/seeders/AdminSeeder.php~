@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'name' => 'Admin',
-                'email' => 'amosaleksiato@gmail.com',
+                'email' => 'amosaleksiatoziliwu@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin'),
             ]

@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Client;
+use App\Models\Service;
+use App\Models\TeamMember;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
+class DashboardController extends Controller
+{
+    public function index()
+    {
+        $memberCount = TeamMember::count();
+        $clientCount = Client::count();
+        $serviceCount = Service::count();
+        return view('backend.content.dashboard',compact('memberCount','clientCount','serviceCount'));
+    }
+
+
+    public function boot()
+    {
+        View::share('users', User::all()); // Share $users ke semua view
+    }
+}

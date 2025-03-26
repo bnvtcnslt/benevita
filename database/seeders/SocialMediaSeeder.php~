@@ -33,6 +33,36 @@ class SocialMediaSeeder extends Seeder
                 'platform' => 'LinkedIn',
                 'url' => 'https://www.linkedin.com',
                 'status' => 0
+            ],
+            [
+                'platform' => 'Whatsapp',
+                'url' => 'https://www.whatsapp.com',
+                'status' => 1
+            ],
+            [
+                'platform' => 'Github',
+                'url' => 'https://www.github.com',
+                'status' => 1
+            ],
+            [
+                'platform' => 'Twitter-X',
+                'url' => 'https://www.twitter.com',
+                'status' => 1
+            ],
+            [
+                'platform' => 'YouTube',
+                'url' => 'https://www.youtube.com',
+                'status' => 1
+            ],
+            [
+                'platform' => 'Telegram',
+                'url' => 'https://www.telegram.org',
+                'status' => 1
+            ],
+            [
+                'platform' => 'Discord',
+                'url' => 'https://www.discord.com',
+                'status' => 1
             ]
         ]);
     }

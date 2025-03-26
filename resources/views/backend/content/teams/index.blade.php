@@ -128,7 +128,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add Team Member</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add Team</h5>
                 </div>
                 <div class="modal-body">
                     <form action="{{route('team.store')}}" method="post" enctype="multipart/form-data">
@@ -161,7 +161,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Edit Team Member</h5>
+                        <h5 class="modal-title" id="updateModalLabel">Edit Team</h5>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('team.update', $team->id) }}" method="post" enctype="multipart/form-data">
@@ -180,7 +180,7 @@
                                 <label for="image" class="form-label">Photo</label>
                                 <div class="row">
                                     <div class="col-lg-2 col-md-12 col-12">
-                                        <img src="{{ Storage::url('/teams/' . $team->image) }}" alt="Team Member" width="50px" height="50px">
+                                        <img src="{{ Storage::url('/teams/' . $team->image) }}" alt="Team" width="50px" height="50px">
                                     </div>
                                     <div class="col-lg-10 col-md-12 col-12">
                                         <input type="file" class="form-control mt-2" name="image">

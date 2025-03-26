@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SocialMedia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -13,8 +14,9 @@ class SocialMediaController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         $social_media = SocialMedia::all();
-        return view('backend.content.social-media.index', compact('social_media'));
+        return view('backend.content.social-media.index', compact('social_media','users'));
     }
     public function update(Request $request, SocialMedia $socialMedia)
     {
@@ -24,6 +26,10 @@ class SocialMediaController extends Controller
                 'status' => 'required',
             ]);
 
+            SocialMedia::where('id', $socialMedia->id)->update([
+                'url' => $request->url,
+                'status' => $request->status
+            ]);
 
             $socialMedia->update($request->all());
             return redirect()->route('social_media.index')->with('success', 'Social Media updated successfully.');

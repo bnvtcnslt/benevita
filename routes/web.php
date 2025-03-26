@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialMediaController;
@@ -27,7 +28,8 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
-Route::post('/', [FrontendController::class, 'frontend'])->name('layout.frontend');
+Route::post('/frontend', [FrontendController::class, 'frontend'])->name('layout.frontend');
+Route::post('/backend', [DashboardController::class, 'main'])->name('layout.backend');
 /*End*/
 
 Route::get('/login',[AuthController::class, 'index'])->name('auth.index');

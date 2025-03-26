@@ -22,7 +22,7 @@ class SocialMediaSeeder extends Seeder
             [
                 'platform' => 'TikTok',
                 'url' => 'https://www.tiktok.com',
-                'status' => 0
+                'status' => 1
             ],
             [
                 'platform' => 'Instagram',
@@ -32,7 +32,7 @@ class SocialMediaSeeder extends Seeder
             [
                 'platform' => 'LinkedIn',
                 'url' => 'https://www.linkedin.com',
-                'status' => 0
+                'status' => 1
             ],
             [
                 'platform' => 'Whatsapp',

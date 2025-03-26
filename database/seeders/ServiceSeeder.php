@@ -12,39 +12,42 @@ class ServiceSeeder extends Seeder
 {
     public function run()
     {
-        // Clear existing data
         DB::table('services')->truncate();
 
         $faker = Faker::create();
 
-        // Get or create teams
-        $teams = Team::all();
-        if ($teams->isEmpty()) {
-            $teams = Team::factory(5)->create();
-        }
+        // Get teams (assuming there are already teams in the database)
+        $teams = DB::table('teams')->get();
 
+        // Service data
         $services = [
-            'Web Development',
-            'Mobile App Development',
-            'UI/UX Design',
-            'Digital Marketing',
-            'Cloud Solutions',
-            'E-commerce Solutions',
-            'IT Consulting',
-            'Data Analytics',
-            'Cybersecurity',
-            'AI & Machine Learning'
-        ];
-
-        foreach ($services as $serviceName) {
-            Service::create([
-                'title' => $serviceName,
+            [
+                'title' => 'Web Development',
                 'description' => $faker->paragraphs(3, true),
                 'image' => 'test1.jpg',
-                'team_id' => $teams->random()->id,
+                'team_id' => $teams->first()->id, // Change to the team_id you want to assign
                 'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        }
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'Mobile App Development',
+                'description' => $faker->paragraphs(3, true),
+                'image' => 'test2.jpg',
+                'team_id' => $teams->first()->id, // Same as above
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'title' => 'UI/UX Design',
+                'description' => $faker->paragraphs(3, true),
+                'image' => 'test3.jpg',
+                'team_id' => $teams->first()->id, // Same as above
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ];
+
+        // Insert services into the services table
+        DB::table('services')->insert($services);
     }
 }
