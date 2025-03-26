@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-lg-12 col-12 mb-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
@@ -29,9 +29,10 @@
                             <thead class="table-dark">
                             <tr>
                                 <th>No</th>
+                                <th>ID</th>
                                 <th>Title</th>
                                 <th>Description</th>
-                                <th>Team Member</th>
+                                <th>Team</th>
                                 <th>Image</th>
                                 <th>Date Added</th>
                                 <th>Action</th>
@@ -41,6 +42,7 @@
                             @foreach($services as $service)
                                 <tr>
                                     <td>{{ ($services->currentPage() - 1) * $services->perPage() + $loop->iteration }}</td>
+                                    <td>{{$service->id}}</td>
                                     <td>{{$service->title}}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($service->description, 50) }}</td>
                                     <td>{{$service->team->name}}</td>
@@ -56,6 +58,7 @@
                                     </td>
                                     <td>{{date('d M Y', strtotime($service->created_at))}}</td>
                                     <td>
+                                        <a href="{{route('service.show', $service->id)}}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
                                         <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{$service->id}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
@@ -66,7 +69,6 @@
                                         </form>
                                         <a onclick="confirmDelete({{$service->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
 
-                                        <a href="{{route('service.show', $service->id)}}" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -140,9 +142,9 @@
                             <textarea class="form-control" id="description" name="description" rows="3" placeholder="Service Description"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="team_id" class="form-label">Team Member</label>
+                            <label for="team_id" class="form-label">Team</label>
                             <select class="form-select" id="team_id" name="team_id">
-                                <option value="" selected disabled>Select Team Member</option>
+                                <option value="" selected disabled>Select Team</option>
                                 @foreach($teams as $team)
                                     <option value="{{$team->id}}">{{$team->name}} - {{$team->position}}</option>
                                 @endforeach
@@ -184,7 +186,7 @@
                                 <textarea class="form-control" name="description" rows="3">{{$service->description}}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="team_id" class="form-label">Team Member</label>
+                                <label for="team_id" class="form-label">Team</label>
                                 <select class="form-select" name="team_id">
                                     @foreach($teams as $team)
                                         <option value="{{$team->id}}" {{$service->team_id == $team->id ? 'selected' : ''}}>

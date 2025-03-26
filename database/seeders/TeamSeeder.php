@@ -16,32 +16,32 @@ class TeamSeeder extends Seeder
         Team::insert([
             [
                 'name' => 'Team',
-                'position' => 'Position',
-                'image' => 'user.jpg',
+                'description' => 'Position',
+                'image' => 'test2.jpg',
                 'created_at' => now(),
             ],
             [
                 'name' => 'Team 2',
-                'position' => 'Position',
-                'image' => '1742733479_download (3).jpg',
+                'description' => 'Position',
+                'image' => 'test1.jpg',
                 'created_at' => now(),
             ],
             [
                 'name' => 'Team 3',
-                'position' => 'Position',
-                'image' => 'user.jpg',
+                'description' => 'Position',
+                'image' => 'test2.jpg',
                 'created_at' => now(),
             ],
             [
                 'name' => 'Team 4',
-                'position' => 'Position',
-                'image' => '1742733479_download (3).jpg',
+                'description' => 'Position',
+                'image' => 'test1.jpg',
                 'created_at' => now(),
             ],
             [
                 'name' => 'Team 5',
-                'position' => 'Position',
-                'image' => 'user.jpg',
+                'description' => 'Position',
+                'image' => 'test2.jpg',
                 'created_at' => now(),
             ],
         ]);

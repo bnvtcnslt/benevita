@@ -13,16 +13,7 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Team::paginate(5);
-        return view('backend.content.teams', compact('teams'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $teams = Team::all();
-        return view('backend.content.teams', compact('teams'));
+        return view('backend.content.teams.index', compact('teams'));
     }
 
     /**
@@ -33,7 +24,7 @@ class TeamController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
-                'position' => 'required',
+                'description' => 'nullable',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
@@ -45,7 +36,7 @@ class TeamController extends Controller
 
             Team::create([
                 'name' => $request->name,
-                'position' => $request->position,
+                'description' => $request->description,
                 'image' => $request->image
             ]);
 
@@ -57,20 +48,14 @@ class TeamController extends Controller
 
     public function show($id)
     {
-        $team = Team::find($id);
+        $team = Team::findOrFail($id);
 
-        if (!$team) {
-            return redirect()->route('team.index')->with('error', 'Team not found.');
-        }
+        // Paginate members separately
+        $members = $team->members()->withTrashed()->paginate(5);
 
-        return view('backend.content.team', compact('team'));
+        return view('backend.content.teams.detail', compact('team', 'members'));
     }
 
-    public function edit(Team $team)
-    {
-        $teams = Team::findOrFail($team->id);
-        return view('backend.content.teams', compact('teams'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -80,7 +65,7 @@ class TeamController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
-                'position' => 'required',
+                'description' => 'required',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             ]);
 
@@ -92,7 +77,7 @@ class TeamController extends Controller
 
             Team::where('id', $team->id)->update([
                 'name' => $request->name,
-                'position' => $request->position,
+                'description' => $request->description,
                 'image' => $request->image ?? $team->image
             ]);
 
@@ -109,9 +94,9 @@ class TeamController extends Controller
     {
         try {
             $team->delete();
-            return redirect()->route('team.index')->with('success', 'Client deleted successfully!');
+            return redirect()->route('team.index')->with('success', 'Team deleted successfully!');
         } catch (\Exception $e) {
-            return redirect()->route('team.index')->with('error', 'Failed to delete client: ' . $e->getMessage());
+            return redirect()->route('team.index')->with('error', 'Failed to delete team: ' . $e->getMessage());
         }
     }
 
@@ -124,32 +109,22 @@ class TeamController extends Controller
                 return redirect()->route('team.index');
             }
 
-            $teamsQuery = Team::query();
+            $teams = Team::where('id', 'like', "%{$query}%")
+                ->Where('name', 'like', "%{$query}%")
+                ->orWhere('description', 'like', "%{$query}%")
+                ->paginate(5)
+                ->appends(['query' => $query]);
 
-            if (is_numeric($query)) {
-                $teamsQuery->where(function($q) use ($query) {
-                    $q->where('id', '=', $query)
-                        ->orWhere('name', 'like', "%{$query}%")
-                        ->orWhere('position', 'like', "%{$query}%");
-                });
-            } else {
-                $teamsQuery->where(function($q) use ($query) {
-                    $q->where('name', 'like', "%{$query}%")
-                        ->orWhere('position', 'like', "%{$query}%");
-                });
-            }
-
-            $teams = $teamsQuery->paginate(5)->appends(['query' => $query]);
-
-            // Check if no results were found
             if ($teams->isEmpty()) {
-                // Flash a message to the session that will be used by SweetAlert
-                session()->flash('sweet_error', 'No teams found matching your search criteria.');
+                return redirect()->route('team.index')
+                    ->with('error', 'No teams found matching your search criteria.');
             }
 
-            return view('backend.content.teams', compact('teams'));
+            return view('backend.content.teams.index', compact('teams'));
+
         } catch (\Exception $e) {
-            return redirect()->route('team.index')->with('error', 'Failed to search team: ' . $e->getMessage());
+            return redirect()->route('team.index')
+                ->with('error', 'Failed to search team: ' . $e->getMessage());
         }
     }
 }

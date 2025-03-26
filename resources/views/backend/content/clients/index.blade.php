@@ -1,15 +1,16 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
+
 @section('content')
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-lg-12 col-12 mb-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h4 class="fw-bold">Services List</h4>
+                    <h4 class="fw-bold">Client List</h4>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="col-lg-4">
-                            <form action="{{ route('service.search') }}" method="GET">
+                            <form action="{{ route('client.search') }}" method="GET">
                                 <div class="input-group input-group-sm align-items-center">
-                                    <input type="text" name="query" class="form-control" placeholder="Search for services..." value="{{ request()->input('query') }}">
+                                    <input type="text" name="query" class="form-control" placeholder="Search for clients..." value="{{ request()->input('query') }}">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-sm" type="submit">Search</button>
                                     </div>
@@ -20,7 +21,7 @@
                             <button class="btn btn-primary d-flex align-items-center px-2" style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#addModal">
                                 <i class="bi bi-plus-lg me-2 d-none d-sm-block"></i>
                                 <span class="d-block d-sm-none">+ Add</span>
-                                <span class="d-none d-sm-block">Add Service</span>
+                                <span class="d-none d-sm-block">Add Client</span>
                             </button>
                         </div>
                     </div>
@@ -29,66 +30,74 @@
                             <thead class="table-dark">
                             <tr>
                                 <th>No</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Team Member</th>
-                                <th>Image</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Logo</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
                                 <th>Date Added</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($services as $service)
+                            @foreach($clients as $client)
                                 <tr>
-                                    <td>{{ ($services->currentPage() - 1) * $services->perPage() + $loop->iteration }}</td>
-                                    <td>{{$service->title}}</td>
-                                    <td>{{ \Illuminate\Support\Str::limit($service->description, 50) }}</td>
-                                    <td>{{$service->team->name}}</td>
+                                    <td>{{ ($clients->currentPage() - 1) * $clients->perPage() + $loop->iteration }}</td>
+                                    <td>{{$client->id}}</td>
+                                    <td>{{$client->name}}</td>
                                     <td class="align-middle">
                                         <div class="d-flex justify-content-center">
-                                            <img src="{{Storage::url('/services/' . $service->image)}}"
-                                                 alt="Service Image"
+                                            <img src="{{Storage::url('/clients/' . $client->logo_img)}}"
+                                                 alt="Client Member"
                                                  class="rounded-circle"
                                                  width="50"
                                                  height="50"
                                                  style="object-fit: cover">
                                         </div>
                                     </td>
-                                    <td>{{date('d M Y', strtotime($service->created_at))}}</td>
+                                    <td>{{$client->email}}</td>
+                                    <td>{{$client->phone}}</td>
+                                    <td>{{$client->address}}</td>
+                                    <td>{{date('d M Y', strtotime($client->created_at))}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{$service->id}}">
+                                        <span class="badge {{ $client->status == 1 ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $client->status == 1 ? 'Active' : 'Inactive' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{$client->id}}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-
-                                        <form id="delete-service-{{$service->id}}" action="{{route('service.destroy', $service->id)}}" method="post" style="display:none;">
+                                        <form id="delete-client-{{$client->id}}" action="{{route('client.destroy', $client->id)}}" method="post" style="display:none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
-                                        <a onclick="confirmDelete({{$service->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                        <a href="#" onclick="confirmDelete({{$client->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <!-- Pagination -->
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             <!-- Previous Page Link -->
-                            <li class="page-item {{ $services->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $services->previousPageUrl() }}" aria-label="Previous">
+                            <li class="page-item {{ $clients->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $clients->previousPageUrl() }}" aria-label="Previous">
                                     <i class="bi bi-chevron-left"></i>
                                 </a>
                             </li>
 
                             @php
-                                $currentPage = $services->currentPage();
-                                $lastPage = $services->lastPage();
+                                $currentPage = $clients->currentPage();
+                                $lastPage = $clients->lastPage();
                                 $start = max($currentPage - 2, 1);
                                 $end = min($currentPage + 2, $lastPage);
 
                                 if ($start > 1) {
-                                    echo '<li class="page-item"><a class="page-link" href="' . $services->url(1) . '">1</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="' . $clients->url(1) . '">1</a></li>';
                                     if ($start > 2) {
                                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                     }
@@ -96,19 +105,19 @@
 
                                 for ($i = $start; $i <= $end; $i++) {
                                     $active = $currentPage == $i ? 'active' : '';
-                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . $services->url($i) . '">' . $i . '</a></li>';
+                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . $clients->url($i) . '">' . $i . '</a></li>';
                                 }
 
                                 if ($end < $lastPage) {
                                     if ($end < $lastPage - 1) {
                                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                     }
-                                    echo '<li class="page-item"><a class="page-link" href="' . $services->url($lastPage) . '">' . $lastPage . '</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="' . $clients->url($lastPage) . '">' . $lastPage . '</a></li>';
                                 }
                             @endphp
 
-                            <li class="page-item {{ $services->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $services->nextPageUrl() }}" aria-label="Next">
+                            <li class="page-item {{ $clients->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $clients->nextPageUrl() }}" aria-label="Next">
                                     <i class="bi bi-chevron-right"></i>
                                 </a>
                             </li>
@@ -124,31 +133,31 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add Service</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('service.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('client.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Service Title">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Service Description"></textarea>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
                         <div class="mb-3">
-                            <label for="team_id" class="form-label">Team Member</label>
-                            <select class="form-select" id="team_id" name="team_id">
-                                <option value="" selected disabled>Select Team Member</option>
-                                @foreach($teams as $team)
-                                    <option value="{{$team->id}}">{{$team->name}} - {{$team->position}}</option>
-                                @endforeach
-                            </select>
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone">
                         </div>
                         <div class="mb-3">
-                            <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image" name="image">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" placeholder="Address"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="logo_img" class="form-label">Logo Client</label>
+                            <input type="file" class="form-control" id="logo_img" name="logo_img">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -160,49 +169,56 @@
         </div>
     </div>
 
-    @foreach($services as $service)
+    @foreach($clients as $client)
         <!-- Modal Update -->
-        <div class="modal fade" id="updateModal{{$service->id}}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal fade" id="updateModal{{$client->id}}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Edit Service</h5>
+                        <h5 class="modal-title" id="updateModalLabel">Edit Client</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('service.update', $service->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('client.update', $client->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <div class="mb-3">
-                                <label for="title" class="form-label">Title</label>
-                                <input type="text" class="form-control" name="title" value="{{$service->title}}">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" value="{{$client->name}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3">{{$service->description}}</textarea>
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" value="{{$client->email}}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="team_id" class="form-label">Team Member</label>
-                                <select class="form-select" name="team_id">
-                                    @foreach($teams as $team)
-                                        <option value="{{$team->id}}" {{$service->team_id == $team->id ? 'selected' : ''}}>
-                                            {{$team->name}} - {{$team->position}}
-                                        </option>
-                                    @endforeach
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="number" class="form-control" name="phone" value="{{$client->phone}}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <textarea class="form-control" name="address" required>{{$client->address}}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select name="status" class="form-control">
+                                    <option value="1" {{($client->status == 1) ? 'selected' : ''}}>Active</option>
+                                    <option value="0" {{($client->status == 0) ? 'selected' : ''}}>Inactive</option>
                                 </select>
                             </div>
+
                             <div class="mb-3">
-                                <label for="image" class="form-label">Image</label>
+                                <label for="logo_img" class="form-label">Logo Client</label>
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-12 col-12">
-                                        <img src="{{ Storage::url('/services/' . $service->image) }}" alt="Service Image" width="80px" height="50px" style="object-fit: cover">
+                                    <div class="col-lg-2 col-md-12 col-12">
+                                        <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Logo Client" width="50px" height="50px" class="rounded-circle">
                                     </div>
-                                    <div class="col-lg-9 col-md-12 col-12">
-                                        <input type="file" class="form-control mt-2" name="image">
+                                    <div class="col-lg-10 col-md-12 col-12">
+                                        <input type="file" class="form-control mt-2" name="logo_img">
+                                        <small class="text-muted">Leave empty if you don't want to change the logo</small>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="id" value="{{$service->id}}">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Update</button>
@@ -231,10 +247,11 @@
                         text: "Your file has been deleted.",
                         icon: "success"
                     }).then(()=>{
-                        document.getElementById('delete-service-' + id).submit();
+                        document.getElementById('delete-client-' + id).submit();
                     });
                 }
             });
         }
+
     </script>
 @endsection

@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamMemberController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,7 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/', [FrontendController::class, 'frontend'])->name('layout.frontend');
 /*End*/
 
 Route::get('/login',[AuthController::class, 'index'])->name('auth.index');
@@ -45,17 +48,22 @@ Route::group(['middleware' => ['auth:user']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
-        // Route untuk pencarian
+        /*Route untuk pencarian*/
         Route::get('/client/search', [ClientController::class, 'search'])->name('client.search');
         Route::get('/team/search', [TeamController::class, 'search'])->name('team.search');
         Route::get('/service/search', [ServiceController::class, 'search'])->name('service.search');
+        Route::get('/team_member/search', [TeamMemberController::class, 'search'])->name('team_members.search');
 
+        /*Route CRUD*/
         Route::resource('client', ClientController::class);
         Route::resource('team', TeamController::class);
+        Route::resource('team_members', TeamMemberController::class);
         Route::resource('service', ServiceController::class);
+        Route::resource('social_media', SocialMediaController::class);
 
     });
 
+    /*Logout*/
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 

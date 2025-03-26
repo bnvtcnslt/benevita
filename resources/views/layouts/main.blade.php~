@@ -87,8 +87,8 @@
 
         .profile-container {
             border-radius: 12px;
-            padding: 16px;
-            margin: 15px 10px;
+            padding: 0;
+            margin: 0;
         }
 
         .profile-container img {
@@ -215,7 +215,7 @@
             </button>
         </div>
 
-        <ul class="list-unstyled components p-2">
+        <ul class="list-unstyled components p-2" style="overflow-y: auto; max-height: 500px; scrollbar-width: none;">
             <li class="{{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                 <a href="{{route('dashboard.index')}}" class="text-white text-decoration-none d-block">
                     <i class="bi bi-speedometer2"></i>Dashboard
@@ -228,12 +228,22 @@
             </li>
             <li class="{{ request()->routeIs('team.index') ? 'active' : '' }}">
                 <a href="{{route('team.index')}}" class="text-white text-decoration-none d-block">
-                    <i class="bi bi-people-fill"></i>Team
+                    <i class="bi bi-unity"></i>Team
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('team_members.index') ? 'active' : '' }}">
+                <a href="{{route('team_members.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-people-fill"></i>Team Member
                 </a>
             </li>
             <li class="{{ request()->routeIs('service.index') ? 'active' : '' }}">
                 <a href="{{route('service.index')}}" class="text-white text-decoration-none d-block">
                     <i class="bi bi-card-list"></i>Service
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('social_media.index') ? 'active' : '' }}">
+                <a href="{{route('social_media.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-share-fill"></i>Social Media
                 </a>
             </li>
             <li class="{{--{{ request()->routeIs('settings.*') ? 'active' : '' }}--}}">
@@ -247,7 +257,7 @@
         <div class="profile-container mt-auto">
             <div class="dropdown">
                 <div class="d-flex align-items-center" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/api/placeholder/40/40" alt="Profile" class="me-3">
+                    <img src="https://picsum.photos/30" alt="Profile" class="me-3">
                     <div>
                         <p class="m-0 fw-bold">John Doe</p>
                         <small class="text-white-50">Administrator</small>
@@ -255,10 +265,10 @@
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end profile-dropdown" aria-labelledby="profileDropdown">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit Profile</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-key me-2"></i>Change Password</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i>Edit Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-key"></i>Change Password</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    <li><a class="dropdown-item" href="{{route('auth.logout')}}"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
                 </ul>
             </div>
         </div>

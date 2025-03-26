@@ -13,60 +13,27 @@ class SocialMediaController extends Controller
      */
     public function index()
     {
-        //
+        $social_media = SocialMedia::all();
+        return view('backend.content.social-media.index', compact('social_media'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'platform' => ['required', Rule::in(SocialMedia::getAllowedPlatforms())],
-            'url' => ['required', 'url'],
-        ]);
-
-        SocialMedia::create($request->all());
-        return redirect()->back()->with('success', 'Social media link added!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(SocialMedia $socialMedia)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SocialMedia $socialMedia)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, SocialMedia $socialMedia)
     {
-        //
-    }
+        try {
+            $request->validate([
+                'url' => 'required',
+                'status' => 'required',
+            ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SocialMedia $socialMedia)
-    {
-        //
+            SocialMedia::where('id', $socialMedia->id)->update([
+                'url' => $request->url,
+                'status' => $request->status
+            ]);
+
+            $socialMedia->update($request->all());
+            return redirect()->route('social_media.index')->with('success', 'Social Media updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('social_media.index')->with('error', 'Failed to update social media: ' . $e->getMessage());
+        }
+
     }
 }

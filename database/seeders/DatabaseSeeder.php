@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             TeamSeeder::class,
             ServiceSeeder::class,
             ContactSeeder::class,
-            SocialMediaSeeder::class
+            SocialMediaSeeder::class,
+            TeamMemberSeeder::class
         ]);
     }
 }

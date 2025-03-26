@@ -9,23 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('social_media', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->string('image');
+            $table->enum('platform',
+                ['Facebook', 'TikTok', 'Instagram',  'LinkedIn', 'Whatsapp',
+                'Github', 'Twitter-X', 'YouTube', 'Telegram', 'Discord']);
+            $table->string('url');
+            $table->string('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('social_media');
     }
 };

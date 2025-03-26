@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('social_media', function (Blueprint $table) {
             $table->id();
-            $table->enum('platform', ['Facebook', 'TikTok', 'Instagram', 'LinkedIn']);
+            $table->enum('platform',
+                ['Facebook', 'TikTok', 'Instagram',  'LinkedIn', 'Whatsapp',
+                'Github', 'Twitter-X', 'YouTube', 'Telegram', 'Discord']);
             $table->string('url');
+            $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

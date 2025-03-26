@@ -1,51 +1,37 @@
 @extends('layouts.main')
 @section('content')
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-lg-12 col-12 mb-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h4 class="fw-bold">Service Details</h4>
-                    <div class="row mt-4">
-                        <div class="col-lg-4 col-md-4 col-12 mb-4">
-                            <img src="{{ Storage::url('/services/' . $service->image) }}"
-                                 alt="Service Image"
-                                 class="img-fluid rounded"
-                                 style="max-height: 300px; object-fit: cover;">
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-12">
-                            <h3>{{ $service->title }}</h3>
-                            <p class="text-muted">Added on {{ date('d M Y', strtotime($service->created_at)) }}</p>
-
-                            <div class="row mb-3">
-                                <div class="col-md-3">
-                                    <strong>Team Member:</strong>
+                    <div class="card-body">
+                        <div class="row">
+                            <h4 class="fw-bold">Service Details</h4>
+                            <div class="col-lg-4 col-md-4 col-12 mb-4">
+                                <img src="{{ Storage::url('/services/' . $service->image) }}"
+                                     alt="Services Image"
+                                     class="img-fluid rounded"
+                                     style="max-height: 300px; object-fit: cover;">
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Description</h5>
+                                        <hr>
+                                        <p>{{ $service->description ?? 'No description available' }}</p>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-9">
-                                    {{ $service->team ? $service->team->name : 'N/A' }}
-                                    @if($service->team)
-                                        <span class="text-muted">({{ $service->team->position }})</span>
-                                    @endif
+
+                                <div class="mt-3">
+                                    <a href="{{ route('service.index') }}" class="btn btn-secondary me-2">
+                                        <i class="bi bi-arrow-left"></i> Back to Services List
+                                    </a>
+                                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{ $service->id }}">
+                                        <i class="bi bi-pencil-square"></i> Edit Services
+                                    </a>
                                 </div>
-                            </div>
-
-                            <div class="mb-4">
-                                <h5>Description</h5>
-                                <p>{{ $service->description }}</p>
-                            </div>
-
-                            <div class="d-flex justify-content-start">
-                                <a href="{{ route('service.index') }}" class="btn btn-secondary me-2">Back to List</a>
-                                <a href="#" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#updateModal{{ $service->id }}">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <form id="delete-service-{{ $service->id }}" action="{{ route('service.destroy', $service->id) }}" method="post" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="confirmDelete({{ $service->id }})" class="btn btn-danger">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,9 +60,9 @@
                             <textarea class="form-control" name="description" rows="3">{{ $service->description }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="team_id" class="form-label">Team Member</label>
+                            <label for="team_id" class="form-label">Team</label>
                             <select class="form-control" name="team_id">
-                                <option value="">Select Team Member</option>
+                                <option value="">Select Team</option>
                                 @foreach($teams as $team)
                                     <option value="{{ $team->id }}" {{ $service->team_id == $team->id ? 'selected' : '' }}>
                                         {{ $team->name }} - {{ $team->position }}

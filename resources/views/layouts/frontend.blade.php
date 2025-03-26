@@ -8,6 +8,8 @@
     <!-- Google Fonts - Merriweather -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -81,17 +83,17 @@
                     <div class="col-md-3">
                         <h5>Follow Us</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-                            <li><a href="#"><i class="fab fa-tiktok"></i> Tiktok</a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                            @foreach($social_media as $media)
+                                <li><a href="{{ $media->url }}" target="_blank"><i class="bi bi-{{ strtolower($media->platform) }}"></i> {{ ucfirst($media->platform) }}</a></li>
+                            @endforeach
                         </ul>
+
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-tiktok"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            @foreach($social_media as $media)
+                                <a href="{{ $media->url }}" target="_blank"><i class="bi bi-{{ strtolower($media->platform) }}"></i></a>
+                            @endforeach
                         </div>
+
                     </div>
                 </div>
                 <hr>

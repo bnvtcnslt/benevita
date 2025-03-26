@@ -19,7 +19,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -28,7 +28,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client212@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -37,7 +37,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -46,7 +46,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -55,7 +55,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -64,7 +64,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -73,7 +73,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -82,7 +82,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -91,7 +91,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -100,7 +100,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -109,7 +109,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -118,7 +118,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -127,7 +127,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -136,7 +136,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -145,7 +145,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -154,7 +154,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -163,7 +163,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -172,7 +172,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -181,7 +181,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -190,7 +190,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -199,7 +199,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -208,7 +208,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -217,7 +217,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -226,7 +226,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -235,7 +235,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -244,7 +244,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -253,7 +253,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -262,7 +262,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -271,7 +271,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -280,7 +280,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -289,7 +289,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -298,7 +298,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -307,7 +307,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -316,7 +316,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -325,7 +325,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -334,7 +334,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -343,7 +343,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => 'user.jpg',
+                'logo_img' => 'test2.jpg',
                 'created_at' => now(),
                 'status' => true
             ],
@@ -352,7 +352,7 @@ class ClientSeeder extends Seeder
                 'email' => 'client2@gmail.com',
                 'phone' => '123456789',
                 'address' => 'Address',
-                'logo_img' => '1742733479_download (3).jpg',
+                'logo_img' => 'test1.jpg',
                 'created_at' => now(),
                 'status' => true
             ],

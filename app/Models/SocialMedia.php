@@ -13,6 +13,8 @@ class SocialMedia extends Model
 
     public static function getAllowedPlatforms()
     {
-        return ['Facebook', 'TikTok', 'Instagram', 'LinkedIn'];
+        return
+            ['Facebook', 'TikTok', 'Instagram', 'LinkedIn', 'Whatsapp',
+            'Github','Twitter-X', 'YouTobe', 'Telegram', 'Discord'];
     }
 }

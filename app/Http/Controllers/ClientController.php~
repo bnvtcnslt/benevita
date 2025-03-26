@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::paginate(5);
-        return view('backend.content.clients', compact('clients'));
+        return view('backend.content.clients.index', compact('clients'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ClientController extends Controller
             return redirect()->route('client.index')->with('error', 'Client not found.');
         }
 
-        return view('backend.content.client', compact('client'));
+        return view('backend.content.client.index', compact('client'));
     }
 
     /**
@@ -128,12 +128,16 @@ class ClientController extends Controller
                 $clientsQuery->where(function($q) use ($query) {
                     $q->where('id', '=', $query)
                         ->orWhere('name', 'like', "%{$query}%")
-                        ->orWhere('position', 'like', "%{$query}%");
+                        ->orWhere('email', 'like', "%{$query}%")
+                        ->orWhere('phone', 'like', "%{$query}%")
+                        ->orWhere('address', 'like', "%{$query}%");
                 });
             } else {
                 $clientsQuery->where(function($q) use ($query) {
                     $q->where('name', 'like', "%{$query}%")
-                        ->orWhere('position', 'like', "%{$query}%");
+                        ->orWhere('email', 'like', "%{$query}%")
+                        ->orWhere('phone', 'like', "%{$query}%")
+                        ->orWhere('address', 'like', "%{$query}%");
                 });
             }
 
@@ -142,12 +146,12 @@ class ClientController extends Controller
             // Check if no results were found
             if ($clients->isEmpty()) {
                 // Flash a message to the session that will be used by SweetAlert
-                session()->flash('sweet_error', 'No teams found matching your search criteria.');
+                session()->flash('error', 'No clients found matching your search criteria.');
             }
 
-            return view('backend.content.clients', compact('clients'));
+            return view('backend.content.clients.index', compact('clients'));
         } catch (\Exception $e) {
-            return redirect()->route('client.index')->with('error', 'Failed to search team: ' . $e->getMessage());
+            return redirect()->route('client.index')->with('error', 'Failed to search client: ' . $e->getMessage());
         }
     }
 }

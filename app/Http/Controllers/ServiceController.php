@@ -17,17 +17,6 @@ class ServiceController extends Controller
         $teams = Team::all();
         return view('backend.content.services.index', compact('services', 'teams'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $services = Service::all();
-        $teams = Team::all();
-        return view('backend.content.services.index', compact('services', 'teams'));
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -64,13 +53,6 @@ class ServiceController extends Controller
     {
         $teams = Team::all();
         return view('backend.content.services.detail', compact('service', 'teams'));
-    }
-
-    public function edit(Service $service)
-    {
-        $services = Service::findOrFail($service->id);
-        $teams = Team::all();
-        return view('backend.content.services.index', compact('services', 'teams'));
     }
 
     /**
@@ -127,33 +109,27 @@ class ServiceController extends Controller
                 return redirect()->route('service.index');
             }
 
-            $servicesQuery = Service::with('team');
-
-            if (is_numeric($query)) {
-                $servicesQuery->where(function($q) use ($query) {
-                    $q->where('id', '=', $query)
-                        ->orWhere('title', 'like', "%{$query}%")
-                        ->orWhere('description', 'like', "%{$query}%");
-                });
-            } else {
-                $servicesQuery->where(function($q) use ($query) {
-                    $q->where('title', 'like', "%{$query}%")
-                        ->orWhere('description', 'like', "%{$query}%");
-                });
-            }
-
-            $services = $servicesQuery->paginate(5)->appends(['query' => $query]);
-
-            // Check if no results were found
-            if ($services->isEmpty()) {
-                // Flash a message to the session that will be used by SweetAlert
-                session()->flash('sweet_error', 'No services found matching your search criteria.');
-            }
+            $services = Service::where('id', 'like', "%{$query}%")
+                ->orWhere('title', 'like', "%{$query}%")
+                ->orWhere('description', 'like', "%{$query}%")
+                ->orWhereHas('team', function($q) use ($query) {
+                    $q->where('name', 'like', "%{$query}%");
+                })
+                ->paginate(5)
+                ->appends(['query' => $query]);
 
             $teams = Team::all();
+
+            if ($services->isEmpty()) {
+                return redirect()->route('service.index')
+                    ->with('error', 'No services found matching your search criteria.');
+            }
+
             return view('backend.content.services.index', compact('services', 'teams'));
+
         } catch (\Exception $e) {
-            return redirect()->route('service.index')->with('error', 'Failed to search service: ' . $e->getMessage());
+            return redirect()->route('service.index')
+                ->with('error', 'Failed to search services: ' . $e->getMessage());
         }
     }
 }

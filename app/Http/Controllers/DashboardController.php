@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use App\Models\Team;
+use App\Models\Service;
+use App\Models\TeamMember;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,8 +13,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $teamCount = Team::count();
+        $memberCount = TeamMember::count();
         $clientCount = Client::count();
-        return view('backend.content.dashboard',compact('teamCount','clientCount'));
+        $serviceCount = Service::count();
+        return view('backend.content.dashboard',compact('memberCount','clientCount','serviceCount'));
     }
 }

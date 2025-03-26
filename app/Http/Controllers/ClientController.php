@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::paginate(5);
-        return view('backend.content.clients', compact('clients'));
+        return view('backend.content.clients.index', compact('clients'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ClientController extends Controller
             return redirect()->route('client.index')->with('error', 'Client not found.');
         }
 
-        return view('backend.content.client', compact('client'));
+        return view('backend.content.client.index', compact('client'));
     }
 
     /**
@@ -122,36 +122,24 @@ class ClientController extends Controller
                 return redirect()->route('client.index');
             }
 
-            $clientsQuery = Client::query();
+            $clients = Client::where('id', 'like', "%{$query}%")
+                ->orWhere('name', 'like', "%{$query}%")
+                ->orWhere('email', 'like', "%{$query}%")
+                ->orWhere('phone', 'like', "%{$query}%")
+                ->orWhere('address', 'like', "%{$query}%")
+                ->paginate(5)
+                ->appends(['query' => $query]);
 
-            if (is_numeric($query)) {
-                $clientsQuery->where(function($q) use ($query) {
-                    $q->where('id', '=', $query)
-                        ->orWhere('name', 'like', "%{$query}%")
-                        ->orWhere('email', 'like', "%{$query}%")
-                        ->orWhere('phone', 'like', "%{$query}%")
-                        ->orWhere('address', 'like', "%{$query}%");
-                });
-            } else {
-                $clientsQuery->where(function($q) use ($query) {
-                    $q->where('name', 'like', "%{$query}%")
-                        ->orWhere('email', 'like', "%{$query}%")
-                        ->orWhere('phone', 'like', "%{$query}%")
-                        ->orWhere('address', 'like', "%{$query}%");
-                });
-            }
-
-            $clients = $clientsQuery->paginate(5)->appends(['query' => $query]);
-
-            // Check if no results were found
             if ($clients->isEmpty()) {
-                // Flash a message to the session that will be used by SweetAlert
-                session()->flash('sweet_error', 'No clients found matching your search criteria.');
+                return redirect()->route('client.index')
+                    ->with('error', 'No clients found matching your search criteria.');
             }
 
-            return view('backend.content.clients', compact('clients'));
+            return view('backend.content.clients.index', compact('clients'));
+
         } catch (\Exception $e) {
-            return redirect()->route('client.index')->with('error', 'Failed to search client: ' . $e->getMessage());
+            return redirect()->route('client.index')
+                ->with('error', 'Failed to search clients: ' . $e->getMessage());
         }
     }
 }

@@ -11,12 +11,18 @@ class Team extends Model
 
     protected $fillable = [
         'name',
-        'position',
+        'description',
         'image'
     ];
+
 
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function members()
+    {
+        return $this->hasMany(TeamMember::class)->withTrashed();
     }
 }

@@ -20,7 +20,7 @@
                             </div>
                             <div class="ms-3">
                                 <p class="text-muted mb-0">Total Team Members</p>
-                                <h5 class="fw-bold">{{ $teamCount }}</h5>
+                                <h5 class="fw-bold">{{ $memberCount }}</h5>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="ms-3">
                                 <p class="text-muted mb-0">Total Services</p>
-                                <h5 class="fw-bold">1,543</h5>
+                                <h5 class="fw-bold">{{ $serviceCount }}</h5>
                             </div>
                         </div>
                     </div>

@@ -142,9 +142,7 @@
                         <div class="tag-list">
                             <div class="inner">
                                 @foreach($clients as $client)
-                                    @if($client->status == 1)
-                                        <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Client Logo">
-                                    @endif
+                                    <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Client Logo">
                                 @endforeach
                             </div>
                         </div>
@@ -178,10 +176,9 @@
                                     <p class="mb-0">info@benevitaconsulting.com</p>
                                 </div>
                                 <div class="social-links mt-4">
-                                    <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-tiktok"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+                                    @foreach($social_media as $media)
+                                        <a href="{{ $media->url }}" target="_blank" class="me-3"><i class="fab fa-{{ strtolower($media->platform) }}"></i></a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

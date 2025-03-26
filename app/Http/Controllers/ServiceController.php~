@@ -17,17 +17,6 @@ class ServiceController extends Controller
         $teams = Team::all();
         return view('backend.content.services.index', compact('services', 'teams'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $services = Service::all();
-        $teams = Team::all();
-        return view('backend.content.services.index', compact('services', 'teams'));
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -63,14 +52,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         $teams = Team::all();
-        return view('backend.content.services.show', compact('service', 'teams'));
-    }
-
-    public function edit(Service $service)
-    {
-        $services = Service::findOrFail($service->id);
-        $teams = Team::all();
-        return view('backend.content.services.index', compact('services', 'teams'));
+        return view('backend.content.services.detail', compact('service', 'teams'));
     }
 
     /**
@@ -147,7 +129,7 @@ class ServiceController extends Controller
             // Check if no results were found
             if ($services->isEmpty()) {
                 // Flash a message to the session that will be used by SweetAlert
-                session()->flash('sweet_error', 'No services found matching your search criteria.');
+                session()->flash('error', 'No services found matching your search criteria.');
             }
 
             $teams = Team::all();
