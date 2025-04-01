@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Testimonial extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'client_id',
+        'testimonial_text',
+        'image',
+        'rating',
+        'position',
+        'status',
+        'order'
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
+        'rating' => 'integer',
+        'order' => 'integer',
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Set order ke jumlah testimonial + 1
+            $model->order = static::count() + 1;
+        });
+    }
+
+    /**
+     * Get the client that owns the testimonial.
+     */
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
+}

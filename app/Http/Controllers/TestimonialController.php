@@ -1,0 +1,194 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Client;
+use App\Models\Testimonial;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
+class TestimonialController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $testimonials = Testimonial::with('client')->orderBy('order')->paginate(5);
+        $clients = Client::where('status', 1)->get();
+        $maxOrder = Testimonial::count() + 1;
+
+        return view('backend.content.testimonials.index', compact('testimonials', 'clients', 'maxOrder'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        try {
+            $request->validate([
+                'client_id' => 'required|exists:clients,id',
+                'testimonial_text' => 'required',
+                'rating' => 'required|integer|min:1|max:5',
+                'position' => 'nullable|string|max:255',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
+
+            $imageFileName = null;
+            if ($request->hasFile('image')) {
+                $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
+                $request->file('image')->storeAs('testimonials', $imageFileName, 'public');
+            }
+
+            Testimonial::create([
+                'client_id' => $request->client_id,
+                'testimonial_text' => $request->testimonial_text,
+                'rating' => $request->rating,
+                'position' => $request->position,
+                'image' => $imageFileName,
+                'status' => $request->has('status') ? 1 : 0,
+                'order' => $request->order ?? 0
+            ]);
+
+            return redirect()->route('testimonial.index')->with('success', 'Testimonial added successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('testimonial.index')->with('error', 'Failed to add testimonial: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $testimonials = Testimonial::with('client')->find($id);
+        $clients = Client::where('status', 1)->get();
+        $maxOrder = Testimonial::count();
+        if (!$testimonials) {
+            return redirect()->route('testimonial.index')->with('error', 'Testimonial not found.');
+        }
+
+        return view('backend.content.testimonials.detail', compact('testimonials', 'clients', 'maxOrder'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Testimonial $testimonial)
+    {
+        try {
+            DB::beginTransaction();
+
+            $request->validate([
+                'client_id' => 'required|exists:clients,id',
+                'testimonial_text' => 'required',
+                'rating' => 'required|integer|min:1|max:5',
+                'position' => 'nullable|string|max:255',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'order' => 'required|integer|min:1'
+            ]);
+
+            $newOrder = (int)$request->order;
+            $oldOrder = $testimonial->order;
+
+            // Only adjust other testimonials if the order changed
+            if ($newOrder != $oldOrder) {
+                if ($newOrder < $oldOrder) {
+                    // Moving up - increment orders between new and old position
+                    Testimonial::where('order', '>=', $newOrder)
+                        ->where('order', '<', $oldOrder)
+                        ->increment('order');
+                } else {
+                    // Moving down - decrement orders between old and new position
+                    Testimonial::where('order', '>', $oldOrder)
+                        ->where('order', '<=', $newOrder)
+                        ->decrement('order');
+                }
+            }
+
+            $data = [
+                'client_id' => $request->client_id,
+                'testimonial_text' => $request->testimonial_text,
+                'rating' => $request->rating,
+                'position' => $request->position,
+                'status' => $request->has('status') ? 1 : 0,
+                'order' => $newOrder
+            ];
+
+            if ($request->hasFile('image')) {
+                // Remove old image if exists
+                if ($testimonial->image && Storage::disk('public')->exists('testimonials/' . $testimonial->image)) {
+                    Storage::disk('public')->delete('testimonials/' . $testimonial->image);
+                }
+
+                $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
+                $request->file('image')->storeAs('testimonials', $imageFileName, 'public');
+                $data['image'] = $imageFileName;
+            }
+
+            $testimonial->update($data);
+
+            DB::commit();
+
+            return redirect()->route('testimonial.index')->with('success', 'Testimonial updated successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('testimonial.index')->with('error', 'Failed to update testimonial: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Testimonial $testimonial)
+    {
+        try {
+            // Remove image if exists
+            if ($testimonial->image && Storage::disk('public')->exists('testimonials/' . $testimonial->image)) {
+                Storage::disk('public')->delete('testimonials/' . $testimonial->image);
+            }
+
+            $testimonial->delete();
+            return redirect()->route('testimonial.index')->with('success', 'Testimonial deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('testimonial.index')->with('error', 'Failed to delete testimonial: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Search for testimonials.
+     */
+    public function search(Request $request)
+    {
+        try {
+            $query = trim($request->input('query'));
+
+            if (empty($query)) {
+                return redirect()->route('testimonial.index');
+            }
+
+            $testimonials = Testimonial::whereHas('client', function($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })
+                ->orWhere('testimonial_text', 'like', "%{$query}%")
+                ->orWhere('position', 'like', "%{$query}%")
+                ->paginate(5)
+                ->appends(['query' => $query]);
+
+            $clients = Client::where('status', 1)->get();
+
+            if ($testimonials->isEmpty()) {
+                return redirect()->route('testimonial.index')
+                    ->with('error', 'No testimonials found matching your search criteria.');
+            }
+
+            return view('backend.content.testimonials.index', compact('testimonials', 'clients'));
+
+        } catch (\Exception $e) {
+            return redirect()->route('testimonial.index')
+                ->with('error', 'Failed to search testimonials: ' . $e->getMessage());
+        }
+    }
+}

@@ -24,7 +24,8 @@ class FrontendController extends Controller
         }])
             ->where('status', true)
             ->orderBy('order')
-            ->get()  // Get all testimonials instead of take(3)
+            ->take(3)
+            ->get()
             ->filter(function($testimonial) {
                 return $testimonial->client !== null;
             });

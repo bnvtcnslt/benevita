@@ -1,3 +1,4 @@
+
 /* Custom Pagination Styles */
 .pagination {
     display: flex;

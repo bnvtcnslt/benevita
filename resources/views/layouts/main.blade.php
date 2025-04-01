@@ -52,6 +52,11 @@
                     <i class="bi bi-share-fill"></i>Social Media
                 </a>
             </li>
+            <li class="{{ request()->routeIs('testimonial.index') ? 'active' : '' }}">
+                <a href="{{route('testimonial.index')}}" class="text-white text-decoration-none d-block">
+                    <i class="bi bi-chat-left-text"></i>Testimonial
+                </a>
+            </li>
         </ul>
     </div>
 

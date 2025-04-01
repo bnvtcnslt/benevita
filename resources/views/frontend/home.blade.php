@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 
 @section('content')
-
     <!-- Hero Section -->
     <section class="hero-section" id="home">
         <div class="container">
@@ -125,6 +124,96 @@
                             <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
                                 Read More <i class="fas fa-arrow-right ms-1"></i>
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section py-5" id="testimonials">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">What Our Clients Say</h2>
+
+                    <div class="testimonial-carousel">
+                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                            <div class="carousel-inner">
+                                @php $chunks = $featuredTestimonials->chunk(3); @endphp
+
+                                @foreach($chunks as $index => $chunk)
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                        <div class="row">
+                                            @foreach($chunk as $testimonial)
+                                                <div class="col-md-4 mb-4">
+                                                    <div class="card border-0 shadow-sm h-100">
+                                                        <div class="card-body d-flex flex-column">
+                                                            <div class="text-center mb-3">
+                                                                @if($testimonial->image)
+                                                                    <img src="{{ Storage::url('testimonials/' . $testimonial->image) }}"
+                                                                         alt="{{ optional($testimonial->client)->name ?? 'Client' }}"
+                                                                         class="rounded-circle"
+                                                                         width="80"
+                                                                         height="80"
+                                                                         style="object-fit: cover">
+                                                                @else
+                                                                    <img src="{{ asset('assets-fe/images/placeholder.png') }}"
+                                                                         alt="{{ optional($testimonial->client)->name ?? 'Client' }}"
+                                                                         class="rounded-circle"
+                                                                         width="80"
+                                                                         height="80">
+                                                                @endif
+
+                                                                <div class="mb-2 mt-3">
+                                                                    @for($i = 1; $i <= 5; $i++)
+                                                                        @if($i <= $testimonial->rating)
+                                                                            <i class="fas fa-star text-warning"></i>
+                                                                        @else
+                                                                            <i class="far fa-star text-warning"></i>
+                                                                        @endif
+                                                                    @endfor
+                                                                </div>
+                                                            </div>
+
+                                                            <p class="text-muted flex-grow-1" style="text-align: center;">
+                                                                "{{ \Illuminate\Support\Str::limit($testimonial->testimonial_text, 150) }}"
+                                                            </p>
+
+                                                            <div class="text-center mt-3">
+                                                                <h5 class="mb-1">{{ optional($testimonial->client)->name ?? 'Client' }}</h5>
+                                                                @if($testimonial->position)
+                                                                    <p class="small text-muted mb-0">{{ $testimonial->position }}</p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            @if($chunks->count() > 1)
+                                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon bg-success rounded-circle p-2" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon bg-success rounded-circle p-2" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+
+                                <div class="carousel-indicators position-static mt-3">
+                                    @foreach($chunks as $index => $chunk)
+                                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="{{ $index }}"
+                                                class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}"
+                                                aria-label="Slide {{ $index + 1 }}" style="background-color: #0A5640;"></button>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

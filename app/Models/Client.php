@@ -9,7 +9,7 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $table = 'clients'; // Ensure this matches your actual table name
+    protected $table = 'clients';
 
     protected $fillable = [
         'name',
@@ -19,6 +19,10 @@ class Client extends Model
         'logo_img',
         'status'
     ];
+
+    public function testimonials() {
+        return $this->hasMany(Testimonial::class);
+    }
 
     // Add this method for debugging
     public static function checkConnection() {
