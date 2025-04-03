@@ -84,59 +84,88 @@
         </div>
     </section>
 
-    <!-- Section Contact -->
-    <section class="contact-section p-3" id="contact" style="margin-top: 10%;">
+    <!-- Testimonials Section -->
+    <section class="testimonials-section py-5" id="testimonials" style="margin-top: 4%;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12 col-12">
-                    <div class="row">
-                        <div class="col-md-6 mb-4 mb-md-0">
-                            <div class="contact-info" data-aos="fade-right" data-aos-duration="1500" style="margin-top: 120px; margin-bottom: 50px;">
-                                <h3 class="h4 mb-4">Informasi Kontak</h3>
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-map-marker-alt me-3" style="color: #0A5640; font-size: 1.5rem;"></i>
-                                    <p class="mb-0">Jl. Ukrim</p>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-phone me-3" style="color: #0A5640; font-size: 1.5rem;"></i>
-                                    <p class="mb-0">+62 822 7562 5828</p>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-envelope me-3" style="color: #0A5640; font-size: 1.5rem;"></i>
-                                    <p class="mb-0">info@benevitaconsulting.com</p>
-                                </div>
-                                <div class="social-links mt-4">
-                                    <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                                    <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
+                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">What Our Clients Say</h2>
+
+                    <div class="testimonial-carousel">
+                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                            <div class="carousel-inner">
+                                @php
+                                    $chunks = $featuredTestimonials->chunk(2);
+                                @endphp
+
+                                @foreach($chunks as $index => $chunk)
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                        <div class="row {{ $chunk->count() == 1 ? 'justify-content-center' : '' }}">
+                                            @foreach($chunk as $testimonial)
+                                                <div class="col-md-6 mb-4 d-flex">
+                                                    <div class="card border-0 shadow-sm w-100" style="height: 350px;">
+                                                        <div class="card-body d-flex flex-column">
+                                                            <div class="text-center mb-3">
+                                                                @if($testimonial->image)
+                                                                    <img src="{{ Storage::url('testimonials/' . $testimonial->image) }}"
+                                                                         alt="{{ optional($testimonial->client)->name ?? 'Client' }}"
+                                                                         class="rounded-circle"
+                                                                         width="80"
+                                                                         height="80"
+                                                                         style="object-fit: cover">
+                                                                @else
+                                                                    <img src="{{ asset('assets-fe/images/placeholder.jpg') }}"
+                                                                         alt="{{ optional($testimonial->client)->name ?? 'Client' }}"
+                                                                         class="rounded-circle"
+                                                                         width="80"
+                                                                         height="80">
+                                                                @endif
+
+                                                                <div class="mb-2 mt-3">
+                                                                    @for($i = 1; $i <= 5; $i++)
+                                                                        @if($i <= $testimonial->rating)
+                                                                            <i class="fas fa-star text-warning"></i>
+                                                                        @else
+                                                                            <i class="far fa-star text-warning"></i>
+                                                                        @endif
+                                                                    @endfor
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="testimonial-text-container flex-grow-1 d-flex align-items-center justify-content-center">
+                                                                <p class="text-muted" style="text-align: center; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
+                                                                    "{{ \Illuminate\Support\Str::limit($testimonial->testimonial_text, 150) }}"
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="text-center mt-auto">
+                                                                <h5 class="mb-1">{{ optional($testimonial->client)->name ?? 'Client' }}</h5>
+                                                                @if($testimonial->position)
+                                                                    <p class="small text-muted mb-0">{{ $testimonial->position }}</p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="contact-form" data-aos="fade-left" data-aos-duration="1500">
-                                <h2 class="text-center mb-5 display-10 fw-bold" style="color: #0A5640;">Hubungi Kami</h2>
-                                <form>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Nama Lengkap">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Subjek">
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea class="form-control" rows="5" placeholder="Pesan"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-success">Kirim Pesan</button>
-                                </form>
-                            </div>
+
+                            @if($chunks->count() > 1)
+                                <div class="carousel-indicators position-static mt-3">
+                                    @foreach($chunks as $index => $chunk)
+                                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="{{ $index }}"
+                                                class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}"
+                                                aria-label="Slide {{ $index + 1 }}" style="background-color: #0A5640;"></button>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 @endsection

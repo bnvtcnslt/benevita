@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 
 /*Route FrontEnd*/
 Route::get('/', [FrontendController::class, 'home'])->name('home');
-Route::get('/testimonials', [FrontendController::class, 'allTestimonials'])->name('testimonials.all');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');

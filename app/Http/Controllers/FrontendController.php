@@ -24,23 +24,6 @@ class FrontendController extends Controller
         }])
             ->where('status', true)
             ->orderBy('order')
-            ->get()  // Get all testimonials instead of take(3)
-            ->filter(function($testimonial) {
-                return $testimonial->client !== null;
-            });
-
-        $social_media = SocialMedia::where('status', true)->get();
-
-        return view('frontend.home', compact('clients', 'social_media', 'featuredTestimonials'));
-    }
-
-    public function allTestimonials()
-    {
-        $testimonials = Testimonial::with(['client' => function($query) {
-            $query->whereNotNull('name')->where('status', true);
-        }])
-            ->where('status', true)
-            ->orderBy('order')
             ->get()
             ->filter(function($testimonial) {
                 return $testimonial->client !== null;
@@ -48,7 +31,7 @@ class FrontendController extends Controller
 
         $social_media = SocialMedia::where('status', true)->get();
 
-        return view('frontend.testimonials.all', compact('testimonials', 'social_media'));
+        return view('frontend.home', compact('clients', 'social_media', 'featuredTestimonials'));
     }
 
     public function about() {
@@ -62,8 +45,17 @@ class FrontendController extends Controller
         if ($clients->count() < 7) {
             $clients = $clients->concat($clients);
         }
+        $featuredTestimonials = Testimonial::with(['client' => function($query) {
+            $query->whereNotNull('name')->where('status', true);
+        }])
+            ->where('status', true)
+            ->orderBy('order')
+            ->get()
+            ->filter(function($testimonial) {
+                return $testimonial->client !== null;
+            });
         $social_media = SocialMedia::where('status', 1)->get();
-        return view('frontend.services', compact('clients', 'social_media'));
+        return view('frontend.services', compact('clients', 'social_media', 'featuredTestimonials'));
     }
 
     public function contact() {

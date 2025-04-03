@@ -33,7 +33,7 @@
                 <div class="col-lg-10">
                     <div class="row g-4">
                         <div class="col-lg-7 col-md-6">
-                            <div class="contact-info h-80" data-aos="fade-right" data-aos-duration="1500">
+                            <div class="contact-info h-50" data-aos="fade-right" data-aos-duration="1500">
                                 <div class="map-container rounded overflow-hidden">
                                     <iframe
                                         src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Universitas%20Kristen%20Immanuel%20Yogyakarta&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
