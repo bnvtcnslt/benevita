@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -22,5 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('users', User::all());
+        View::composer('*', function ($view) {
+            $view->with('unreadMessagesCount', Message::whereNull('reply')->count());
+        });
     }
 }

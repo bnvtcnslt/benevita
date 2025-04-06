@@ -1,0 +1,177 @@
+@extends('layouts.main')
+
+@section('content')
+    <div class="row">
+        <div class="col-lg-12 col-12 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h4 class="fw-bold">Daftar Pesan dari Guest</h4>
+                    <div class="mb-3">
+                        <button id="btn-all" class="btn btn-outline-secondary active">Semua</button>
+                        <button id="btn-pending" class="btn btn-outline-warning">Pending</button>
+                        <button id="btn-success" class="btn btn-outline-success">Success</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover text-center align-middle" id="contacts-table">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Subjek</th>
+                                <th>Pesan</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($messages->sortByDesc('created_at') as $message)
+                                <tr class="message-row {{ $message->reply ? 'success-row' : 'pending-row' }}">
+                                    <td>{{ $message->full_name }}</td>
+                                    <td>{{ $message->email }}</td>
+                                    <td>{{ Str::limit($message->subject, 20) ?? '-' }}</td>
+                                    <td>{{ Str::limit($message->message, 50) }}</td>
+                                    <td>
+                                        @if($message->reply)
+                                            <span class="badge bg-success"><i class="fas fa-check"></i> Success</span>
+                                        @else
+                                            <span class="badge bg-warning text-dark"><i class="fas fa-clock"></i> Pending</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn {{ $message->reply ? 'btn-info' : 'btn-warning' }} btn-sm" data-bs-toggle="modal" data-bs-target="#replyModal-{{ $message->id }}">
+                                            <i class="{{ $message->reply ? 'bi bi-eye' : 'bi bi-reply' }}"></i>
+                                        </button>
+
+                                        <form id="delete-form-{{$message->id}}" action="{{ route('messages.destroy', $message->id) }}" method="POST" style="display:none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
+                                        <a href="#" onclick="confirmDelete({{$message->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Balasan -->
+    <div class="modal fade" id="replyModal-{{ $message->id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ $message->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="replyModalLabel-{{ $message->id }}">
+                        {{ $message->reply ? 'Detail Pesan' : 'Balas Pesan' }} dari {{ $message->full_name }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <strong>Subjek:</strong>
+                        <p>{{ $message->subject ?? '-' }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Pesan:</strong>
+                        <p>{{ $message->message }}</p>
+                    </div>
+
+                    @if($message->reply)
+                        <div class="mb-3">
+                            <strong>Balasan Anda:</strong>
+                            <p>{{ $message->reply }}</p>
+                        </div>
+                    @else
+                        <form action="{{ route('messages.reply', $message->id) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="reply">Balasan:</label>
+                                <textarea name="reply" class="form-control" required rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2">
+                                <i class="fas fa-paper-plane"></i> Kirim Balasan
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    @push('styles')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <style>
+            .btn-outline-secondary.active, .btn-outline-warning.active, .btn-outline-success.active {
+                font-weight: bold;
+            }
+        </style>
+    @endpush
+
+
+    <script>
+        function confirmDelete(id){
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
+    </script>
+        <script>
+            // Filter messages by status
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize button listeners
+                document.getElementById('btn-all').addEventListener('click', function() {
+                    showAllMessages();
+                    setActiveButton(this);
+                });
+
+                document.getElementById('btn-pending').addEventListener('click', function() {
+                    filterMessages('pending-row');
+                    setActiveButton(this);
+                });
+
+                document.getElementById('btn-success').addEventListener('click', function() {
+                    filterMessages('success-row');
+                    setActiveButton(this);
+                });
+            });
+
+            function showAllMessages() {
+                const rows = document.querySelectorAll('.message-row');
+                rows.forEach(row => {
+                    row.style.display = '';
+                });
+            }
+
+            function filterMessages(className) {
+                const rows = document.querySelectorAll('.message-row');
+                rows.forEach(row => {
+                    if (row.classList.contains(className)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            function setActiveButton(button) {
+                const buttons = document.querySelectorAll('#btn-all, #btn-pending, #btn-success');
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+            }
+        </script>
+@endsection

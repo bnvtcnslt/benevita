@@ -48,7 +48,7 @@ class TestimonialController extends Controller
                 'rating' => $request->rating,
                 'position' => $request->position,
                 'image' => $imageFileName,
-                'status' => $request->has('status') ? 1 : 0,
+                'status' => 1,
                 'order' => $request->order ?? 0
             ]);
 
@@ -87,6 +87,7 @@ class TestimonialController extends Controller
                 'rating' => 'required|integer|min:1|max:5',
                 'position' => 'nullable|string|max:255',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'status' => 'required',
                 'order' => 'required|integer|min:1'
             ]);
 
@@ -113,7 +114,7 @@ class TestimonialController extends Controller
                 'testimonial_text' => $request->testimonial_text,
                 'rating' => $request->rating,
                 'position' => $request->position,
-                'status' => $request->has('status') ? 1 : 0,
+                'status' => $request->status,
                 'order' => $newOrder
             ];
 
@@ -174,17 +175,19 @@ class TestimonialController extends Controller
             })
                 ->orWhere('testimonial_text', 'like', "%{$query}%")
                 ->orWhere('position', 'like', "%{$query}%")
+                ->orWhere('id', 'like', "%{$query}%")
                 ->paginate(5)
                 ->appends(['query' => $query]);
 
             $clients = Client::where('status', 1)->get();
+            $maxOrder = Testimonial::count() + 1;
 
             if ($testimonials->isEmpty()) {
                 return redirect()->route('testimonial.index')
                     ->with('error', 'No testimonials found matching your search criteria.');
             }
 
-            return view('backend.content.testimonials.index', compact('testimonials', 'clients'));
+            return view('backend.content.testimonials.index', compact('testimonials', 'clients', 'maxOrder')); // Add maxOrder here
 
         } catch (\Exception $e) {
             return redirect()->route('testimonial.index')

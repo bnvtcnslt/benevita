@@ -27,7 +27,6 @@ class TestimonialSeeder extends Seeder
                 'testimonial_text' => 'BeneVita Consulting has transformed how we understand our customers. Their sentiment analysis has helped us improve our products significantly.',
                 'rating' => 5,
                 'position' => 'Marketing Director',
-                'image' => 'test1.jpg',
                 'status' => true,
                 'order' => 1
             ],
@@ -36,7 +35,6 @@ class TestimonialSeeder extends Seeder
                 'testimonial_text' => 'The insights provided by their analysis have been crucial for our business strategy. Highly recommended for any company looking to understand customer feedback.',
                 'rating' => 5,
                 'position' => 'CEO',
-                'image' => 'test2.jpg',
                 'status' => true,
                 'order' => 2
             ]

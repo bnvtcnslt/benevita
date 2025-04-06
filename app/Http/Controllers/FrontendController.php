@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Service;
 use App\Models\SocialMedia;
 use App\Models\Team;
 use App\Models\TeamMember;
@@ -14,7 +15,9 @@ class FrontendController extends Controller
     public function home()
     {
         $clients = Client::where('status', true)->get();
-
+        $services = Service::orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
         if ($clients->count() < 7) {
             $clients = $clients->concat($clients->take(7 - $clients->count()));
         }
@@ -31,7 +34,7 @@ class FrontendController extends Controller
 
         $social_media = SocialMedia::where('status', true)->get();
 
-        return view('frontend.home', compact('clients', 'social_media', 'featuredTestimonials'));
+        return view('frontend.home', compact('clients', 'services', 'social_media', 'featuredTestimonials'));
     }
 
     public function about() {
@@ -41,10 +44,14 @@ class FrontendController extends Controller
     }
 
     public function services() {
-        $clients = Client::all();
+        $clients = Client::where('status', true)->get();
+        $services = Service::orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
         if ($clients->count() < 7) {
-            $clients = $clients->concat($clients);
+            $clients = $clients->concat($clients->take(7 - $clients->count()));
         }
+
         $featuredTestimonials = Testimonial::with(['client' => function($query) {
             $query->whereNotNull('name')->where('status', true);
         }])
@@ -54,13 +61,15 @@ class FrontendController extends Controller
             ->filter(function($testimonial) {
                 return $testimonial->client !== null;
             });
-        $social_media = SocialMedia::where('status', 1)->get();
-        return view('frontend.services', compact('clients', 'social_media', 'featuredTestimonials'));
+
+        $social_media = SocialMedia::where('status', true)->get();
+
+        return view('frontend.services', compact('clients', 'services', 'social_media', 'featuredTestimonials'));
     }
 
     public function contact() {
         $social_media = SocialMedia::where('status', 1)->get();
-        return view('frontend.contact', compact('social_media'));
+        return view('frontend.messages', compact('social_media'));
     }
 
 

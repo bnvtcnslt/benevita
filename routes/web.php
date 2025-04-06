@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ServiceController;
@@ -28,9 +29,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
-Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/messages', [FrontendController::class, 'contact'])->name('messages');
 Route::post('/frontend', [FrontendController::class, 'frontend'])->name('layout.frontend');
 Route::post('/backend', [DashboardController::class, 'main'])->name('layout.backend');
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 /*End*/
 
 Route::get('/login',[AuthController::class, 'index'])->name('auth.index');
@@ -65,6 +67,9 @@ Route::group(['middleware' => ['auth:user']], function () {
         Route::resource('service', ServiceController::class);
         Route::resource('social_media', SocialMediaController::class);
         Route::resource('testimonial', TestimonialController::class);
+
+        Route::resource('messages', MessageController::class);
+        Route::post('/messages/{id}/reply', [MessageController::class, 'reply'])->name('messages.reply');
     });
 
     /*Logout*/

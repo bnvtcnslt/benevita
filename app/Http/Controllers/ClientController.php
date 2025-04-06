@@ -22,36 +22,32 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'phone' => 'required',
-                'address' => 'required',
-                'logo_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email',
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string',
+            'logo_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
-            $imageFileName = null;
-            if ($request->hasFile('image')) {
-                $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('teams', $imageFileName, 'public');
-                $request->image = $imageFileName;
-            }
-
-            Client::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'logo_img' => $imageFileName,
-                'status' => 1 // Default to active
-            ]);
-
-            return redirect()->route('client.index')->with('success', 'Client added successfully!');
-        } catch (\Exception $e) {
-            return redirect()->route('client.index')->with('error', 'Failed to add client: ' . $e->getMessage());
+        if ($request->hasFile('logo_img')) {
+            $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
+            $request->file('logo_img')->storeAs('clients', $imageFileName, 'public');
+            $request->logo_img = $imageFileName;
         }
+
+        Client::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'logo_img' => $request->logo_img,
+            'status' => 1,
+        ]);
+
+        return redirect()->route('client.index')->with('success', 'Client added successfully.');
     }
+
 
     public function show($id)
     {
@@ -76,24 +72,23 @@ class ClientController extends Controller
                 'phone' => 'required',
                 'address' => 'required',
                 'status' => 'required',
-                'logo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'logo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
             ]);
 
-            $data = [
+            if ($request->hasFile('logo_img')) {
+                $imageFileName = time() . '_' . $request->file('logo_img')->getClientOriginalName();
+                $request->file('logo_img')->storeAs('clients', $imageFileName, 'public');
+                $request->logo_img = $imageFileName;
+            }
+
+            Client::where('id', $client->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'status' => $request->status,
-            ];
-
-            if ($request->hasFile('image')) {
-                $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('teams', $imageFileName, 'public');
-                $request->image = $imageFileName;
-            }
-
-            $client->update($data);
+                'logo_img' => $request->logo_img ?? $client->logo_img
+            ]);
 
             return redirect()->route('client.index')->with('success', 'Client updated successfully!');
         } catch (\Exception $e) {

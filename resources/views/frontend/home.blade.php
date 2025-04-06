@@ -39,30 +39,40 @@
                 <div class="col-lg-10 col-md-12 col-12">
                     <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Services</h2>
                     <div class="services-wrapper">
-                        <div class="services">
-                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
-                            <h3>Analisis Sentimen</h3>
-                            <p>Layanan analisis sentimen kami membantu Anda memahami emosi dan opini pelanggan melalui data tekstual...</p>
-                            <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
-                                Read More <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                        <div class="services">
-                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
-                            <h3>Analisis Aspek Sentimen</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                            <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
-                                Read More <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                        <div class="services">
-                            <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image">
-                            <h3>Pemantauan Opini Publik dan Analisis Kompetitif</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                            <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#servicesmodal">
-                                Read More <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
+                        @foreach($services as $service)
+                            <div class="services">
+                                @if($service->image)
+                                    <img src="{{ Storage::url('services/' . $service->image) }}" alt="{{ $service->title }}">
+                                @else
+                                    <img src="{{ asset('assets-fe/images/services.webp') }}" alt="{{ $service->title }}">
+                                @endif
+                                <h3>{{ $service->title }}</h3>
+                                <p>{{ \Illuminate\Support\Str::limit($service->description, 150) }}</p>
+                                <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#serviceModal{{ $service->id }}">
+                                    Read More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+
+                            <!-- Modal for each service -->
+                            <div class="modal fade" id="serviceModal{{ $service->id }}" tabindex="-1" aria-labelledby="serviceModalLabel{{ $service->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="serviceModalLabel{{ $service->id }}">{{ $service->title }}</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            @if($service->image)
+                                                <img src="{{ Storage::url('services/' . $service->image) }}" class="img-fluid mb-3" alt="{{ $service->title }}">
+                                            @endif
+                                            <p>{{ $service->description }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -90,24 +100,26 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section py-5" id="testimonials" style="margin-top: 4%;">
+    <section class="testimonials-section py-5" id="testimonials" style="margin-top: 4%;" data-aos="fade-up" data-aos-duration="1500">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12 col-12">
-                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">What Our Clients Say</h2>
+                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;" data-aos="fade-up" data-aos-duration="1500">What Our Clients Say</h2>
 
                     <div class="testimonial-carousel">
-                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-aos="fade-up" data-aos-duration="1500">
                             <div class="carousel-inner">
+                                @foreach($featuredTestimonials as $testimonial)
                                 @php
                                     $chunks = $featuredTestimonials->chunk(2);
                                 @endphp
+                                @endforeach
 
                                 @foreach($chunks as $index => $chunk)
                                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                         <div class="row {{ $chunk->count() == 1 ? 'justify-content-center' : '' }}">
                                             @foreach($chunk as $testimonial)
-                                                <div class="col-md-6 mb-4 d-flex">
+                                                <div class="col-md-6 mb-4 d-flex" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
                                                     <div class="card border-0 shadow-sm w-100" style="height: 350px;">
                                                         <div class="card-body d-flex flex-column">
                                                             <div class="text-center mb-3">
@@ -174,7 +186,7 @@
         </div>
     </section>
 
-    <!-- Section Contact -->
+    <!-- Section Message -->
     <section class="contact-section py-5" id="contact">
         <div class="container">
             <div class="row justify-content-center">
@@ -197,20 +209,21 @@
                         <div class="col-lg-5 col-md-6">
                             <div class="contact-form" data-aos="fade-left" data-aos-duration="1500">
                                 <h2 class="mb-4 fw-bold text-center" style="color: #0A5640;">Hubungi Kami</h2>
-                                <form>
+                                <form action="{{ route('messages.store') }}" method="POST">
+                                    @csrf
                                     <div class="mb-3">
-                                        <input type="text" class="form-control py-2" placeholder="Nama Lengkap" style="border: 1px solid #ced4da;">
+                                        <input type="text" name="full_name" class="form-control" placeholder="Nama Lengkap">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" class="form-control py-2" placeholder="Email" style="border: 1px solid #ced4da;">
+                                        <input type="email" name="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control py-2" placeholder="Subjek (Opsional)" style="border: 1px solid #ced4da;">
+                                        <input type="text" name="subject" class="form-control" placeholder="Subjek (Opsional)">
                                     </div>
                                     <div class="mb-3">
-                                        <textarea class="form-control" rows="5" placeholder="Pesan" style="border: 1px solid #ced4da;"></textarea>
+                                        <textarea name="message" class="form-control" rows="5" placeholder="Pesan"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Kirim Pesan</button>
+                                    <button type="submit" class="btn btn-success w-100">Kirim Pesan</button>
                                 </form>
                             </div>
                         </div>
@@ -219,39 +232,4 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="servicesmodal" tabindex="-1" role="dialog" aria-labelledby="servicesmodalTitle"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-image-container position-relative">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2 bg-white"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
-                    <img src="{{asset('assets-fe/images/services.webp')}}" alt="Service Image" class="w-100">
-                </div>
-                <div class="modal-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis asperiores unde quia
-                    saepe veritatis id molestias eligendi ratione repudiandae incidunt assumenda natus animi sunt
-                    commodi, adipisci vitae rerum porro est?
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis praesentium vitae et, excepturi
-                    amet ut minima rerum architecto quae
-                    iusto eveniet nisi doloribus adipisci vero, reprehenderit atque ipsum perferendis neque!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis asperiores unde quia
-                    saepe veritatis id molestias eligendi ratione repudiandae incidunt assumenda natus animi sunt
-                    commodi, adipisci vitae rerum porro est?
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis praesentium vitae et, excepturi
-                    amet ut minima rerum architecto quae
-                    iusto eveniet nisi doloribus adipisci vero, reprehenderit atque ipsum perferendis neque!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis asperiores unde quia
-                    saepe veritatis id molestias eligendi ratione repudiandae incidunt assumenda natus animi sunt
-                    commodi, adipisci vitae rerum porro est?
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis praesentium vitae et, excepturi
-                    amet ut minima rerum architecto quae
-                    iusto eveniet nisi doloribus adipisci vero, reprehenderit atque ipsum perferendis neque!
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection

@@ -176,14 +176,6 @@
                             <small class="form-text text-muted">Person's photo (optional)</small>
                         </div>
                         <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="status" id="status" checked>
-                                <label class="form-check-label" for="status">
-                                    Active
-                                </label>
-                            </div>
-                        </div>
-                        <div class="mb-3">
                             <label for="order" class="form-label">Urutan</label>
                             <select class="form-select" name="order" required>
                                 @for($i = 1; $i <= $maxOrder; $i++)
@@ -261,12 +253,11 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="status" id="status_{{$testimonial->id}}" {{ $testimonial->status ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="status_{{$testimonial->id}}">
-                                        Active
-                                    </label>
-                                </div>
+                                <label for="status" class="form-label">Status</label>
+                                <select name="status" class="form-control" id="status" required>
+                                    <option value="1" {{ $testimonial->status == 1 ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ $testimonial->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="order" class="form-label">Urutan</label>

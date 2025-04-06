@@ -90,7 +90,9 @@
                             <div class="services text-center" style="max-width:100%" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
                                 <img src="{{ Storage::url('teams/' . $member->image) }}" alt="{{ $member->name }}" class="img-fluid rounded-3" style="width: 100%; height: 200px; object-fit: cover;">
                                 <h3 class="mt-3" style="font-size: 1.2rem">{{ $member->name }}</h3>
-                                <p class="small text-muted text-center" style="font-size: .9rem">{{ $member->team->name }}</p>
+                                <p class="small text-muted text-center" style="font-size: .9rem">
+                                    {{ $member->team ? $member->team->name : 'No Team' }}
+                                </p>
                             </div>
                         @endforeach
                     </div>

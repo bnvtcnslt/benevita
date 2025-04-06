@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <!-- Contact Hero Section -->
+    <!-- Message Hero Section -->
     <section class="hero-section" id="contact"  style="margin-bottom: 10%;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12 col-12">
                     <div class="row align-items-center flex-column-reverse flex-md-row">
                         <div class="col-md-7 mt-md-0 align-self-center">
-                            <h1 class="display-3 fw-normal mb-4" style="color: #0A5640;">Hubungi Kami<br>Kami Siap Membantu</h1>
+                            <h1 class="display-3 fw-normal mb-4" style="color: #0A5640;">Hubungi Kami,<br>Kami Siap Membantu</h1>
                             <p class="text-muted mb-4" style="text-align: justify;">
                                 Ingin memahami pelanggan lebih dalam dan mengoptimalkan strategi bisnis Anda? Tim BeneVita Consulting siap membantu! Hubungi kami untuk berdiskusi lebih lanjut tentang bagaimana analisis sentimen berbasis AI dan NLP dapat memberikan wawasan berharga bagi bisnis, lembaga, atau organisasi Anda.
                             </p>
@@ -26,7 +26,7 @@
         </div>
     </section>
 
-    <!-- Section Contact -->
+    <!-- Section Message -->
     <section class="contact-section py-5" id="contact">
         <div class="container">
             <div class="row justify-content-center">

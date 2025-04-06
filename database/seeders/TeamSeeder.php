@@ -25,12 +25,6 @@ class TeamSeeder extends Seeder
                 'description' => 'Position',
                 'image' => 'test1.jpg',
                 'created_at' => now(),
-            ],
-            [
-                'name' => 'Team 3',
-                'description' => 'Position',
-                'image' => 'test2.jpg',
-                'created_at' => now(),
             ]
         ]);
     }

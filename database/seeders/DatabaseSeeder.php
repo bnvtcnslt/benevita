@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             TeamSeeder::class,
             ServiceSeeder::class,
-            ContactSeeder::class,
+            MessageSeeder::class,
             SocialMediaSeeder::class,
             TeamMemberSeeder::class,
             TestimonialSeeder::class,

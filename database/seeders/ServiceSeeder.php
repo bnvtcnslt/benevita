@@ -36,14 +36,6 @@ class ServiceSeeder extends Seeder
                 'team_id' => $teams->first()->id, // Same as above
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'title' => 'UI/UX Design',
-                'description' => $faker->paragraphs(3, true),
-                'image' => 'test3.jpg',
-                'team_id' => $teams->first()->id, // Same as above
-                'created_at' => now(),
-                'updated_at' => now(),
             ]
         ];
 

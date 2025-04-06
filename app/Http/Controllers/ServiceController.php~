@@ -32,7 +32,7 @@ class ServiceController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('services', $imageFileName, 'public');
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
                 $request->image = $imageFileName;
             }
 
@@ -70,7 +70,7 @@ class ServiceController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('services', $imageFileName, 'public');
+                $request->file('image')->storeAs('teams', $imageFileName, 'public');
                 $request->image = $imageFileName;
             }
 

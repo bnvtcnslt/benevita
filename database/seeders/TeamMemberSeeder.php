@@ -24,14 +24,7 @@ class TeamMemberSeeder extends Seeder
             [
                 'name' => 'Jane Doe',
                 'role' => 'Designer',
-                'image' => 'test1.jpg',
-                'created_at' => now(),
-                'team_id' => 1,
-            ],
-            [
-                'name' => 'John Doe',
-                'role' => 'Developer',
-                'image' => 'test1.jpg',
+                'image' => 'test2.jpg',
                 'created_at' => now(),
                 'team_id' => 2,
             ]

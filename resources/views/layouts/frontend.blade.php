@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
-<body>
+<body class="preload">
 
 <!-- Navbar -->
 <section class="navbar-section">
@@ -42,7 +42,7 @@
                         <a class="nav-link {{ Request::is('services') ? 'active' : '' }}" href="{{route('services')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{route('contact')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Contact</a>
+                        <a class="nav-link {{ Request::is('messages') ? 'active' : '' }}" href="{{route('messages')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -66,7 +66,7 @@
                         </div>
                         <p class="mb-3">Membantu bisnis memahami pelanggan lebih baik melalui analisis sentimen berbasis AI.</p>
 
-                        <!-- Added Contact Information -->
+                        <!-- Added Message Information -->
                         <div class="contact-info mb-3">
                             <p><i class="fas fa-envelope me-2"></i> info@benevita.com</p>
                             <p><i class="fas fa-phone me-2"></i> +62 123 4567 890</p>
@@ -81,7 +81,7 @@
                             <li class="mb-2"><a href="{{route('home')}}"><i class="fas fa-chevron-right me-2"></i> Home</a></li>
                             <li class="mb-2"><a href="{{route('about')}}"><i class="fas fa-chevron-right me-2"></i> About</a></li>
                             <li class="mb-2"><a href="{{route('services')}}"><i class="fas fa-chevron-right me-2"></i> Services</a></li>
-                            <li><a href="{{route('contact')}}"><i class="fas fa-chevron-right me-2"></i> Contact</a></li>
+                            <li><a href="{{route('messages')}}"><i class="fas fa-chevron-right me-2"></i> Contact</a></li>
                         </ul>
                     </div>
 
@@ -126,7 +126,7 @@
                     </div>
                     <div class="card-body">
                         <form onsubmit="return sendWhatsAppMessage(this);" target="_blank">
-                            <input type="hidden" id="whatsappNumber" value="{{ str_replace(['https://wa.me/', 'https://api.whatsapp.com/send?phone='], '', $media->url) }}">
+                            <input type="hidden" id="whatsappNumber" value="{{ str_replace(['https://api.whatsapp.com/send?phone='], '', $media->url) }}">
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="nama" placeholder="Nama Anda" required>
                             </div>
@@ -155,7 +155,7 @@
         const fullMessage = "Perkenalkan saya: " + name + "\n\n" + "'" + message + "'";
 
         // Create WhatsApp URL with encoded message
-        const whatsappURL = "https://wa.me/" + number + "?text=" + encodeURIComponent(fullMessage);
+        const whatsappURL = number + "?text=" + encodeURIComponent(fullMessage);
 
         // Open WhatsApp in new tab
         window.open(whatsappURL, '_blank');
@@ -170,6 +170,8 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="{{asset('assets-fe/js/script.js')}}"></script>
 <script>
     AOS.init();
@@ -212,6 +214,67 @@
     });
 
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 1500,
+            width: '400px',
+            toast: true,
+            padding: '0.5rem',
+            customClass: {
+                popup: 'small-toast',
+                title: 'small-toast-title'
+            }
+        });
+        @endif
+
+        @if(session('error'))
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 1500,
+            width: '400px',
+            toast: true,
+            padding: '0.5rem',
+            customClass: {
+                popup: 'small-toast',
+                title: 'small-toast-title'
+            }
+        });
+        @endif
+    });
+</script>
+
+{{--loading page--}}
+<script>
+    if(!sessionStorage.getItem('preloaderShown')) {
+        const preloader = document.createElement('div');
+        preloader.id = 'preloader';
+        preloader.innerHTML = `
+            <div style="width: 150px; height: 150px;">
+                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_raiw2hpe.json" background="transparent" speed="1" loop autoplay></lottie-player>
+            </div>
+            <div style="color: white; font-size: 1.5rem; font-weight: bold; margin-top: -30px;">Benevita Consulting</div>
+        `;
+        document.body.prepend(preloader);
+
+        sessionStorage.setItem('preloaderShown', 'true');
+
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.remove(), 2000);
+        }, 2000);
+    }
+</script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
 </html>
 
