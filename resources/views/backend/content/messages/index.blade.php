@@ -5,7 +5,7 @@
         <div class="col-lg-12 col-12 mb-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h4 class="fw-bold">Daftar Pesan dari Guest</h4>
+                    <h4 class="fw-bold">Daftar Pesan</h4>
                     <div class="mb-3">
                         <button id="btn-all" class="btn btn-outline-secondary active">Semua</button>
                         <button id="btn-pending" class="btn btn-outline-warning">Pending</button>
@@ -59,6 +59,7 @@
         </div>
     </div>
 
+    @foreach($messages as $message)
     <!-- Modal Balasan -->
     <div class="modal fade" id="replyModal-{{ $message->id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ $message->id }}" aria-hidden="true">
         <div class="modal-dialog">
@@ -100,6 +101,7 @@
             </div>
         </div>
     </div>
+    @endforeach
     @push('styles')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">

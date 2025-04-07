@@ -176,12 +176,11 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="status" id="status_{{$testimonials->id}}" {{ $testimonials->status ? 'checked' : '' }}>
-                                <label class="form-check-label" for="status_{{$testimonials->id}}">
-                                    Active
-                                </label>
-                            </div>
+                            <label for="status" class="form-label">Status</label>
+                            <select name="status" class="form-control" id="status" required>
+                                <option value="1" {{ $testimonials->status == 1 ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ $testimonials->status == 0 ? 'selected' : '' }}>Inactive</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="order" class="form-label">Urutan</label>

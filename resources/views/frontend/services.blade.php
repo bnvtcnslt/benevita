@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-md-5 mb-4 align-self-center">
                             <div class="hero-image">
-                                <img src="{{asset('assets-fe/images/heros.png')}}" alt="Hero Image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300" class="img-fluid rounded-4">
+                                <img src="{{asset('assets/images/heros.png')}}" alt="Hero Image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300" class="img-fluid rounded-4">
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                                 @if($service->image)
                                     <img src="{{ Storage::url('services/' . $service->image) }}" alt="{{ $service->title }}">
                                 @else
-                                    <img src="{{ asset('assets-fe/images/services.webp') }}" alt="{{ $service->title }}">
+                                    <img src="{{ asset('assets/images/services.webp') }}" alt="{{ $service->title }}">
                                 @endif
                                 <h3>{{ $service->title }}</h3>
                                 <p>{{ \Illuminate\Support\Str::limit($service->description, 150) }}</p>
@@ -53,15 +53,13 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="serviceModalLabel{{ $service->id }}">{{ $service->title }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             @if($service->image)
                                                 <img src="{{ Storage::url('services/' . $service->image) }}" class="img-fluid mb-3" alt="{{ $service->title }}">
                                             @endif
                                             <p>{{ $service->description }}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +124,7 @@
                                                                          height="80"
                                                                          style="object-fit: cover">
                                                                 @else
-                                                                    <img src="{{ asset('assets-fe/images/placeholder.jpg') }}"
+                                                                    <img src="{{ asset('assets/images/placeholder.jpg') }}"
                                                                          alt="{{ optional($testimonial->client)->name ?? 'Client' }}"
                                                                          class="rounded-circle"
                                                                          width="80"

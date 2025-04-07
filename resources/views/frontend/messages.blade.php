@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-md-5 mb-4 align-self-center">
                             <div class="hero-image">
-                                <img src="{{asset('assets-fe/images/heros.png')}}" alt="Contact Hero Image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300" class="img-fluid rounded-4">
+                                <img src="{{asset('assets/images/heros.png')}}" alt="Contact Hero Image" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="300" class="img-fluid rounded-4">
                             </div>
                         </div>
                     </div>
@@ -49,20 +49,21 @@
                         <div class="col-lg-5 col-md-6">
                             <div class="contact-form" data-aos="fade-left" data-aos-duration="1500">
                                 <h2 class="mb-4 fw-bold text-center" style="color: #0A5640;">Hubungi Kami</h2>
-                                <form>
+                                <form action="{{ route('messages.store') }}" method="POST">
+                                    @csrf
                                     <div class="mb-3">
-                                        <input type="text" class="form-control py-2" placeholder="Nama Lengkap" style="border: 1px solid #ced4da;">
+                                        <input type="text" name="full_name" class="form-control" placeholder="Nama Lengkap">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" class="form-control py-2" placeholder="Email" style="border: 1px solid #ced4da;">
+                                        <input type="email" name="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control py-2" placeholder="Subjek (Opsional)" style="border: 1px solid #ced4da;">
+                                        <input type="text" name="subject" class="form-control" placeholder="Subjek (Opsional)">
                                     </div>
                                     <div class="mb-3">
-                                        <textarea class="form-control" rows="5" placeholder="Pesan" style="border: 1px solid #ced4da;"></textarea>
+                                        <textarea name="message" class="form-control" rows="5" placeholder="Pesan"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Kirim Pesan</button>
+                                    <button type="submit" class="btn btn-success w-100">Kirim Pesan</button>
                                 </form>
                             </div>
                         </div>

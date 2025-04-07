@@ -1,7 +1,7 @@
 // Menangani masalah pada animasi semua logo
 const logoContainer = document.querySelector('.logo-container');
-        const logos = logoContainer.innerHTML;
-        logoContainer.innerHTML += logos;
+const logos = logoContainer.innerHTML;
+logoContainer.innerHTML += logos;
 
 //  // Menangani scroll dan collapse navbar
 //         document.querySelectorAll('.nav-scroll').forEach(link => {

@@ -12,39 +12,8 @@ class InformationContactController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(InformationContact $informationContact)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(InformationContact $informationContact)
-    {
-        //
+        $contact = InformationContact::first();
+        return view('backend.content.information-contact.index', compact('contact'));
     }
 
     /**
@@ -52,14 +21,22 @@ class InformationContactController extends Controller
      */
     public function update(Request $request, InformationContact $informationContact)
     {
-        //
-    }
+        try {
+            $request->validate([
+                'address' => 'required|string',
+                'phone' => 'required|string',
+                'email' => 'required|email',
+            ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(InformationContact $informationContact)
-    {
-        //
+            InformationContact::where('id', $informationContact->id)->update([
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+            ]);
+
+            return redirect()->route('information-contact.index')->with('success', 'Contact information updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('information-contact.index')->with('error', 'Failed to update contact information: ' . $e->getMessage());
+        }
     }
 }

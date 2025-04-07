@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Dashboard</title>
+    <title>Benevita Dashboard</title>
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="{{asset('assets-be/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper d-flex">
@@ -105,9 +105,17 @@
                     </div>
                     @if($unreadMessagesCount > 0)
                         <span class="badge bg-danger rounded-pill ms-2" style="font-size: 0.65em;">
-                    {{ $unreadMessagesCount > 9 ? '9+' : $unreadMessagesCount }}
-                </span>
+                        {{ $unreadMessagesCount > 9 ? '9+' : $unreadMessagesCount }}
+                    </span>
                     @endif
+                </a>
+            </li>
+
+            <!-- Information Contact -->
+            <li class="mb-2 {{ request()->routeIs('information-contact.index') ? 'active' : '' }}">
+                <a href="{{ route('information-contact.index') }}" class="text-white text-decoration-none d-flex align-items-center py-2 px-3 rounded">
+                    <i class="bi bi-info-circle me-3 fs-5"></i>
+                    <span>Contact Info</span>
                 </a>
             </li>
         </ul>

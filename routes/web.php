@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\InformationContactController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
@@ -16,69 +17,65 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Public Routes (Bisa diakses tanpa login)
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
-/*Route FrontEnd*/
+// Route FrontEnd
 Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
-Route::get('/messages', [FrontendController::class, 'contact'])->name('messages');
-Route::post('/frontend', [FrontendController::class, 'frontend'])->name('layout.frontend');
-Route::post('/backend', [DashboardController::class, 'main'])->name('layout.backend');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
-/*End*/
+Route::get('/messages', [FrontendController::class, 'messages'])->name('messages');
+// Auth Routes
+Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
+Route::post('/login', [AuthController::class, 'verify'])->name('auth.verify');
 
-Route::get('/login',[AuthController::class, 'index'])->name('auth.index');
-Route::post('/login',[AuthController::class, 'verify'])->name('auth.verify');
-
+// Password Reset Routes
 Route::group(['middleware' => ['guest']], function () {
     Route::prefix('password')->group(function () {
-        // Forgot Password
         Route::get('/forgot', [AuthController::class, 'forgotPassword'])->name('password.request');
         Route::post('/forgot', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
-        // Reset Password
         Route::get('/reset/{token}', [AuthController::class, 'resetPassword'])->name('password.reset');
         Route::post('/reset/{token}', [AuthController::class, 'updatePassword'])->name('password.update');
     });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Protected Routes (Harus login)
+|--------------------------------------------------------------------------
+*/
 Route::group(['middleware' => ['auth:user']], function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
-        /*Route untuk pencarian*/
+        // Search Routes
         Route::get('/client/search', [ClientController::class, 'search'])->name('client.search');
         Route::get('/team/search', [TeamController::class, 'search'])->name('team.search');
         Route::get('/service/search', [ServiceController::class, 'search'])->name('service.search');
         Route::get('/team_member/search', [TeamMemberController::class, 'search'])->name('team_members.search');
         Route::get('testimonial/search', [TestimonialController::class, 'search'])->name('testimonial.search');
 
-        /*Route CRUD*/
+        // Resource Routes
         Route::resource('client', ClientController::class);
         Route::resource('team', TeamController::class);
         Route::resource('team_members', TeamMemberController::class);
         Route::resource('service', ServiceController::class);
         Route::resource('social_media', SocialMediaController::class);
         Route::resource('testimonial', TestimonialController::class);
+        Route::resource('information-contact', InformationContactController::class);
 
-        Route::resource('messages', MessageController::class);
+        // Message Routes (kecuali store)
+        Route::resource('messages', MessageController::class)->except(['store']);
         Route::post('/messages/{id}/reply', [MessageController::class, 'reply'])->name('messages.reply');
     });
 
-    /*Logout*/
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
-/*End*/
-
-/*Route Storage*/
+// Storage Route
 Route::get('/storage/{folder}/{filename}', function ($folder, $filename) {
     $path = storage_path('app/public/' . $folder . '/' . $filename);
 

@@ -186,8 +186,8 @@
                         <div class="mb-3">
                             <label for="order" class="form-label">Urutan</label>
                             <select class="form-select" name="order" required>
-                                @for($i = 1; $i <= $testimonials->total(); $i++)
-                                    <option value="{{ $i }}" {{ $testimonial->order == $i ? 'selected' : '' }}>
+                                @for($i = 1; $i <= $maxOrder; $i++)
+                                    <option value="{{ $i }}" {{ $testimonials->order == $i ? 'selected' : '' }}>
                                         Posisi ke-{{ $i }}
                                     </option>
                                 @endfor
