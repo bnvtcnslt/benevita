@@ -256,68 +256,6 @@
     });
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ensure WhatsApp container is properly positioned
-        const whatsappContainer = document.querySelector('.whatsapp-container');
-        const whatsappFloat = document.querySelector('.whatsapp-float');
-
-        if (whatsappContainer && whatsappFloat) {
-            // Reset styles to ensure consistency
-            whatsappContainer.style.position = 'fixed';
-            whatsappContainer.style.bottom = '30px';
-            whatsappContainer.style.right = '30px';
-            whatsappContainer.style.zIndex = '9999';
-
-            // Mobile adjustments
-            function adjustWhatsAppPosition() {
-                if (window.innerWidth <= 768) {
-                    whatsappContainer.style.bottom = '20px';
-                    whatsappContainer.style.right = '20px';
-                } else {
-                    whatsappContainer.style.bottom = '30px';
-                    whatsappContainer.style.right = '30px';
-                }
-            }
-
-            // Initial adjustment
-            adjustWhatsAppPosition();
-
-            // Adjust on resize
-            window.addEventListener('resize', adjustWhatsAppPosition);
-
-            // Prevent card from closing when clicking inside
-            const whatsappCard = document.querySelector('.whatsapp-card');
-            if (whatsappCard) {
-                whatsappCard.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            }
-        }
-
-        // WhatsApp message function
-        window.sendWhatsAppMessage = function(form) {
-            const name = document.getElementById('nama').value;
-            const message = document.getElementById('pesan').value;
-            const number = document.getElementById('whatsappNumber').value;
-
-            const fullMessage = `Halo, saya ${name}.\n\n${message}`;
-            const whatsappURL = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(fullMessage)}`;
-
-            window.open(whatsappURL, '_blank');
-            form.reset();
-
-            // Close the card after sending
-            const collapse = new bootstrap.Collapse(document.getElementById('whatsappCollapse'), {
-                toggle: false
-            });
-            collapse.hide();
-
-            return false;
-        };
-    });
-</script>
-
 <!-- Updated Preloader Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {

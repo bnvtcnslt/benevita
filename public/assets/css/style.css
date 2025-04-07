@@ -447,7 +447,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .services-section {
     background-color: rgb(255, 255, 255);
-    padding: 80px 0;
+    padding: 40px 0;
     overflow: hidden;
 }
 
@@ -697,6 +697,7 @@ section[id] {
 .about-section {
     position: relative; /* Agar pseudo-element dapat diposisikan relatif terhadap section ini */
     padding: 40px 0; /* Padding untuk konten */
+    background-color: rgb(255, 255, 255);
 }
 
 .about-section::after {
@@ -1005,6 +1006,7 @@ section[id] {
 }
 
 .contact-section .contact-info {
+    margin-top: 50px; /* Add some margin for spacing */
     background-color: white; /* Set background to white */
     border-radius: 8px; /* Optional: add rounded corners */
     padding: 20px; /* Add some padding for better spacing */
@@ -1014,12 +1016,18 @@ section[id] {
     white-space: normal; /* Allow text to wrap */
 }
 
+.contact-section .contact-form {
+    margin-top: 50px; /* Add some margin for spacing */
+}
+
 .contact-section {
     position: relative; /* Agar pseudo-element dapat diposisikan relatif terhadap section ini */
     padding: 40px 0; /* Padding untuk konten */
+    background-color: rgb(255, 255, 255);
 }
 
 .contact-section::after {
+    margin-top: 40px;
     content: '';
     position: absolute;
     top: 0; /* Jarak dari atas */
