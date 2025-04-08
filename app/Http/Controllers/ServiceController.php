@@ -109,24 +109,25 @@ class ServiceController extends Controller
                 return redirect()->route('service.index');
             }
 
-            // Make sure this returns a LengthAwarePaginator, not a Collection
-            $services = Service::where('id', 'like', "%{$query}%")
+            // Change variable name from $services to $paginatedServices
+            $paginatedServices = Service::where('id', 'like', "%{$query}%")
                 ->orWhere('title', 'like', "%{$query}%")
                 ->orWhere('description', 'like', "%{$query}%")
                 ->orWhereHas('team', function($q) use ($query) {
                     $q->where('name', 'like', "%{$query}%");
                 })
-                ->paginate(5)  // This needs to return a paginator, not a collection
+                ->paginate(5)
                 ->appends(['query' => $query]);
 
             $teams = Team::all();
 
-            if ($services->isEmpty()) {
+            if ($paginatedServices->isEmpty()) {
                 return redirect()->route('service.index')
                     ->with('error', 'No services found matching your search criteria.');
             }
 
-            return view('backend.content.services.index', compact('services', 'teams'));
+            // Use paginatedServices instead of services
+            return view('backend.content.services.index', compact('paginatedServices', 'teams'));
 
         } catch (\Exception $e) {
             return redirect()->route('service.index')
