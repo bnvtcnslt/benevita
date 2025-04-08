@@ -109,11 +109,9 @@ class TeamController extends Controller
                 return redirect()->route('team.index');
             }
 
-            $teams = Team::where(function($q) use ($query) {
-                $q->where('id', 'like', "%{$query}%")
-                    ->orWhere('name', 'like', "%{$query}%")
-                    ->orWhere('description', 'like', "%{$query}%");
-            })
+            $teams = Team::where('id', 'like', "%{$query}%")
+                ->Where('name', 'like', "%{$query}%")
+                ->orWhere('description', 'like', "%{$query}%")
                 ->paginate(5)
                 ->appends(['query' => $query]);
 
