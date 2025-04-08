@@ -210,21 +210,16 @@
                                 <form action="{{ route('messages.store') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <input type="text" name="full_name" class="form-control" placeholder="Nama Lengkap" required>
+                                        <input type="text" name="full_name" class="form-control" placeholder="Nama Lengkap">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                        <input type="email" name="email" class="form-control" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <select name="subject" class="form-select" required>
-                                            <option value="" selected disabled>Pilih Layanan</option>
-                                            @foreach($services as $service)
-                                                <option value="{{ $service->title }}">{{ $service->title }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" name="subject" class="form-control" placeholder="Subjek (Opsional)">
                                     </div>
                                     <div class="mb-3">
-                                        <textarea name="message" class="form-control" rows="5" placeholder="Pesan tambahan (opsional)"></textarea>
+                                        <textarea name="message" class="form-control" rows="5" placeholder="Pesan"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-success w-100">Kirim Pesan</button>
                                 </form>

@@ -58,7 +58,7 @@
     </div>
 
     <p><strong>Pesan Anda:</strong></p>
-    <blockquote>{{ $messageData->message ?: '-' }}</blockquote>
+    <blockquote>{{ $messageData->message }}</blockquote>
 
     <p><strong>Balasan dari Tim Kami:</strong></p>
     <blockquote>{{ $messageData->reply }}</blockquote>

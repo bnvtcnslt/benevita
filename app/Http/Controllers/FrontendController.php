@@ -69,13 +69,13 @@ class FrontendController extends Controller
 
     public function messages() {
         $social_media = SocialMedia::where('status', 1)->get();
-        return view('frontend.messages', compact('social_media'));
+        $services = Service::all();
+        return view('frontend.messages', compact('social_media', 'services'));
     }
-
-
     public function frontend()
     {
         $social_media = SocialMedia::where('status', 1)->get();
-        return view('layouts.frontend', compact('social_media'));
+        $services = Service::all();
+        return view('layouts.frontend', compact('social_media', 'services'));
     }
 }

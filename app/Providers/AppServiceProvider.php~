@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\InformationContact;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
@@ -22,9 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Share users with all views
         View::share('users', User::all());
+
+        // Share data with all views using View composer
         View::composer('*', function ($view) {
+            // Share unread messages count
             $view->with('unreadMessagesCount', Message::whereNull('reply')->count());
+
+            // Share information contact data
+            $informationContact = InformationContact::first();
+            $view->with('informationContact', $informationContact);
         });
     }
 }

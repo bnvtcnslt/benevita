@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Message Hero Section -->
-    <section class="hero-section" id="contact"  style="margin-bottom: 10%;">
+    <section class="hero-section" id="contact">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12 col-12">
@@ -27,7 +27,7 @@
     </section>
 
     <!-- Section Message -->
-    <section class="contact-section py-5" id="contact" style="margin-top: 75px;">
+    <section class="contact-section py-5" id="contact">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -52,16 +52,21 @@
                                 <form action="{{ route('messages.store') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <input type="text" name="full_name" class="form-control" placeholder="Nama Lengkap">
+                                        <input type="text" name="full_name" class="form-control" placeholder="Nama Lengkap" required>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Email">
+                                        <input type="email" name="email" class="form-control" placeholder="Email" required>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" name="subject" class="form-control" placeholder="Subjek (Opsional)">
+                                        <select name="subject" class="form-select" required>
+                                            <option value="" selected disabled>Pilih Layanan</option>
+                                            @foreach($services as $service)
+                                                <option value="{{ $service->title }}">{{ $service->title }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
-                                        <textarea name="message" class="form-control" rows="5" placeholder="Pesan"></textarea>
+                                        <textarea name="message" class="form-control" rows="5" placeholder="Pesan tambahan (opsional)"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-success w-100">Kirim Pesan</button>
                                 </form>
@@ -72,5 +77,6 @@
             </div>
         </div>
     </section>
+@endsection
 
 @endsection

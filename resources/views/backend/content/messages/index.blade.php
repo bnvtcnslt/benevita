@@ -16,9 +16,9 @@
                             <thead class="table-dark">
                             <tr>
                                 <th>Nama</th>
-                                <th>Email</th>
-                                <th>Subjek</th>
+                                <th>Layanan</th>
                                 <th>Pesan</th>
+                                <th>Email</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -27,9 +27,15 @@
                             @foreach($messages->sortByDesc('created_at') as $message)
                                 <tr class="message-row {{ $message->reply ? 'success-row' : 'pending-row' }}">
                                     <td>{{ $message->full_name }}</td>
+                                    <td>
+                                        @if($message->subject)
+                                            <span class="badge bg-info text-dark">{{ Str::limit($message->subject, 20) }}</span>
+                                        @else
+                                            <span class="badge bg-secondary">-</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $message->message ? Str::limit($message->message, 50) : '-' }}</td>
                                     <td>{{ $message->email }}</td>
-                                    <td>{{ Str::limit($message->subject, 20) ?? '-' }}</td>
-                                    <td>{{ Str::limit($message->message, 50) }}</td>
                                     <td>
                                         @if($message->reply)
                                             <span class="badge bg-success"><i class="fas fa-check"></i> Success</span>
@@ -60,47 +66,48 @@
     </div>
 
     @foreach($messages as $message)
-    <!-- Modal Balasan -->
-    <div class="modal fade" id="replyModal-{{ $message->id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ $message->id }}" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="replyModalLabel-{{ $message->id }}">
-                        {{ $message->reply ? 'Detail Pesan' : 'Balas Pesan' }} dari {{ $message->full_name }}
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <strong>Subjek:</strong>
-                        <p>{{ $message->subject ?? '-' }}</p>
+        <!-- Modal Balasan -->
+        <div class="modal fade" id="replyModal-{{ $message->id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ $message->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="replyModalLabel-{{ $message->id }}">
+                            {{ $message->reply ? 'Detail Pesan' : 'Balas Pesan' }} dari {{ $message->full_name }}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="mb-3">
-                        <strong>Pesan:</strong>
-                        <p>{{ $message->message }}</p>
-                    </div>
-
-                    @if($message->reply)
+                    <div class="modal-body">
                         <div class="mb-3">
-                            <strong>Balasan Anda:</strong>
-                            <p>{{ $message->reply }}</p>
+                            <strong>Layanan:</strong>
+                            <p class="p-2 bg-light rounded">{{ $message->subject ?? 'Tidak disebutkan' }}</p>
                         </div>
-                    @else
-                        <form action="{{ route('messages.reply', $message->id) }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="reply">Balasan:</label>
-                                <textarea name="reply" class="form-control" required rows="5"></textarea>
+                        <div class="mb-3">
+                            <strong>Pesan:</strong>
+                            <p class="p-2 bg-light rounded">
+                                {{ $message->message ? : '-' }}
+                            </p>
+                        </div>
+                        @if($message->reply)
+                            <div class="mb-3">
+                                <strong>Balasan Anda:</strong>
+                                <p class="p-2 bg-light rounded">{{ $message->reply }}</p>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2">
-                                <i class="fas fa-paper-plane"></i> Kirim Balasan
-                            </button>
-                        </form>
-                    @endif
+                        @else
+                            <form action="{{ route('messages.reply', $message->id) }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="reply">Balasan:</label>
+                                    <textarea name="reply" class="form-control" required rows="5"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">
+                                    <i class="fas fa-paper-plane"></i> Kirim Balasan
+                                </button>
+                            </form>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endforeach
     @push('styles')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -130,50 +137,50 @@
             });
         }
     </script>
-        <script>
-            // Filter messages by status
-            document.addEventListener('DOMContentLoaded', function() {
-                // Initialize button listeners
-                document.getElementById('btn-all').addEventListener('click', function() {
-                    showAllMessages();
-                    setActiveButton(this);
-                });
-
-                document.getElementById('btn-pending').addEventListener('click', function() {
-                    filterMessages('pending-row');
-                    setActiveButton(this);
-                });
-
-                document.getElementById('btn-success').addEventListener('click', function() {
-                    filterMessages('success-row');
-                    setActiveButton(this);
-                });
+    <script>
+        // Filter messages by status
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize button listeners
+            document.getElementById('btn-all').addEventListener('click', function() {
+                showAllMessages();
+                setActiveButton(this);
             });
 
-            function showAllMessages() {
-                const rows = document.querySelectorAll('.message-row');
-                rows.forEach(row => {
+            document.getElementById('btn-pending').addEventListener('click', function() {
+                filterMessages('pending-row');
+                setActiveButton(this);
+            });
+
+            document.getElementById('btn-success').addEventListener('click', function() {
+                filterMessages('success-row');
+                setActiveButton(this);
+            });
+        });
+
+        function showAllMessages() {
+            const rows = document.querySelectorAll('.message-row');
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+        }
+
+        function filterMessages(className) {
+            const rows = document.querySelectorAll('.message-row');
+            rows.forEach(row => {
+                if (row.classList.contains(className)) {
                     row.style.display = '';
-                });
-            }
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
 
-            function filterMessages(className) {
-                const rows = document.querySelectorAll('.message-row');
-                rows.forEach(row => {
-                    if (row.classList.contains(className)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            }
-
-            function setActiveButton(button) {
-                const buttons = document.querySelectorAll('#btn-all, #btn-pending, #btn-success');
-                buttons.forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                button.classList.add('active');
-            }
-        </script>
+        function setActiveButton(button) {
+            const buttons = document.querySelectorAll('#btn-all, #btn-pending, #btn-success');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+    </script>
 @endsection

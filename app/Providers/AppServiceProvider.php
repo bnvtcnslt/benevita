@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\InformationContact;
 use App\Models\Message;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
             // Share information contact data
             $informationContact = InformationContact::first();
             $view->with('informationContact', $informationContact);
+
+            // Share services data for WhatsApp dropdown
+            $view->with('services', Service::all());
         });
     }
 }

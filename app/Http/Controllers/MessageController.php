@@ -32,7 +32,7 @@ class MessageController extends Controller
                 'full_name' => 'required',
                 'email' => 'required|email',
                 'subject' => 'nullable',
-                'message' => 'required'
+                'message' => 'nullable',
             ]);
 
             // Simpan ke database

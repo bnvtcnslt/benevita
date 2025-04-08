@@ -129,7 +129,15 @@
                                 <input type="text" class="form-control" id="nama" placeholder="Nama Anda" required>
                             </div>
                             <div class="mb-3">
-                                <textarea class="form-control" id="pesan" rows="3" placeholder="Pesan Anda..." required></textarea>
+                                <select class="form-select" id="layanan" required>
+                                    <option value="" selected disabled>Pilih Layanan</option>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->title }}">{{ $service->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="pesan" rows="3" placeholder="Pertanyaan tambahan (opsional)"></textarea>
                             </div>
                             <button type="submit" class="btn btn-success w-100">
                                 <i class="fab fa-whatsapp me-2"></i> Kirim Pesan
@@ -151,11 +159,18 @@
     function sendWhatsAppMessage(form) {
         // Get input values
         const name = document.getElementById('nama').value;
+        const service = document.getElementById('layanan').value;
         const message = document.getElementById('pesan').value;
         const number = document.getElementById('whatsappNumber').value;
 
-        // Format the message to include the name
-        const fullMessage = "Perkenalkan saya: " + name + "\n\n" + "'" + message + "'";
+        // Format the message to include the name and selected service
+        let fullMessage = "Perkenalkan saya: " + name + "\n\n";
+        fullMessage += "Saya tertarik dengan layanan: " + service + "\n\n";
+
+        // Add additional message if provided
+        if (message.trim() !== "") {
+            fullMessage += "Pertanyaan saya: \n'" + message + "'";
+        }
 
         // Create WhatsApp URL with encoded message
         const whatsappURL = number + "?text=" + encodeURIComponent(fullMessage);
