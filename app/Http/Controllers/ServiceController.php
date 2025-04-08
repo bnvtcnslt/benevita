@@ -13,9 +13,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::paginate(5);
+        $paginatedServices = Service::paginate(5);
         $teams = Team::all();
-        return view('backend.content.services.index', compact('services', 'teams'));
+        return view('backend.content.services.index', compact('paginatedServices', 'teams'));
     }
     /**
      * Store a newly created resource in storage.
@@ -109,13 +109,14 @@ class ServiceController extends Controller
                 return redirect()->route('service.index');
             }
 
+            // Make sure this returns a LengthAwarePaginator, not a Collection
             $services = Service::where('id', 'like', "%{$query}%")
                 ->orWhere('title', 'like', "%{$query}%")
                 ->orWhere('description', 'like', "%{$query}%")
                 ->orWhereHas('team', function($q) use ($query) {
                     $q->where('name', 'like', "%{$query}%");
                 })
-                ->paginate(5)
+                ->paginate(5)  // This needs to return a paginator, not a collection
                 ->appends(['query' => $query]);
 
             $teams = Team::all();

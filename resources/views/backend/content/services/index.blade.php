@@ -39,9 +39,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($services as $service)
+                            @foreach($paginatedServices as $service)
                                 <tr>
-                                    <td>{{ ($services->currentPage() - 1) * $services->perPage() + $loop->iteration }}</td>
+                                    <td>{{ ($paginatedServices->currentPage() - 1) * $paginatedServices->perPage() + $loop->iteration }}</td>
                                     <td>{{$service->id}}</td>
                                     <td>{{$service->title}}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($service->description, 50) }}</td>
@@ -79,20 +79,20 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             <!-- Previous Page Link -->
-                            <li class="page-item {{ $services->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $services->previousPageUrl() }}" aria-label="Previous">
+                            <li class="page-item {{ $paginatedServices->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $paginatedServices->previousPageUrl() }}" aria-label="Previous">
                                     <i class="bi bi-chevron-left"></i>
                                 </a>
                             </li>
 
                             @php
-                                $currentPage = $services->currentPage();
-                                $lastPage = $services->lastPage();
+                                $currentPage = $paginatedServices->currentPage();
+                                $lastPage = $paginatedServices->lastPage();
                                 $start = max($currentPage - 2, 1);
                                 $end = min($currentPage + 2, $lastPage);
 
                                 if ($start > 1) {
-                                    echo '<li class="page-item"><a class="page-link" href="' . $services->url(1) . '">1</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="' . $paginatedServices->url(1) . '">1</a></li>';
                                     if ($start > 2) {
                                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                     }
@@ -100,19 +100,19 @@
 
                                 for ($i = $start; $i <= $end; $i++) {
                                     $active = $currentPage == $i ? 'active' : '';
-                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . $services->url($i) . '">' . $i . '</a></li>';
+                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . $paginatedServices->url($i) . '">' . $i . '</a></li>';
                                 }
 
                                 if ($end < $lastPage) {
                                     if ($end < $lastPage - 1) {
                                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                     }
-                                    echo '<li class="page-item"><a class="page-link" href="' . $services->url($lastPage) . '">' . $lastPage . '</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="' . $paginatedServices->url($lastPage) . '">' . $lastPage . '</a></li>';
                                 }
                             @endphp
 
-                            <li class="page-item {{ $services->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $services->nextPageUrl() }}" aria-label="Next">
+                            <li class="page-item {{ $paginatedServices->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $paginatedServices->nextPageUrl() }}" aria-label="Next">
                                     <i class="bi bi-chevron-right"></i>
                                 </a>
                             </li>
