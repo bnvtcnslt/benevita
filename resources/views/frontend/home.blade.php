@@ -16,7 +16,7 @@
                                 media sosial, dan survei, Kami tidak hanya mengukur sentimen, tetapi juga
                                 mengidentifikasi aspek yang memengaruhi opini pelanggan. sehingga membantu Anda
                                 mengambil keputusan strategis yang lebih cerdas.</p>
-                            <p>🔍 <span
+                            <p>🌟 <span
                                     class="fst-italic">Siap memahami pelanggan lebih baik? Hubungi kami sekarang!</span>
                             </p>
                         </div>

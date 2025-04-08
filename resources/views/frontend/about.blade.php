@@ -12,7 +12,7 @@
                             <h1 class="display-3 fw-normal mb-4" style="color: #0A5640;">Menyediakan perawatan terbaik <br> sejak 2025</h1>
                             <p class="text-muted mb-4" style="text-align: justify;">
                                 BeneVita Consulting adalah perusahaan konsultan yang berfokus pada analisis sentimen dan pemahaman pelanggan. Kami menggunakan teknologi NLP (Natural Language Processing) dan AI untuk membantu bisnis memahami feedback pelanggan mereka dengan lebih baik.</p>
-                            <p>ðŸš€ <span class="fst-italic">Bersama BeneVita Consulting, ubah data menjadi wawasan yang berharga dan optimalkan pertumbuhan bisnis Anda!</span></p>
+                            <p>🔍 <span class="fst-italic">Bersama BeneVita Consulting, ubah data menjadi wawasan yang berharga dan optimalkan pertumbuhan bisnis Anda!</span></p>
                         </div>
                         <div class="col-md-5 mb-4 align-self-center">
                             <div class="hero-image">

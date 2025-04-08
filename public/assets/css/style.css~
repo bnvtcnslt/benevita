@@ -573,6 +573,7 @@ h1, h2, h3, h4, h5, h6 {
         right: 0;
         /* background: rgba(255, 255, 255, 0.98); */
         z-index: 1030;
+        padding-right: 25px;
     }
 
     .navbar-section .container {
@@ -581,7 +582,7 @@ h1, h2, h3, h4, h5, h6 {
         max-width: 100%;
     }
 
-    .navbar-front {
+    .navbar {
         width: 100%;
         padding: 0.5rem 0;
     }
@@ -667,7 +668,7 @@ section[id] {
     scroll-margin-top: 60px;
 }
 
-.navbar-front {
+.navbar {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
@@ -1024,6 +1025,7 @@ section[id] {
     position: relative; /* Agar pseudo-element dapat diposisikan relatif terhadap section ini */
     padding: 40px 0; /* Padding untuk konten */
     background-color: rgb(255, 255, 255);
+    margin-top: 70px;
 }
 
 .contact-section::after {
@@ -1052,9 +1054,8 @@ section[id] {
         background-color: rgb(255, 241, 220); /* Background color */
         z-index: 0; /* Ensure it is behind the content */
     }
-
     .contact-section {
-        margin-top: -200px;
+        margin-top: 0;
     }
 }
 
@@ -1234,6 +1235,28 @@ body {
     padding: 0.5rem 0;
     border-radius: 12px;
     margin: 15px;
+}
+
+/* Mobile Navbar Fix */
+@media (max-width: 991px) {
+    .navbar-section {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+
+    .navbar {
+        margin: 10px 15px !important;
+        width: calc(100% - 30px) !important;
+    }
+
+    #sidebarCollapse {
+        margin-left: 5px !important;
+    }
+
+    .navbar .dropdown-menu {
+        right: 15px !important;
+        left: auto !important;
+    }
 }
 
 #sidebarCollapse {

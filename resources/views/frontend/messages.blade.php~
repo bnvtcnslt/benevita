@@ -13,7 +13,7 @@
                             <p class="text-muted mb-4" style="text-align: justify;">
                                 Ingin memahami pelanggan lebih dalam dan mengoptimalkan strategi bisnis Anda? Tim BeneVita Consulting siap membantu! Hubungi kami untuk berdiskusi lebih lanjut tentang bagaimana analisis sentimen berbasis AI dan NLP dapat memberikan wawasan berharga bagi bisnis, lembaga, atau organisasi Anda.
                             </p>
-                            <p>ðŸ“© <span class="fst-italic">Jangan ragu untuk menghubungi kami. Kami siap mendukung perjalanan bisnis Anda!</span></p>
+                            <p>✉️ <span class="fst-italic">Jangan ragu untuk menghubungi kami. Kami siap mendukung perjalanan bisnis Anda!</span></p>
                         </div>
                         <div class="col-md-5 mb-4 align-self-center">
                             <div class="hero-image">
@@ -77,6 +77,4 @@
             </div>
         </div>
     </section>
-@endsection
-
 @endsection
