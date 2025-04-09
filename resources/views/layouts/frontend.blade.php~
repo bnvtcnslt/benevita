@@ -192,43 +192,60 @@
 
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script>
-    AOS.init();
+    document.addEventListener("DOMContentLoaded", function() {
+        const inner = document.querySelector(".inner");
+        if (!inner) return; // Safety check if element doesn't exist
 
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar-section');
-        if (window.scrollY > 50) { // Ganti 50 dengan nilai yang sesuai
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+        const logos = Array.from(inner.children);
+        const logoCount = logos.length;
 
-    /*Menangani scroll dan collapse navbar*/
-    document.addEventListener("DOMContentLoaded", function () {
-        let inner = document.querySelector(".inner");
-        let logos = Array.from(inner.children);
-        let totalLogos = logos.length;
+        // Don't proceed if there are no logos
+        if (logoCount === 0) return;
 
-        // Clone terus menerus hingga mencapai panjang yang cukup
+        // Function to clone all logos
         const cloneLogos = () => {
             logos.forEach(logo => {
-                let clone = logo.cloneNode(true);
+                const clone = logo.cloneNode(true);
                 inner.appendChild(clone);
             });
         };
 
-        // Clone sampai scrollWidth lebih dari dua kali lebar jendela
+        // Make sure we have enough logos for smooth scrolling
+        // Clone at least 3 times to ensure continuous flow
+        for (let i = 0; i < 3; i++) {
+            cloneLogos();
+        }
+
+        // Keep cloning until we have enough content for continuous scrolling
+        // We want at least 2x window width of content
         while (inner.scrollWidth < window.innerWidth * 2) {
             cloneLogos();
         }
 
-        // Sesuaikan durasi animasi berdasarkan total lebar konten
-        let totalWidth = inner.scrollWidth;
-        let speed = totalWidth / 50;
-        inner.style.animationDuration = `${speed}s`;
+        // Calculate appropriate animation duration based on content width
+        // Slower for fewer logos, faster for many logos
+        let totalWidth = inner.scrollWidth / 2; // Only need to scroll half the content due to loop
+        let baseSpeed = 40; // Base scrolling speed factor
+        let duration = totalWidth / baseSpeed;
 
-        // Tambahkan class untuk memulai animasi
+        // Ensure animation isn't too fast or too slow
+        duration = Math.max(15, Math.min(duration, 60)); // Between 15-60 seconds
+
+        // Apply the animation
+        inner.style.animationDuration = `${duration}s`;
         inner.classList.add("animated");
+    });
+
+    // Rest of your existing script for navbar scroll effect, etc.
+    AOS.init();
+
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar-section');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     });
 
 </script>
@@ -241,7 +258,7 @@
             icon: "success",
             title: "{{ session('success') }}",
             showConfirmButton: false,
-            timer: 5000,
+            timer: 8000,
             width: '400px',
             toast: true,
             padding: '0.5rem',
@@ -258,7 +275,7 @@
             icon: "error",
             title: "{{ session('error') }}",
             showConfirmButton: false,
-            timer: 5000,
+            timer: 8000,
             width: '400px',
             toast: true,
             padding: '0.5rem',

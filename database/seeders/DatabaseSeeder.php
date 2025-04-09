@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             SocialMediaSeeder::class,
             TeamMemberSeeder::class,
             TestimonialSeeder::class,
-            InformationContactSeeder::class
+            InformationContactSeeder::class,
+            YoutubeVideoSeeder::class
         ]);
     }
 }

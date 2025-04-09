@@ -1,0 +1,16 @@
+<?php
+
+namespace Database\Seeders;
+
+namespace Database\Seeders;
+
+use App\Models\YouTubeVideo;
+use Illuminate\Database\Seeder;
+
+class YoutubeVideoSeeder extends Seeder
+{
+    public function run()
+    {
+
+    }
+}

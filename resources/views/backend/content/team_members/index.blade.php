@@ -5,22 +5,26 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <h4 class="fw-bold">Team Member List</h4>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="col-lg-4">
+                    <!-- Team Members - Search and Add Button -->
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-2">
+                        <!-- Search Form - Full width on mobile -->
+                        <div class="col-12 col-md-5 col-lg-4 px-0">
                             <form action="{{ route('team_members.search') }}" method="GET">
-                                <div class="input-group input-group-sm align-items-center">
+                                <div class="input-group input-group-sm">
                                     <input type="text" name="query" class="form-control" placeholder="Search for team members..." value="{{ request()->input('query') }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary btn-sm" type="submit">Search</button>
-                                    </div>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="bi bi-search"></i>
+                                    </button>
                                 </div>
                             </form>
                         </div>
-                        <div class="col-auto text-end d-flex justify-content-end">
-                            <button class="btn btn-primary d-flex align-items-center px-2" style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#addModal">
-                                <i class="bi bi-plus-lg me-2 d-none d-sm-block"></i>
-                                <span class="d-block d-sm-none">+ Add</span>
-                                <span class="d-none d-sm-block">Add Member</span>
+
+                        <!-- Add Button - Full width on mobile -->
+                        <div class="col-12 col-md-auto px-0 mt-2 mt-md-0">
+                            <button class="btn btn-primary d-flex align-items-center justify-content-center w-100"
+                                    data-bs-toggle="modal" data-bs-target="#addModal">
+                                <i class="bi bi-plus-lg me-1"></i>
+                                <span>Add Member</span>
                             </button>
                         </div>
                     </div>

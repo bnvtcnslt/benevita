@@ -1,0 +1,118 @@
+@extends('layouts.main')
+
+@section('content')
+    <div class="row">
+        <div class="col-lg-12 col-12 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h4 class="fw-bold">YouTube Video List</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover text-center align-middle">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>No</th>
+                                <th>Title</th>
+                                <th>Video ID</th>
+                                <th>Channel URL</th>
+                                <th>Position</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($videos as $video)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $video->title }}</td>
+                                    <td>{{ $video->video_id }}</td>
+                                    <td>{{ $video->channel_url ?? '-' }}</td>
+                                    <td>{{ $video->position_right ? 'Right' : 'Left' }}</td>
+                                    <td>
+                    <span class="badge {{ $video->is_active ? 'bg-success' : 'bg-danger' }}">
+                        {{ $video->is_active ? 'Active' : 'Inactive' }}
+                    </span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <!-- Update Button -->
+                                            <a href="#" class="btn btn-sm btn-warning"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#updateModal{{ $video->id }}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <!-- Toggle Status Button -->
+                                            <form action="{{ route('youtube-videos.toggle-status', $video->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm {{ $video->is_active ? 'btn-danger' : 'btn-success' }}">
+                                                    <i class="bi bi-power"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Modals -->
+    @foreach($videos as $video)
+        <div class="modal fade" id="updateModal{{ $video->id }}" tabindex="-1"
+             aria-labelledby="updateModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Edit YouTube Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('youtube-videos.update', $video->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" name="title"
+                                       value="{{ $video->title }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" name="description" rows="3">{{ $video->description }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="url" class="form-label">YouTube Video URL</label>
+                                <input type="url" class="form-control" name="url"
+                                       value="{{ $video->url }}">
+                                <small class="text-muted">Example: https://www.youtube.com/watch?v=MZ2aHpZtCNo</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="channel_url" class="form-label">YouTube Channel URL (Optional)</label>
+                                <input type="url" class="form-control" name="channel_url"
+                                       value="{{ $video->channel_url }}">
+                                <small class="text-muted">Example: https://www.youtube.com/@YourChannel</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="position_right" class="form-label">Position</label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="position_right"
+                                           id="position_right{{ $video->id }}" value="1"
+                                        {{ $video->position_right ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="position_right{{ $video->id }}">
+                                        {{ $video->position_right ? 'Right' : 'Left' }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endsection

@@ -1,4 +1,134 @@
 /*Frontend*/
+/*Youtube*/
+.youtube-video-section {
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    padding: 60px 0;
+}
+
+.youtube-video-row {
+    margin-bottom: 80px;
+}
+
+.youtube-video-row:last-of-type {
+    margin-bottom: 40px;
+}
+
+.video-content {
+    padding: 0 20px;
+}
+
+.video-title {
+    color: #004a33;
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
+    font-size: 1.8rem;
+}
+
+.divider {
+    width: 60px;
+    height: 3px;
+    background-color: #ff6f00;
+    margin-bottom: 20px;
+}
+
+.video-description {
+    color: #6c757d;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.youtube-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #e06000;
+    border-color: #e06000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
+}
+
+.btn-outline-primary {
+    color: #ff6f00;
+    border-color: #ff6f00;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ff6f00;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
+}
+
+@media (max-width: 991px) {
+    .video-content {
+        padding: 0;
+        text-align: center;
+    }
+
+    .divider {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .col-lg-6 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/* Extra safeguards for mobile responsiveness */
+@media (max-width: 767px) {
+    .youtube-video-section {
+        overflow-x: hidden;
+    }
+
+    .container, .row, .col-lg-6 {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .video-container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .video-title {
+        font-size: 1.5rem;
+    }
+}
 /* Preloader Styles */
 #preloader {
     position: fixed;
@@ -166,16 +296,17 @@
     border-color: #dee2e6;
 }
 
-/* Container untuk logo */
+/* Container for logos */
 .tag-list {
     width: 100%;
     max-width: 1200px;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    margin: 0 auto;
 }
 
-/* Wrapper animasi */
+/* Animation wrapper */
 .inner {
     display: flex;
     align-items: center;
@@ -184,25 +315,32 @@
     width: max-content;
 }
 
-/* Ukuran logo */
+/* Logo sizing */
 .tag-list img {
     height: 60px;
     object-fit: contain;
     max-width: 150px;
     flex-shrink: 0;
+    padding: 0 10px;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
 }
 
-/* Animasi scroll */
+.tag-list img:hover {
+    opacity: 1;
+}
+
+/* Scroll animation */
 @keyframes scroll {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
 
-/* Menjalankan animasi */
+/* Run animation - will be added by JS */
 .inner.animated {
     animation: scroll linear infinite;
 }

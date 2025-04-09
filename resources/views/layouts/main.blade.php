@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css?v=' . time()) }}" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper d-flex">
@@ -93,6 +93,13 @@
                             <span>Testimonials</span>
                         </a>
                     </li>
+                    <!-- Add YouTube Videos under Marketing -->
+                    <li class="{{ request()->routeIs('youtube-videos.*') ? 'active' : '' }}">
+                        <a href="{{ route('youtube-videos.index') }}" class="text-white text-decoration-none d-flex align-items-center py-2 px-3 rounded">
+                            <i class="bi bi-youtube me-3 fs-6"></i>
+                            <span>YouTube Videos</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -105,8 +112,8 @@
                     </div>
                     @if($unreadMessagesCount > 0)
                         <span class="badge bg-danger rounded-pill ms-2" style="font-size: 0.65em;">
-                        {{ $unreadMessagesCount > 9 ? '9+' : $unreadMessagesCount }}
-                    </span>
+                    {{ $unreadMessagesCount > 9 ? '9+' : $unreadMessagesCount }}
+                </span>
                     @endif
                 </a>
             </li>

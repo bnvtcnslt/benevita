@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth:user']], function () {
         Route::resource('youtube-videos', YoutubeVideoController::class);
         Route::post('youtube-videos/{video}/toggle-status', [YoutubeVideoController::class, 'toggleStatus'])
             ->name('youtube-videos.toggle-status');
-
+        
         // Message Routes (kecuali store)
         Route::resource('messages', MessageController::class)->except(['store']);
         Route::post('/messages/{id}/reply', [MessageController::class, 'reply'])->name('messages.reply');
