@@ -44,6 +44,8 @@ class FrontendController extends Controller
     }
 
     public function services() {
+        $members = TeamMember::all();
+
         $clients = Client::where('status', true)->get();
         $services = Service::orderBy('created_at', 'desc')
             ->take(3)
@@ -64,7 +66,7 @@ class FrontendController extends Controller
 
         $social_media = SocialMedia::where('status', true)->get();
 
-        return view('frontend.services', compact('clients', 'services', 'social_media', 'featuredTestimonials'));
+        return view('frontend.services', compact('clients','members', 'services', 'social_media', 'featuredTestimonials'));
     }
 
     public function create() {

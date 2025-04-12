@@ -312,7 +312,7 @@ body:not(.backend-body) .navbar-collapse {
 }
 
 /* For responsive */
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     #testimonialCarousel .carousel-control-prev {
         left: -20px;
     }
@@ -323,6 +323,60 @@ body:not(.backend-body) .navbar-collapse {
 
     .testimonials-section{
         margin-bottom: 120px;
+    }
+}
+/* Fix for testimonial section mobile scrolling issue - more aggressive approach */
+
+/* Force the card height to be auto regardless of inline styles */
+.testimonials-section .card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Reset all possible overflow settings in the testimonial section */
+.testimonials-section,
+.testimonials-section .container,
+.testimonials-section .row,
+.testimonials-section .col-md-6,
+.testimonials-section .carousel,
+.testimonials-section .carousel-inner,
+.testimonials-section .carousel-item,
+.testimonials-section .card-body,
+.testimonials-section .testimonial-text-container {
+    overflow: visible !important;
+}
+
+/* Ensure text is not truncated and causing overflow issues */
+.testimonials-section p {
+    overflow: visible !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+}
+
+/* Ensure carousel items don't create fixed height rows */
+.testimonials-section .carousel-item .row {
+    flex-wrap: wrap !important;
+}
+
+/* Remove any max-height limitations */
+.testimonials-section * {
+    max-height: none !important;
+}
+
+@media (max-width: 767px) {
+    /* Make sure cards stack properly on mobile */
+    .testimonials-section .col-md-6 {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+    }
+
+    /* Ensure text fits nicely without scrolling */
+    .testimonials-section .text-muted {
+        max-height: none !important;
+        -webkit-line-clamp: 3 !important; /* Show fewer lines on mobile */
     }
 }
 
@@ -1246,6 +1300,11 @@ section[id] {
     z-index: 0; /* Pastikan berada di belakang konten */
 }
 
+.contact-section .social-media-box a{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 @media (max-width: 991px) {
     .contact-section::after {
         content: '';
@@ -1261,6 +1320,11 @@ section[id] {
     }
     .contact-section {
         margin-top: 0;
+    }
+
+    .contact-section .social-media-box a{
+        margin-left: 2px;
+        margin-right: 2px;
     }
 }
 

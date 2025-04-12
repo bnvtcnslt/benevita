@@ -29,12 +29,12 @@
     <!-- Services Section -->
     <section class="services-section" id="services" style="margin-top: 50px;">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-duration="1500">
                 <div class="col-lg-10 col-md-12 col-12">
                     <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Services</h2>
                     <div class="services-wrapper">
                         @foreach($services as $service)
-                            <div class="services">
+                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
                                 @if($service->image)
                                     <img src="{{ Storage::url('services/' . $service->image) }}" alt="{{ $service->title }}">
                                 @else
@@ -93,14 +93,14 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section py-5" id="testimonials" style="margin-top: 4%;">
+    <section class="testimonials-section py-5" id="testimonials" style="margin-top: 4%;" data-aos="fade-up" data-aos-duration="1500">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12 col-12">
-                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">What Our Clients Say</h2>
+                    <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;" data-aos="fade-up" data-aos-duration="1500">What Our Clients Say</h2>
 
                     <div class="testimonial-carousel">
-                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-aos="fade-up" data-aos-duration="1500">
                             <div class="carousel-inner">
                                 @foreach($featuredTestimonials as $testimonial)
                                     @php
@@ -112,8 +112,8 @@
                                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                         <div class="row {{ $chunk->count() == 1 ? 'justify-content-center' : '' }}">
                                             @foreach($chunk as $testimonial)
-                                                <div class="col-md-6 mb-4 d-flex">
-                                                    <div class="card border-0 shadow-sm w-100" style="height: 350px;">
+                                                <div class="col-md-6 mb-4 d-flex" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+                                                    <div class="card border-0 shadow-sm w-100">
                                                         <div class="card-body d-flex flex-column">
                                                             <div class="text-center mb-3">
                                                                 @if($testimonial->image)

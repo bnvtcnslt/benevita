@@ -46,8 +46,8 @@
                                                 </div>
                                                 <div class="flex-grow-1 ms-2">
                                                     <p class="mb-0">
-                                                        <a href="mailto:{{ $informationContact->email ?? 'info@benevita.com' }}" class="text-decoration-none text-dark">
-                                                            {{ $informationContact->email ?? 'info@benevita.com' }}
+                                                        <a href="mailto:{{ $informationContact->email}}" class="text-decoration-none text-dark">
+                                                            {{ $informationContact->email}}
                                                         </a>
                                                     </p>
                                                 </div>
@@ -60,8 +60,8 @@
                                                 </div>
                                                 <div class="flex-grow-1 ms-2">
                                                     <p class="mb-0 small">
-                                                        <a href="tel:{{ $informationContact->phone ?? '+621234567890' }}" class="text-decoration-none text-dark">
-                                                            {{ $informationContact->phone ?? '+62 123 4567 890' }}
+                                                        <a href="tel:{{ $informationContact->phone}}" class="text-decoration-none text-dark">
+                                                            {{ $informationContact->phone}}
                                                         </a>
                                                     </p>
                                                 </div>
@@ -83,7 +83,7 @@
                                 <div class="social-media-box bg-white p-2 rounded-3 shadow-sm mt-3 text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         @foreach($social_media as $media)
-                                            <a href="{{ $media->url }}" target="_blank" class="text-success fs-6 me-4">
+                                            <a href="{{ $media->url }}" target="_blank" class="text-success fs-6 me-2">
                                                 <i class="bi bi-{{ strtolower($media->platform) }}"></i>
                                             </a>
                                         @endforeach
@@ -105,7 +105,7 @@
                                         <input type="email" name="email" class="form-control" placeholder="Email" required>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="tel" name="phone" class="form-control" placeholder="Nomor Telepon">
+                                        <input type="tel" name="phone" class="form-control" placeholder="Nomor Whatsapp" required>
                                     </div>
                                     <div class="mb-3">
                                         <input type="text" name="company" class="form-control" placeholder="Nama Perusahaan/Organisasi">
