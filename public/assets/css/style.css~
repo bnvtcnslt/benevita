@@ -1,71 +1,4 @@
 /*Frontend*/
-/* Create a new class for the frontend navbar */
-.frontend-navbar {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-.navbar-toggler:focus {
-    box-shadow: none !important;
-}
-
-/* Modify the existing navbar-section classes to be more specific for frontend */
-body:not(.backend-body) .navbar-section {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    -webkit-backdrop-filter: blur(13.8px);
-    border: 1px solid rgba(255, 255, 255, 0.31);
-    z-index: 1030;
-    background-color: transparent; /* Transparent background by default */
-    transition: background-color 0.3s ease;
-}
-
-/* Modify the navbar-section when scrolled */
-body:not(.backend-body) .navbar-section.scrolled {
-    background-color: #fff; /* Keep the white background */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    padding-top: 0; /* Add this to reduce top padding */
-    padding-bottom: 0; /* Add this to reduce bottom padding */
-    border: none; /* Remove the border when scrolled */
-}
-
-/* Add this to make the navbar more compact when scrolled */
-body:not(.backend-body) .navbar-section.scrolled .navbar {
-    padding-top: 0; /* Reduce top padding */
-    padding-bottom: 0; /* Reduce bottom padding */
-}
-
-/* Make sure the links in the navbar are properly aligned */
-.navbar-nav .nav-link {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-/* Backend specific navbar styling */
-.backend-body .navbar {
-    background-color: #fff;
-    box-shadow: var(--card-shadow);
-    padding: 0.5rem 0;
-    border-radius: 12px;
-    margin: 15px;
-}
-
-/* Ensure transparent navbar doesn't affect dropdown menus */
-body:not(.backend-body) .navbar-collapse {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 0 0 10px 10px;
-}
-
-@media (min-width: 992px) {
-    body:not(.backend-body) .navbar-collapse {
-        background-color: transparent;
-        backdrop-filter: none;
-    }
-}
-
 /*Youtube*/
 .youtube-video-section {
     background-color: rgb(255, 255, 255);
@@ -787,12 +720,14 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .navbar-section .container {
+        padding: 0 15px;
         width: 100%;
         max-width: 100%;
     }
 
     .navbar {
         width: 100%;
+        padding: 0.5rem 0;
     }
 
     .navbar-collapse {
@@ -802,7 +737,9 @@ h1, h2, h3, h4, h5, h6 {
         right: 0;
         background-color: #fff;
         z-index: 1000;
+        padding: 10px 0;
         width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: none;
     }
 
@@ -859,12 +796,13 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-backdrop-filter: blur(13.8px);
     border: 1px solid rgba(255, 255, 255, 0.31);
     z-index: 1030;
-    background-color: transparent;
+    background-color: transparent; /* Latar belakang transparan secara default */
     transition: background-color 0.3s ease; /* Transisi halus untuk perubahan warna */
 }
 
 .navbar-section.scrolled {
-    background-color: #fff; /* Warna latar belakang saat di-scroll */
+    backdrop-filter: blur(13.8px);
+    background-color: rgba(255, 255, 255, 0.28); /* Warna latar belakang saat di-scroll */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan jika diinginkan */
 }
 
@@ -1636,4 +1574,3 @@ footer {
     background: #0A5640;
     border-radius: 10px;
 }
-

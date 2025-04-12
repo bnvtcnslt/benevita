@@ -6,6 +6,7 @@ use App\Http\Controllers\InformationContactController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\TeamController;
@@ -27,8 +28,8 @@ Route::get('/', [FrontendController::class, 'home'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
-Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
-Route::get('/messages', [FrontendController::class, 'messages'])->name('messages');
+Route::post('/contact', [MessageController::class, 'store'])->name('messages.store');
+Route::get('/contact', [FrontendController::class, 'create'])->name('contact');
 // Auth Routes
 Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
 Route::post('/login', [AuthController::class, 'verify'])->name('auth.verify');
@@ -67,6 +68,8 @@ Route::group(['middleware' => ['auth:user']], function () {
         Route::resource('social_media', SocialMediaController::class);
         Route::resource('testimonial', TestimonialController::class);
         Route::resource('information-contact', InformationContactController::class);
+        Route::resource('profile', ProfileController::class);
+
         Route::resource('youtube-videos', YoutubeVideoController::class);
         Route::post('youtube-videos/{video}/toggle-status', [YoutubeVideoController::class, 'toggleStatus'])
             ->name('youtube-videos.toggle-status');

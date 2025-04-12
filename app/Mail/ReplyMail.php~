@@ -14,7 +14,7 @@ class ReplyMail extends Mailable
 
     public $messageData;
 
-    public function __construct(Message $message, $informationContact)
+    public function __construct(Message $message)
     {
         $this->messageData = $message;
         $this->informationContact = $informationContact;

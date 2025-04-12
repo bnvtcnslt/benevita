@@ -23,7 +23,7 @@
 
 <!-- Navbar -->
 <section class="navbar-section">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg frontend-navbar">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="https://picsum.photos/30" alt="Logo" width="30"><span style="color: #004a33;"> Benevita</span>
@@ -43,7 +43,7 @@
                         <a class="nav-link {{ Request::is('services') ? 'active' : '' }}" href="{{route('services')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('messages') ? 'active' : '' }}" href="{{route('messages')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Contact</a>
+                        <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{route('contact')}}" onclick="document.getElementById('navbarNav').classList.remove('show')">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -82,7 +82,7 @@
                             <li class="mb-2"><a href="{{route('home')}}"><i class="fas fa-chevron-right me-2"></i> Home</a></li>
                             <li class="mb-2"><a href="{{route('about')}}"><i class="fas fa-chevron-right me-2"></i> About</a></li>
                             <li class="mb-2"><a href="{{route('services')}}"><i class="fas fa-chevron-right me-2"></i> Services</a></li>
-                            <li class="mb-2"><a href="{{route('messages')}}"><i class="fas fa-chevron-right me-2"></i> Contact</a></li>
+                            <li class="mb-2"><a href="{{route('contact')}}"><i class="fas fa-chevron-right me-2"></i> Contact</a></li>
                         </ul>
                     </div>
 

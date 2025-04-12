@@ -66,11 +66,11 @@
     <p>Kami berharap informasi di atas dapat membantu menjawab kebutuhan Anda.
         Jika ada hal lain yang perlu diklarifikasi atau Anda membutuhkan bantuan lebih lanjut,
         jangan ragu untuk menghubungi kami kembali melalui:</p>
-    <ul>
-        <li>Email: cs@benevita.com</li>
-        <li>WhatsApp: +62 123 4567 890</li>
-    </ul>
 
+    <ul>
+        <li>Email: {{ $informationContact->email}}</li>
+        <li>WhatsApp: {{ $informationContact->phone}}</li>
+    </ul>
     <p>Kami selalu berkomitmen untuk memberikan pelayanan terbaik kepada Anda.</p>
 </div>
 

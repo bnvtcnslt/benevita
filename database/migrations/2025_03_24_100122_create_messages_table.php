@@ -6,16 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
             $table->string('email');
-            $table->string('subject')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('company')->nullable();
+            $table->string('subject');
+            $table->string('referral_source')->nullable();
             $table->text('message')->nullable();
             $table->text('reply')->nullable();
             $table->softDeletes();
@@ -23,11 +23,7 @@ return new class extends Migration
         });
     }
 
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('messages');
     }

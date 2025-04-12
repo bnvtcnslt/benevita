@@ -62,11 +62,7 @@ class MessageController extends Controller
         ]);
 
         $message->update(['reply' => $request->reply]);
-        $informationContact = \App\Models\InformationContact::first() ?? (object)[
-            'email' => 'cs@benevita.id',
-            'phone' => '-',
-        ];
-
+        $informationContact = \App\Models\InformationContact::first();
         Mail::to($message->email)->send(new ReplyMail($message, $informationContact));
 
         return redirect()->route('messages.index')

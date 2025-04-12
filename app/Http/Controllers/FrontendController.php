@@ -67,7 +67,7 @@ class FrontendController extends Controller
         return view('frontend.services', compact('clients', 'services', 'social_media', 'featuredTestimonials'));
     }
 
-    public function messages() {
+    public function create() {
         $social_media = SocialMedia::where('status', 1)->get();
         $services = Service::all();
         return view('frontend.messages', compact('social_media', 'services'));

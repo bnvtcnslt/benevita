@@ -2,57 +2,55 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 col-12 mb-4">
-            <div class="card border-0 shadow-sm">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Daftar Pesan</h4>
+                </div>
                 <div class="card-body">
-                    <h4 class="fw-bold">Message List</h4>
+                    <!-- Filter buttons -->
                     <div class="mb-3">
-                        <button id="btn-all" class="btn btn-outline-secondary active">All</button>
-                        <button id="btn-pending" class="btn btn-outline-warning">Pending</button>
-                        <button id="btn-success" class="btn btn-outline-success">Success</button>
+                        <button id="btn-all" class="btn btn-outline-secondary active">Semua</button>
+                        <button id="btn-pending" class="btn btn-outline-warning">Belum Dibalas</button>
+                        <button id="btn-success" class="btn btn-outline-success">Sudah Dibalas</button>
                     </div>
+
+                    <!-- Messages table -->
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover text-center align-middle" id="contacts-table">
-                            <thead class="table-dark">
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Service</th>
-                                <th>Message</th>
-                                <th>Email</th>
+                                <th>Nama</th>
+                                <th>Layanan</th>
+                                <th>Pesan</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($messages->sortByDesc('created_at') as $message)
+                            @foreach($messages as $message)
                                 <tr class="message-row {{ $message->reply ? 'success-row' : 'pending-row' }}">
                                     <td>{{ $message->full_name }}</td>
-                                    <td>
-                                        @if($message->subject)
-                                            <span class="badge bg-info text-dark">{{ Str::limit($message->subject, 20) }}</span>
-                                        @else
-                                            <span class="badge bg-secondary">-</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $message->message ? Str::limit($message->message, 50) : '-' }}</td>
-                                    <td>{{ $message->email }}</td>
+                                    <td>{{ $message->subject ?? '-' }}</td>
+                                    <td>{{ Str::limit($message->message, 50) ?: '-' }}</td>
                                     <td>
                                         @if($message->reply)
-                                            <span class="badge bg-success"><i class="fas fa-check"></i> Success</span>
+                                            <span class="badge bg-success">Sudah Dibalas</span>
                                         @else
-                                            <span class="badge bg-warning text-dark"><i class="fas fa-clock"></i> Pending</span>
+                                            <span class="badge bg-warning text-dark">Belum Dibalas</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <button type="button" class="btn {{ $message->reply ? 'btn-info' : 'btn-warning' }} btn-sm" data-bs-toggle="modal" data-bs-target="#replyModal-{{ $message->id }}">
+                                        <button class="btn btn-sm {{ $message->reply ? 'btn-info' : 'btn-warning' }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#messageModal{{ $message->id }}">
                                             <i class="{{ $message->reply ? 'bi bi-eye' : 'bi bi-reply' }}"></i>
                                         </button>
 
-                                        <form id="delete-form-{{$message->id}}" action="{{ route('messages.destroy', $message->id) }}" method="POST" style="display:none;">
+                                        <form id="delete-message-{{$message->id}}" action="{{route('messages.destroy', $message->id)}}" method="post" style="display:none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
-
                                         <a href="#" onclick="confirmDelete({{$message->id}})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
@@ -66,41 +64,55 @@
     </div>
 
     @foreach($messages as $message)
-        <!-- Modal Balasan -->
-        <div class="modal fade" id="replyModal-{{ $message->id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ $message->id }}" aria-hidden="true">
-            <div class="modal-dialog">
+        <!-- Message Modal -->
+        <div class="modal fade" id="messageModal{{ $message->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="replyModalLabel-{{ $message->id }}">
-                            {{ $message->reply ? 'Detail Pesan' : 'Balas Pesan' }} dari {{ $message->full_name }}
-                        </h5>
+                        <h5 class="modal-title">Detail Pesan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+
+                    <div class="modal-body p-4" style="max-height: 70vh; overflow-y: auto;">
+                        <div class="mb-3">
+                            <strong>Nama:</strong>
+                            <p class="mb-1">{{ $message->full_name }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Email:</strong>
+                            <p class="mb-1">{{ $message->email }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Telepon:</strong>
+                            <p class="mb-1">{{ $message->phone ?? '-' }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Perusahaan:</strong>
+                            <p class="mb-1">{{ $message->company ?? '-' }}</p>
+                        </div>
                         <div class="mb-3">
                             <strong>Layanan:</strong>
-                            <p class="p-2 bg-light rounded">{{ $message->subject ?? 'Tidak disebutkan' }}</p>
+                            <p class="mb-1">{{ $message->subject ?? '-' }}</p>
                         </div>
                         <div class="mb-3">
                             <strong>Pesan:</strong>
-                            <p class="p-2 bg-light rounded">
-                                {{ $message->message ? : '-' }}
-                            </p>
+                            <p class="mb-1">{{ $message->message ?? '-' }}</p>
                         </div>
+
                         @if($message->reply)
                             <div class="mb-3">
                                 <strong>Balasan Anda:</strong>
-                                <p class="p-2 bg-light rounded">{{ $message->reply }}</p>
+                                <p class="mb-1">{{ $message->reply }}</p>
                             </div>
                         @else
                             <form action="{{ route('messages.reply', $message->id) }}" method="POST">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="reply">Balasan:</label>
-                                    <textarea name="reply" class="form-control" required rows="5"></textarea>
+                                <div class="mb-3">
+                                    <label class="form-label">Balasan</label>
+                                    <textarea name="reply" class="form-control" rows="4" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-2">
-                                    <i class="fas fa-paper-plane"></i> Kirim Balasan
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-send"></i> Kirim Balasan
                                 </button>
                             </form>
                         @endif
@@ -109,17 +121,6 @@
             </div>
         </div>
     @endforeach
-    @push('styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-        <style>
-            .btn-outline-secondary.active, .btn-outline-warning.active, .btn-outline-success.active {
-                font-weight: bold;
-            }
-        </style>
-    @endpush
-
-
     <script>
         function confirmDelete(id){
             Swal.fire({
@@ -132,15 +133,22 @@
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + id).submit();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    }).then(()=>{
+                        document.getElementById('delete-message-' + id).submit();
+                    });
                 }
             });
         }
     </script>
+
     <script>
-        // Filter messages by status
+        // Filter messages
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize button listeners
+            // Button event listeners
             document.getElementById('btn-all').addEventListener('click', function() {
                 showAllMessages();
                 setActiveButton(this);
@@ -155,19 +163,26 @@
                 filterMessages('success-row');
                 setActiveButton(this);
             });
+
+            // Delete confirmation
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if(confirm('Apakah Anda yakin ingin menghapus pesan ini?')) {
+                        this.closest('form').submit();
+                    }
+                });
+            });
         });
 
         function showAllMessages() {
-            const rows = document.querySelectorAll('.message-row');
-            rows.forEach(row => {
+            document.querySelectorAll('.message-row').forEach(row => {
                 row.style.display = '';
             });
         }
 
         function filterMessages(className) {
-            const rows = document.querySelectorAll('.message-row');
-            rows.forEach(row => {
-                if (row.classList.contains(className)) {
+            document.querySelectorAll('.message-row').forEach(row => {
+                if(row.classList.contains(className)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -176,11 +191,12 @@
         }
 
         function setActiveButton(button) {
-            const buttons = document.querySelectorAll('#btn-all, #btn-pending, #btn-success');
-            buttons.forEach(btn => {
+            document.querySelectorAll('#btn-all, #btn-pending, #btn-success').forEach(btn => {
                 btn.classList.remove('active');
             });
             button.classList.add('active');
         }
     </script>
+
 @endsection
+

@@ -1,0 +1,59 @@
+// Menangani masalah pada animasi semua logo
+const logoContainer = document.querySelector('.logo-container');
+const logos = logoContainer.innerHTML;
+logoContainer.innerHTML += logos;
+
+//  // Menangani scroll dan collapse navbar
+//         document.querySelectorAll('.nav-scroll').forEach(link => {
+//             link.addEventListener('click', function(e) {
+//                 e.preventDefault();
+
+//                 // Menutup navbar mobile jika terbuka
+//                 const navbarCollapse = document.querySelector('.navbar-collapse');
+//                 if (navbarCollapse.classList.contains('show')) {
+//                     navbarCollapse.classList.remove('show');
+//                 }
+
+//                 // Scroll ke section yang dituju
+//                 const targetId = this.getAttribute('href');
+//                 const targetSection = document.querySelector(targetId);
+//                 if (targetSection) {
+//                     const offsetTop = targetSection.offsetTop - 75; // Sesuaikan dengan tinggi navbar
+//                     window.scrollTo({
+//                         top: offsetTop,
+//                         behavior: 'smooth'
+//                     });
+//                 }
+//             });
+//         });
+
+
+/*Setting Profile*/
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const settingsOptions = document.getElementById('settingsOptions');
+    const profileForm = document.getElementById('profileForm');
+    const passwordForm = document.getElementById('passwordForm');
+
+    // Event listeners
+    document.getElementById('profileOption').addEventListener('click', showProfileForm);
+    document.getElementById('passwordOption').addEventListener('click', showPasswordForm);
+    document.getElementById('backToOptions').addEventListener('click', showOptions);
+    document.getElementById('backToOptionsPassword').addEventListener('click', showOptions);
+
+    // Handle errors and URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Show modal if there are errors or URL parameter
+    if (document.querySelectorAll('.is-invalid').length > 0 || urlParams.get('openProfileModal') === 'true') {
+        const profileModal = new bootstrap.Modal(document.getElementById('profileSettingsModal'));
+        profileModal.show();
+
+        // Determine which form to show
+        if (document.querySelectorAll('#profileForm .is-invalid').length > 0 || urlParams.get('form') === 'profile') {
+            showProfileForm();
+        } else if (document.querySelectorAll('#passwordForm .is-invalid').length > 0 || urlParams.get('form') === 'password') {
+            showPasswordForm();
+        }
+    }
+});
