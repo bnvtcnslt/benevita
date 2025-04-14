@@ -52,24 +52,6 @@
                                     Read More <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
-
-                            <!-- Modal for each service -->
-                            <div class="modal fade" id="serviceModal{{ $service->id }}" tabindex="-1" aria-labelledby="serviceModalLabel{{ $service->id }}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="serviceModalLabel{{ $service->id }}">{{ $service->title }}</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            @if($service->image)
-                                                <img src="{{ Storage::url('services/' . $service->image) }}" class="img-fluid mb-3" alt="{{ $service->title }}">
-                                            @endif
-                                            <p>{{ $service->description }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -138,6 +120,26 @@
             </div>
         </section>
     @endif
+
+    @foreach($services as $service)
+        <!-- Modal for each service -->
+        <div class="modal fade" id="serviceModal{{ $service->id }}" tabindex="-1" aria-labelledby="serviceModalLabel{{ $service->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="serviceModalLabel{{ $service->id }}">{{ $service->title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if($service->image)
+                            <img src="{{ Storage::url('services/' . $service->image) }}" class="img-fluid mb-3" alt="{{ $service->title }}">
+                        @endif
+                        <p>{{ $service->description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     <!-- Logo section -->
     <section class="logo-section" id="logo" style="margin-top: 2%;">

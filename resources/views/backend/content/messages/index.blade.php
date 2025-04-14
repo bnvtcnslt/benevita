@@ -18,7 +18,7 @@
                     <!-- Messages table -->
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            <thead>
+                            <thead class="table-dark">
                             <tr>
                                 <th>Nama</th>
                                 <th>Layanan</th>

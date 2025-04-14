@@ -18,7 +18,7 @@
                     <!-- Messages table -->
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            <thead>
+                            <thead class="table-dark">  
                             <tr>
                                 <th>Nama</th>
                                 <th>Layanan</th>
@@ -47,7 +47,7 @@
                                             <i class="{{ $message->reply ? 'bi bi-eye' : 'bi bi-reply' }}"></i>
                                         </button>
 
-                                        <form id="delete-message-{{$message->id}}" action="{{route('message.destroy', $message->id)}}" method="post" style="display:none;">
+                                        <form id="delete-message-{{$message->id}}" action="{{route('messages.destroy', $message->id)}}" method="post" style="display:none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
