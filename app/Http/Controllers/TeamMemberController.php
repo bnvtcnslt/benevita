@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeamMemberController extends Controller
 {
@@ -33,7 +34,7 @@ class TeamMemberController extends Controller
 
             if ($request->hasFile('image')) {
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('teams', $imageFileName, 'public');
+                $request->file('image')->storeAs('team_members', $imageFileName, 'public');
                 $request->image = $imageFileName;
             }
 
@@ -72,9 +73,13 @@ class TeamMemberController extends Controller
             ];
 
             if ($request->hasFile('image')) {
+                if ($team_member->image) {
+                    Storage::delete('public/team_members/' . $team_member->image);
+                }
+
                 $imageFileName = time() . '_' . $request->file('image')->getClientOriginalName();
-                $request->file('image')->storeAs('teams', $imageFileName, 'public');
-                $request->image = $imageFileName;
+                $request->file('image')->storeAs('team_members', $imageFileName, 'public');
+                $data['image'] = $imageFileName;
             }
 
             $team_member->update($data);

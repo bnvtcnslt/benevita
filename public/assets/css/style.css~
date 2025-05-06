@@ -503,28 +503,7 @@ body:not(.backend-body) .navbar-collapse {
     width: max-content;
 }
 
-/* Modal improvements */
-#clientModal .modal-content {
-    border-radius: 12px;
-    border: none;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
 
-#clientModal .modal-header {
-    background-color: #0A5640;
-    color: white;
-    border-bottom: none;
-}
-
-#clientModal .btn-close {
-    color: white;
-    opacity: 0.8;
-}
-
-#clientModal .modal-footer {
-    border-top: none;
-}
 
 /* Tooltip styling */
 .tooltip-container {

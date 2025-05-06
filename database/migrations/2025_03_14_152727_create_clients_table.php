@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->integer('phone');
+            $table->string('phone')->max(12);
+            $table->string('description');
             $table->string('address');
             $table->string('logo_img');
             $table->boolean('status')->default(true);

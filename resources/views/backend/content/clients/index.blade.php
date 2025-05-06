@@ -40,7 +40,7 @@
                                 <th>Logo</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Address</th>
+                                <th>Description</th>
                                 <th>Date Added</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -59,7 +59,7 @@
                                     </td>
                                     <td>{{$client->email}}</td>
                                     <td>{{$client->phone}}</td>
-                                    <td>{{$client->address}}</td>
+                                    <td>{{$client->description}}</td>
                                     <td>{{date('d M Y', strtotime($client->created_at))}}</td>
                                     <td>
                                             <span class="badge {{ $client->status == 1 ? 'bg-success' : 'bg-danger' }}">
@@ -143,7 +143,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" required>
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" required maxlength="12">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" placeholder="Description" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
@@ -187,6 +191,10 @@
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
                                 <input type="number" class="form-control" name="phone" value="{{$client->phone}}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" name="description" required>{{$client->description}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>

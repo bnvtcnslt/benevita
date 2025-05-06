@@ -193,50 +193,87 @@
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Logo carousel functionality
         const inner = document.querySelector(".inner");
-        if (!inner) return; // Safety check if element doesn't exist
+        if (!inner) return;
 
-        const logos = Array.from(inner.children);
-        const logoCount = logos.length;
+        // Store original logos before cloning
+        const originalLogos = Array.from(inner.children);
+        if (originalLogos.length === 0) return;
 
-        // Don't proceed if there are no logos
-        if (logoCount === 0) return;
-
-        // Function to clone all logos
+        // Function to clone logos
         const cloneLogos = () => {
-            logos.forEach(logo => {
+            originalLogos.forEach(logo => {
                 const clone = logo.cloneNode(true);
+
+                // Make sure the clone also triggers the modal
+                clone.addEventListener('click', function(event) {
+                    pauseAnimation();
+                    updateModalWithLogoData(this);
+                });
+
                 inner.appendChild(clone);
             });
         };
 
-        // Make sure we have enough logos for smooth scrolling
-        // Clone at least 3 times to ensure continuous flow
-        for (let i = 0; i < 3; i++) {
+        // Clone logos until we have enough for smooth scrolling
+        const minRequiredWidth = window.innerWidth * 2;
+        while (inner.scrollWidth < minRequiredWidth) {
             cloneLogos();
         }
 
-        // Keep cloning until we have enough content for continuous scrolling
-        // We want at least 2x window width of content
-        while (inner.scrollWidth < window.innerWidth * 2) {
-            cloneLogos();
-        }
-
-        // Calculate appropriate animation duration based on content width
-        // Slower for fewer logos, faster for many logos
-        let totalWidth = inner.scrollWidth / 2; // Only need to scroll half the content due to loop
-        let baseSpeed = 40; // Base scrolling speed factor
-        let duration = totalWidth / baseSpeed;
-
-        // Ensure animation isn't too fast or too slow
-        duration = Math.max(15, Math.min(duration, 60)); // Between 15-60 seconds
-
-        // Apply the animation
+        // Calculate animation duration based on content width
+        let duration = Math.max(15, Math.min(inner.scrollWidth / 40, 60));
         inner.style.animationDuration = `${duration}s`;
         inner.classList.add("animated");
+
+        // Animation control functions
+        function pauseAnimation() {
+            inner.style.animationPlayState = 'paused';
+        }
+
+        function resumeAnimation() {
+            inner.style.animationPlayState = 'running';
+        }
+
+        // Set up modal functionality for all logos (original and cloned)
+        const clientModal = document.getElementById('clientModal');
+        if (clientModal) {
+            const modalInstance = new bootstrap.Modal(clientModal);
+
+            // Add click event to all logo items
+            document.querySelectorAll('.logo-item').forEach(item => {
+                item.addEventListener('click', function(event) {
+                    pauseAnimation();
+                    updateModalWithLogoData(this);
+                });
+            });
+
+            // Resume animation when modal is closed
+            clientModal.addEventListener('hidden.bs.modal', function () {
+                resumeAnimation();
+            });
+        }
+
+        // Function to update modal with logo data
+        function updateModalWithLogoData(logoElement) {
+            const name = logoElement.getAttribute('data-name');
+            const description = logoElement.getAttribute('data-description');
+            const address = logoElement.getAttribute('data-address');
+            const phone = logoElement.getAttribute('data-phone');
+            const email = logoElement.getAttribute('data-email');
+            const logo = logoElement.getAttribute('data-logo');
+
+            document.getElementById('modalLogo').src = logo;
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('modalAddress').textContent = address || 'Not provided';
+            document.getElementById('modalPhone').textContent = phone || 'Not provided';
+            document.getElementById('modalEmail').textContent = email || 'Not provided';
+        }
     });
 
-    // Rest of your existing script for navbar scroll effect, etc.
+    // Keep your existing scripts for other functionality
     AOS.init();
 
     window.addEventListener('scroll', function() {
@@ -247,7 +284,6 @@
             navbar.classList.remove('scrolled');
         }
     });
-
 </script>
 
 <script>

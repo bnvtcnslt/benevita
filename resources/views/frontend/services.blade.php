@@ -80,11 +80,47 @@
                 <div class="col-lg-10 col-md-12 col-12">
                     <div class="logo-section">
                         <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Client</h2>
-                        <div class="tag-list">
-                            <div class="inner">
+                        <div class="tag-list" id="clientLogos">
+                            <div class="inner" id="logoContainer">
                                 @foreach($clients as $client)
-                                    <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="Client Logo">
+                                    <div class="logo-item"
+                                         data-bs-toggle="modal"
+                                         data-bs-target="#clientModal"
+                                         data-name="{{ $client->name }}"
+                                         data-description="{{ $client->description }}"
+                                         data-address="{{ $client->address }}"
+                                         data-phone="{{ $client->phone }}"
+                                         data-email="{{ $client->email }}"
+                                         data-logo="{{ Storage::url('/clients/' . $client->logo_img) }}">
+                                        <img src="{{ Storage::url('/clients/' . $client->logo_img) }}" alt="{{ $client->name }} Logo">
+                                    </div>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Client Description Modal -->
+                        <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="clientModalLabel">Client Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-center mb-4">
+                                            <img id="modalLogo" src="" alt="Client Logo" class="img-fluid mb-3" style="max-height: 100px;">
+                                            <h4 id="modalName" class="fw-bold" style="color: #0A5640;"></h4>
+                                        </div>
+                                        <div class="client-info">
+                                            <p id="modalDescription" class="mb-3"></p>
+                                            <div class="client-contact mt-4">
+                                                <p><i class="fas fa-map-marker-alt me-2" style="color: #0A5640;"></i> <span id="modalAddress"></span></p>
+                                                <p><i class="fas fa-phone me-2" style="color: #0A5640;"></i> <span id="modalPhone"></span></p>
+                                                <p><i class="fas fa-envelope me-2" style="color: #0A5640;"></i> <span id="modalEmail"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

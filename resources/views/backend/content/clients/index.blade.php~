@@ -143,7 +143,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" required>
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" required maxlength="12">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
@@ -186,7 +186,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="{{$client->phone}}" required>
+                                <input type="number" class="form-control" name="phone" value="{{$client->phone}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
