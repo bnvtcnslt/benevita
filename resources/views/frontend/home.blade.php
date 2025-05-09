@@ -36,18 +36,18 @@
     <section class="services-section" id="services">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-up" data-aos-duration="1500">
-                <div class="col-lg-10 col-md-12 col-12">
+                <div class="col-12">
                     <h2 class="text-center mb-5 display-6 fw-bold" style="color: #0A5640;">Our Services</h2>
-                    <div class="services-wrapper">
+                    <div class="services-grid">
                         @foreach($services as $service)
-                            <div class="services" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
+                            <div class="service-card" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
                                 @if($service->image)
                                     <img src="{{ Storage::url('services/' . $service->image) }}" alt="{{ $service->title }}">
                                 @else
                                     <img src="{{ asset('assets/images/services.webp') }}" alt="{{ $service->title }}">
                                 @endif
                                 <h3>{{ $service->title }}</h3>
-                                <p>{{ \Illuminate\Support\Str::limit($service->description, 150) }}</p>
+                                <p class="service-description">{{ \Illuminate\Support\Str::limit($service->description, 120) }}</p>
                                 <a href="#" class="read-services" data-bs-toggle="modal" data-bs-target="#serviceModal{{ $service->id }}">
                                     Read More <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
@@ -121,18 +121,20 @@
         </section>
     @endif
 
+    <!-- Service Modals -->
     @foreach($services as $service)
-        <!-- Modal for each service -->
         <div class="modal fade" id="serviceModal{{ $service->id }}" tabindex="-1" aria-labelledby="serviceModalLabel{{ $service->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
+            <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="serviceModalLabel{{ $service->id }}">{{ $service->title }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         @if($service->image)
-                            <img src="{{ Storage::url('services/' . $service->image) }}" class="img-fluid mb-3" alt="{{ $service->title }}">
+                            <img src="{{ Storage::url('services/' . $service->image) }}" alt="{{ $service->title }}" class="img-fluid mb-3" style="width: 100%; border-radius: 8px;">
+                        @else
+                            <img src="{{ asset('assets/images/services.webp') }}" alt="{{ $service->title }}" class="img-fluid mb-3" style="width: 100%; border-radius: 8px;">
                         @endif
                         <p>{{ $service->description }}</p>
                     </div>
